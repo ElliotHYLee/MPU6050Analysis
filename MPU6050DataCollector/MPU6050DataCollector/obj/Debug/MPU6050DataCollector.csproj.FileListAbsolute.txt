@@ -1,0 +1,14 @@
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Debug\MPU6050DataCollector.exe.config
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.csprojResolveAssemblyReference.cache
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\AttitudeAnalyzer.baml
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\AttitudeAnalyzer.g.cs
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\App.g.cs
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector_MarkupCompile.cache
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.g.resources
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.Properties.Resources.resources
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.csproj.GenerateResource.Cache
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.csproj.ResolveComReference.cache
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Debug\MPU6050DataCollector.exe
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Debug\MPU6050DataCollector.pdb
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.exe
+C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.pdb
