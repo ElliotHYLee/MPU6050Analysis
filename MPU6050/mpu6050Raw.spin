@@ -35,7 +35,7 @@ VAR
   long x0, y0, z0, tx
   long Cog
   long rx, ry, rz, temp, ax, ay, az, arx, ary   'PASM code assumes these to be contiguous
-  
+  long cFilterX,cFilterY,cFilterZ
 
 OBJ
   debug : "FullDuplexSerial"
@@ -45,53 +45,50 @@ PUB TestMPU  | MPUcog
   debug.start(SERIAL_RX_PIN, SERIAL_TX_PIN, 0, 115200) 'Start cog to allow IO with serial terminal
   MPUcog := Start( SCL_PIN, SDA_PIN)
 
-  'Output gyro data, then accel data, once per second
   repeat
-     'debug.str(string("GX  GY  GZ    AX  AY  AZ"))
-   '  debug.tx(13)      
-   '  debug.dec(GetRX)
-   '  debug.str(string(", "))
-   '  debug.dec(GetRY)
-   '  debug.str(string(", "))
-   '  debug.dec(GetRZ)
-   '  debug.str(string(" | "))
-   '  debug.dec(GetAX)
-   '  debug.str(string(", "))
-   '  debug.dec(GetAY)
-   '  debug.str(string(", "))
-   '  debug.dec(GetAZ)
-   '  debug.str(string(" | "))
-    normAcc :=  ^^(GetAX*GetAX + GetAY*GetAY + GetAZ*GetAZ)                                       
+    ' gyro info
+    debug.str(string("[gx")) 
+    debug.dec(GetRX)
+    debug.str(string("]"))
+    debug.str(string("[gy")) 
+    debug.dec(GetRY)
+    debug.str(string("]")) 
+    debug.str(string("[gz")) 
+    debug.dec(GetRZ)
+    debug.str(string("]"))
+    'debug.tx(13)
+    ' acc info
+    debug.str(string("[ax")) 
+    debug.dec(GetAX)
+    debug.str(string("]"))
+    debug.str(string("[ay")) 
+    debug.dec(GetAY)
+    debug.str(string("]")) 
+    debug.str(string("[az")) 
+    debug.dec(GetAZ)
+    debug.str(string("]"))
+    'debug.tx(13)
+    debug.str(string("[cx")) 
+    debug.dec(GetCX)
+    debug.str(string("]"))
+    debug.str(string("[cy")) 
+    debug.dec(GetCY)
+    debug.str(string("]")) 
+    debug.str(string("[cz")) 
+    debug.dec(GetCZ)
+    debug.str(string("]"))
+    
+PUB GetCX
+  cFilterX := 98*(cx*1000+GetRX*2) + 2000*GetAX
+  return cFilterX
 
-    dirVx := fNum.fFloat(GetAx)
-    dirVy := fNum.fFloat(GetAy)
-    dirVz := fNum.fFloat(GetAz)
-    fnormAcc := fNum.fFloat(normAcc)
-    dirVx := fNum.fDiv(dirVx, fNormAcc)
-    dirVy := fNum.fDiv(dirVy, fNormAcc)
-    dirVz := fNum.fDiv(dirVz, fNormAcc)          
-
-    debug.str(fstring.FloatToString(dirVx))
-    debug.str(String(", "))
-    debug.str(fstring.FloatToString(dirVy))
-    debug.str(String(", "))
-    debug.str(fstring.FloatToString(dirVz))
-    debug.str(String(" | "))
-    a := fNum.acos(dirVx)
-    b := fNum.acos(dirVy)
-    r := fNum.acos(dirVz)
-    a := fNum.fMul(a, radToDeg)
-    b := fNum.fMul(b, radToDeg)
-    r := fNum.fMul(r, radToDeg)          
-    debug.str(fstring.FloatToString(a))
-    debug.str(String(", "))
-    debug.str(fstring.FloatToString(b))
-    debug.str(String(", "))
-    debug.str(fstring.FloatToString(r))
-
-    debug.tx(13)
-    waitcnt((clkfreq / 10) + cnt)
-
+PUB GetCY
+  cFilterY := 98*(cy*1000+GetRY*2) + 2000*GetAY
+  return cFilterY
+  
+PUB GetCZ
+  cFilterZ := 98*(cx*1000+GetRX*2) + 2000*GetAZ
+  return cFilterZ
 
 PUB Start( SCL, SDA ) : Status
  

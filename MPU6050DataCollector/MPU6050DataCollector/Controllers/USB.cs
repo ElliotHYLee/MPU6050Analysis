@@ -8,13 +8,12 @@ using System.Threading;
 using MPU6050DataCollector;
 using MPU6050DataCollector.Model;
 
-
-
 namespace SerialMonitorTest03.ControllerFolder
 {
     // This class doesn't check convention
     class USB
     {
+        private bool regulator = true;
         private MainWindow _main;
         private AttitudeData _data;
         private SerialPort _serial;
@@ -22,6 +21,7 @@ namespace SerialMonitorTest03.ControllerFolder
         private string[] _portsList;
         private int _numberOfPorts;
         private bool _collectionMode;
+        private int _numberOfDataGathered;
 
         public USB(MainWindow x, AttitudeData y)
         {
@@ -31,13 +31,14 @@ namespace SerialMonitorTest03.ControllerFolder
             this._portsList = SerialPort.GetPortNames();
             this._numberOfPorts = this._portsList.Length;
             this._collectionMode = false;
+            this._numberOfDataGathered = 0;
         }
 
         #region Getter and Setter
 
             public bool collectionMode
             {
-                set { this.collectionMode = value; }
+                set { this._collectionMode = value; }
                 get { return this._collectionMode; }
             }
 
@@ -113,58 +114,251 @@ namespace SerialMonitorTest03.ControllerFolder
 
             private void serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
             {
-                string indata = (string)this._serial.ReadExisting();
-                string strToParse = this.trim(indata);
-                this.parse(strToParse);
-                this.updateMain();
-            }
-
-            private string trim(string x)
-            {
-                Console.WriteLine(x);
-                int beginPos = this.findFirstChar(x, '[', true);
-                int endPos = this.findFirstChar(x, ']', false);
-
-                string result = x.Substring(beginPos, x.Length - endPos);
-
-                return result;
-            }
-
-            private string reverse(string str)
-            {
-                char[] array = str.ToCharArray();
-                Array.Reverse(array);
-                return new String(array);
-            }
-
-            private int findFirstChar(string str, char x, bool fromFront)
-            {
-                int result = 0;
-                if (fromFront)
+                
+                string inStream = (string)this._serial.ReadExisting();
+                try
                 {
-                    result = str.IndexOf(x.ToString());
+                    if (regulator)// parse 50 % of incoming data
+                    {
+                        this.parse(inStream);
+                    }
+                    regulator = !regulator; 
+
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine(err);
+                }
+            }
+
+            private void parse(string x)
+            {
+                string raw = Tokenizer.Tokenizer.trim(x);
+                List<string> listTokens = Tokenizer.Tokenizer.getTokens(raw);
+                ISet<string> setInfoTypes = new HashSet<string>();
+                
+                string infoType = "";
+                string infoDir = "";
+
+                string[] gyro = { "0", "0", "0", "0", "0", "0", "0", "0", "0" ,"0"};
+                string[] acc = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
+                string[] cFilter = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
+
+                for (int i = 0; i < listTokens.Count/2; i++)
+                {
+                    infoType = listTokens[i].Substring(0, 1);
+
+                    // report types of information incoming
+                    if (!setInfoTypes.Contains(infoType))
+                    {
+                        setInfoTypes.Add(infoType);
+                    }
+
+                    // check what type of information it is
+                    if (infoType.Equals("g"))
+                    {
+                        // get direction of info (x,y,z)
+                        infoDir = listTokens[i].Substring(1, 1);
+                        switch (infoDir)
+                        {
+                            case "x":
+                                gyro[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "y":
+                                gyro[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "z":
+                                gyro[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                        }
+
+                    }
+                    else if (infoType.Equals("a"))
+                    {
+                        // get direction of info (x,y,z)
+
+                        infoDir = listTokens[i].Substring(1, 1);
+                        switch (infoDir)
+                        {
+                            case "x":
+                                acc[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "y":
+                                acc[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "z":
+                                acc[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                        }
+                    }
+                    else if (infoType.Equals("c"))
+                    {
+                        // get direction of info (x,y,z)
+                        infoDir = listTokens[i].Substring(1, 1);
+                        switch (infoDir)
+                        {
+                            case "x":
+                                cFilter[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "y":
+                                cFilter[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "z":
+                                cFilter[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                        }
+                    }
+                               
+                }
+
+                this.updateMain(gyro, acc, cFilter); 
+                
+
+                this._main.Dispatcher.Invoke(() =>
+                {
+                    this._main.listInfoType.Items.Clear();
+                    List<string> temp = setInfoTypes.ToList<string>();
+                    for(int i = 0; i < setInfoTypes.Count; i++)
+                    {
+                        temp.Sort();
+                        if (temp[i].Equals("a"))
+                        {
+                            this._main.listInfoType.Items.Add("a: Accelerometer");
+                        }else if(temp[i].Equals("g")){
+                            this._main.listInfoType.Items.Add("g: Gyroscope");
+                        }else if(temp[i].Equals("c")){
+                            this._main.listInfoType.Items.Add("c: Complementary Filter");
+                        }
+                        
+                    }
+                    temp.Clear();
+                    
+                });
+                setInfoTypes.Clear();
+            }
+
+            private void updateMain(string[] gyro, string[] acc, string[] cFilter)
+            {
+
+                double norm, xRaw, yRaw, zRaw;
+                for (int i = 0; i < 3; i++)
+                {
+
+                    try 
+                    {
+                        if (i == 0) // gyro
+                        {
+                            xRaw = Double.Parse(gyro[0]);
+                            yRaw = Double.Parse(gyro[1]);
+                            zRaw = Double.Parse(gyro[2]);
+                            norm = Math.Sqrt(xRaw * xRaw + yRaw * yRaw + zRaw * zRaw);
+                            gyro[3] = norm.ToString();
+                            gyro[4] = (xRaw / norm).ToString();
+                            gyro[5] = (Math.Acos(xRaw / norm) * 180 / Math.PI).ToString();
+                            gyro[6] = (yRaw / norm).ToString();
+                            gyro[7] = (Math.Acos(yRaw / norm) * 180 / Math.PI).ToString();
+                            gyro[8] = (zRaw / norm).ToString();
+                            gyro[9] = (Math.Acos(zRaw / norm) * 180 / Math.PI).ToString();
+
+                        }
+                        else if (i == 1) //acc
+                        {
+                            xRaw = Double.Parse(acc[0]);
+                            yRaw = Double.Parse(acc[1]);
+                            zRaw = Double.Parse(acc[2]);
+                            norm = Math.Sqrt(xRaw * xRaw + yRaw * yRaw + zRaw * zRaw);
+                            if (norm != 0)
+                            {
+                                acc[3] = norm.ToString();
+                                acc[4] = (xRaw / norm).ToString();
+                                acc[5] = (Math.Acos(xRaw / norm) * 180 / Math.PI).ToString();
+                                acc[6] = (yRaw / norm).ToString();
+                                acc[7] = (Math.Acos(yRaw / norm) * 180 / Math.PI).ToString();
+                                acc[8] = (zRaw / norm).ToString();
+                                acc[9] = (Math.Acos(zRaw / norm) * 180 / Math.PI).ToString();
+                            }
+                        }
+                        else
+                        {
+                            xRaw = Double.Parse(cFilter[0]);
+                            yRaw = Double.Parse(cFilter[1]);
+                            zRaw = Double.Parse(cFilter[2]);
+                            norm = Math.Sqrt(xRaw * xRaw + yRaw * yRaw + zRaw * zRaw);
+                            if (norm != 0)
+                            {
+                                cFilter[3] = norm.ToString();
+                                cFilter[4] = (xRaw / norm).ToString();
+                                cFilter[5] = (Math.Acos(xRaw / norm) * 180 / Math.PI).ToString();
+                                cFilter[6] = (yRaw / norm).ToString();
+                                cFilter[7] = (Math.Acos(yRaw / norm) * 180 / Math.PI).ToString();
+                                cFilter[8] = (zRaw / norm).ToString();
+                                cFilter[9] = (Math.Acos(zRaw / norm) * 180 / Math.PI).ToString();
+                            }
+
+                        }
+                    }catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        Console.WriteLine("acc[0]=" + acc[0]);
+                        Console.WriteLine("acc[1]=" + acc[1]);
+                        Console.WriteLine("acc[2]=" + acc[2]);
+                        Console.WriteLine("gyro[0]=" + gyro[0]);
+                        Console.WriteLine("gyro[0]=" + gyro[1]);
+                        Console.WriteLine("gyro[0]=" + gyro[2]);
+                        Console.WriteLine("cFilter[0]=" + cFilter[0]);
+                        Console.WriteLine("cFilter[0]=" + cFilter[1]);
+                        Console.WriteLine("cFilter[0]=" + cFilter[2]);
+
+                    }
+                    
+                }
+
+                if (this._collectionMode)
+                {
+                    Console.WriteLine("gathering...");
+                    for (int i = 0; i < 10; i++)
+                    {
+                        this._data.gyro[i].Add(gyro[i]);
+                    }
+                    for (int i = 0; i < 10; i++)
+                    {
+                        this._data.acc[i].Add(acc[i]);
+                    }
+                    for (int i = 0; i < 10; i++)
+                    {
+                        this._data.cFilter[i].Add(cFilter[i]);
+                    }
+                    this._numberOfDataGathered++;
                 }
                 else
                 {
-                    string revStr = reverse(str);
-                    int position = revStr.IndexOf(x.ToString()) + 1;
-                    result = str.Length - position;
+                    this._numberOfDataGathered = 0;
                 }
-                return result;
-            }
 
-            private void parse(string indata )
-            {
-                //Console.WriteLine(indata);
-                //Console.WriteLine("==========");
-            }
 
-                   
-            
+                this._main.Dispatcher.Invoke(() =>
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        this._main.gyro[i].Text = gyro[i];
+                    }
+                    for (int i = 0; i < 10; i++)
+                    {
+                        this._main.acc[i].Text = acc[i];
+                    }
+                    for (int i = 0; i < 10; i++)
+                    {
+                        this._main.cFilter[i].Text = cFilter[i];
+                    }
+                    if (this._numberOfDataGathered > 0)
+                    {
+                        this._main.txtNumberOfData.Text = this._numberOfDataGathered.ToString() + " data gathered.";
+                    }
+                    
+                });
 
-            private void updateMain()
-            {
-            
+                
+                
             }
 
         #endregion
