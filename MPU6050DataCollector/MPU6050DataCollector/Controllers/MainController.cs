@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 using Microsoft.Office.Interop;
 using System.Windows;
 using SerialMonitorTest03.ControllerFolder;
-using Excel = Microsoft.Office.Interop.Excel; 
+using Excel = Microsoft.Office.Interop.Excel;
+using WpfApplication1;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Controls; 
 
 namespace MPU6050DataCollector.Controllers
 {
@@ -17,15 +21,18 @@ namespace MPU6050DataCollector.Controllers
         private AttitudeData _data;
         private USB _usb;
         private bool _usbConnected;
-                
+        private LineAttitude lineX, lineY, lineZ;
+        private bool _pidOnOff = true;        
         public MainController(MainWindow x, AttitudeData y)
         {
             this._main = x;
             this._data = y;
-            this._usb = new USB(x, y);
+            this._usb = new USB(x, y, this);
             this._usbConnected = false;
             this.setDataAddress();
             this.refreshComports();
+
+            
         }
 
         #region connection and disconnection
@@ -86,30 +93,15 @@ namespace MPU6050DataCollector.Controllers
 
         #endregion
 
-        
-
-        private String getDataFolderAddr()
+        public bool pidOnOff
         {
-            // get VocabList Folder's address
-            String dir = Environment.CurrentDirectory;
-            // dir end with "Release or Debug" as long as development going on
-            String check = dir.Substring(dir.Length - 7, 7);
-            if (check.Equals("Release"))
-            {
-                // length(bin\Release) = 11
-                dir = dir.Substring(0, dir.Length - 11) + "Data\\";
-            }
-            else
-            {
-                // length(bin\Debug) = 9
-                dir = dir.Substring(0, dir.Length - 9) + "Data\\";
-            }
-            return dir;
+            set { this._pidOnOff= value;}
+            get { return this._pidOnOff; }
         }
         
         public void setDataAddress()
         {
-            this._main.lblAddress.Content = this.getDataFolderAddr();
+            this._main.lblAddress.Content = AbsAddress.getFolderAddr("Data");
             this._main.txtFileName.Text = "data01.xlsx";
         }
 
@@ -232,7 +224,6 @@ namespace MPU6050DataCollector.Controllers
         }
         
 
-
         public void startCollecting()
         {
             if (this._usb.collectionMode)
@@ -248,5 +239,143 @@ namespace MPU6050DataCollector.Controllers
         }
 
 
+        public void updatePidConst()
+        {
+            string[] k = new string[3]; // in order of kp, ki, kd
+            k[0] = this._main.txtKp.Text;
+            k[1] = this._main.txtKi.Text;
+            k[2] = this._main.txtKd.Text;
+            string result = "";
+
+
+            for (int i = 0; i < 3; i++)
+            {
+                int temp =  (int) (Double.Parse(k[i]) + 0.5);
+                if ( temp < 10)
+                {
+                    result = "000" + temp.ToString();
+                }
+                else if (temp <100)
+                {
+                    result = "00" + temp.ToString();
+                }
+                else if (temp <1000)
+                {
+                    result = "0" + temp.ToString();
+                }
+                else
+                {
+                    result = temp.ToString();
+                }
+                this._usb.sendData("P" + (i+2).ToString() + result);
+                Console.WriteLine("P" + (i + 2).ToString() + result);
+            }
+
+            
+        }
+
+        public void prepareMode()
+        {
+            this._usb.sendData("D10002");
+            Console.WriteLine("System Mode = prepare. Message sent: D10002");
+        }
+
+        public void idleMode()
+        {
+            this._usb.sendData("D10001");
+            Console.WriteLine("System Mode = prepare. Message sent: D10001");
+        }
+
+
+        public void requestPidConst()
+        {
+            // R11 = request PID contants like Kp, Ki, Kd
+            string command = "R11";
+            this._usb.sendData(command);
+            Console.WriteLine("PID Constant requested: " + command);
+        }
+
+        internal void Loaded()
+        {
+            ImageBrush bg = new ImageBrush();
+            bg.ImageSource = new BitmapImage(new Uri(AbsAddress.getFolderAddr("Resource") + "coord.jpg"));
+            this._main.canvasAttitudeX.Background = bg;
+            this._main.canvasAttitudeY.Background = bg;
+
+            ImageBrush bg2 = new ImageBrush();
+            bg2.ImageSource = new BitmapImage(new Uri(AbsAddress.getFolderAddr("Resource") + "HeadingWeel.bmp"));
+            this._main.canvasHeading.Background = bg2;
+
+            this.lineX = new LineAttitude(this._main.canvasAttitudeX);
+            this.lineY = new LineAttitude(this._main.canvasAttitudeY);
+            this.lineZ = new LineAttitude(this._main.canvasHeading);
+
+            this.setSlider();
+
+            //this._main.moterSlide1 = new Slider();
+            //this._main.motorSlide2 = new Slider();
+            //this._main.motorSlide3 = new Slider();
+            //this._main.motorSlide4 = new Slider();
+
+
+
+            //this._main.moterSlide1.Minimum = 1100;
+            //this._main.motorSlide2.Minimum = 1100;
+            //this._main.motorSlide3.Minimum = 1100;
+            //this._main.motorSlide4.Minimum = 1100;
+
+            //this._main.moterSlide1.Maximum = 2500;
+            //this._main.motorSlide2.Maximum = 2500;
+            //this._main.motorSlide3.Maximum = 2500;
+            //this._main.motorSlide4.Maximum = 2500;
+
+
+        }
+
+        internal void updateAttitudeX(string deg)
+        {
+            
+            double angle = Double.Parse(deg);
+            this._main.canvasAttitudeX.Children.Clear();
+            this._main.canvasAttitudeX.Children.Add(lineX.getLine(angle));
+            //Console.WriteLine("deg: " + deg);
+        }
+
+        internal void updateAttitudeY(string deg)
+        {
+
+            double angle = Double.Parse(deg);
+            this._main.canvasAttitudeY.Children.Clear();
+            this._main.canvasAttitudeY.Children.Add(lineY.getLine(angle));
+            //Console.WriteLine("deg: " + deg);
+        }
+
+        public void updateSlider()
+        {
+            this._main.moterSlide1.Value = Double.Parse(this._main.txtMotor1.Text);
+            this._main.motorSlide2.Value = Double.Parse(this._main.txtMotor2.Text);
+            this._main.motorSlide3.Value = Double.Parse(this._main.txtMotor3.Text);
+            this._main.motorSlide4.Value = Double.Parse(this._main.txtMotor4.Text);
+        }
+
+        public void setSlider()
+        {
+            this._main.moterSlide1.Minimum = 1100;
+            this._main.motorSlide2.Minimum = 1100;
+            this._main.motorSlide3.Minimum = 1100;
+            this._main.motorSlide4.Minimum = 1100;
+
+            this._main.moterSlide1.Maximum = 2500;
+            this._main.motorSlide2.Maximum = 2500;
+            this._main.motorSlide3.Maximum = 2500;
+            this._main.motorSlide4.Maximum = 2500;
+        }
+
+
+
+
+
+
     }
 }
+

@@ -7,6 +7,9 @@ using System.IO.Ports;
 using System.Threading;
 using MPU6050DataCollector;
 using MPU6050DataCollector.Model;
+using System.Windows;
+using System.Windows.Media;
+using MPU6050DataCollector.Controllers;
 
 namespace SerialMonitorTest03.ControllerFolder
 {
@@ -17,14 +20,19 @@ namespace SerialMonitorTest03.ControllerFolder
         private MainWindow _main;
         private AttitudeData _data;
         private SerialPort _serial;
+        private MainController _mainCtrl;
+        private string _testInstream;
+
 
         private string[] _portsList;
         private int _numberOfPorts;
         private bool _collectionMode;
         private int _numberOfDataGathered;
 
-        public USB(MainWindow x, AttitudeData y)
+
+        public USB(MainWindow x, AttitudeData y, MainController z)
         {
+            this._mainCtrl = z;
             this._main = x;
             this._data = y;
             this._serial = new SerialPort();
@@ -116,13 +124,21 @@ namespace SerialMonitorTest03.ControllerFolder
             {
                 
                 string inStream = (string)this._serial.ReadExisting();
+                if (inStream.Contains("p"))
+                {
+                    Console.WriteLine(inStream);
+                }
+                //Console.WriteLine(inStream);
+                this._testInstream = inStream;
                 try
                 {
-                    if (regulator)// parse 50 % of incoming data
-                    {
-                        this.parse(inStream);
-                    }
-                    regulator = !regulator; 
+                    this.parse(inStream);
+                    //if (regulator)// parse 50 % of incoming data
+                    //{
+                    //    //Console.WriteLine(inStream);
+                          //this.parse(inStream);
+                    //}
+                    //regulator = !regulator; 
 
                 }
                 catch (Exception err)
@@ -133,18 +149,30 @@ namespace SerialMonitorTest03.ControllerFolder
 
             private void parse(string x)
             {
+
                 string raw = Tokenizer.Tokenizer.trim(x);
+                if (raw.Equals("abort"))
+                {
+                    return;
+                }
+
                 List<string> listTokens = Tokenizer.Tokenizer.getTokens(raw);
                 ISet<string> setInfoTypes = new HashSet<string>();
                 
                 string infoType = "";
                 string infoDir = "";
 
-                string[] gyro = { "0", "0", "0", "0", "0", "0", "0", "0", "0" ,"0"};
+                string[] gyro = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
                 string[] acc = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
                 string[] cFilter = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
+                string[] motor = { "0", "0", "0", "0"};
+                string[] pid = { "e", "e", "e" };
 
-                for (int i = 0; i < listTokens.Count/2; i++)
+                #region parsing tokens
+
+
+
+                for (int i = 0; i < listTokens.Count; i++)
                 {
                     infoType = listTokens[i].Substring(0, 1);
 
@@ -157,6 +185,7 @@ namespace SerialMonitorTest03.ControllerFolder
                     // check what type of information it is
                     if (infoType.Equals("g"))
                     {
+                        #region parse gyro
                         // get direction of info (x,y,z)
                         infoDir = listTokens[i].Substring(1, 1);
                         switch (infoDir)
@@ -171,10 +200,11 @@ namespace SerialMonitorTest03.ControllerFolder
                                 gyro[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                                 break;
                         }
-
+                        #endregion
                     }
                     else if (infoType.Equals("a"))
                     {
+                        #region parse acc
                         // get direction of info (x,y,z)
 
                         infoDir = listTokens[i].Substring(1, 1);
@@ -190,9 +220,11 @@ namespace SerialMonitorTest03.ControllerFolder
                                 acc[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                                 break;
                         }
+                        #endregion
                     }
                     else if (infoType.Equals("c"))
                     {
+                        #region parse cFilter
                         // get direction of info (x,y,z)
                         infoDir = listTokens[i].Substring(1, 1);
                         switch (infoDir)
@@ -207,11 +239,62 @@ namespace SerialMonitorTest03.ControllerFolder
                                 cFilter[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                                 break;
                         }
+                        #endregion
                     }
-                               
-                }
+                    else if (infoType.Equals("m"))
+                    {
+                        #region parse motor
+                        // get direction of info 1,2,3,4 motor
+                        infoDir = listTokens[i].Substring(1, 1);
+                        switch (infoDir)
+                        {
+                            case "1":
+                                motor[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "2":
+                                motor[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "3":
+                                motor[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "4":
+                                motor[3] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                        }
+                        #endregion
+                    }
+                    else if (infoType.Equals("p"))
+                    {
+                        // get direction of info 1,2,3,4 motor
+                        infoDir = listTokens[i].Substring(1, 1);
+                        switch (infoDir)
+                        {
+                            case "p":
+                                pid[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "i":
+                                pid[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "d":
+                                pid[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "o":
+                                Console.WriteLine("PID On/Off");
+                                if( listTokens[i].Substring(2, listTokens[i].Length - 2).Equals("1"))
+                                {
+                                    this._mainCtrl.pidOnOff = true;
+                                }else
+                                {
+                                     this._mainCtrl.pidOnOff = false;
+                                }
+                                break;
+                        }
+                    }
 
-                this.updateMain(gyro, acc, cFilter); 
+                }
+                #endregion
+
+                this.updateMain(gyro, acc, cFilter, motor); 
                 
 
                 this._main.Dispatcher.Invoke(() =>
@@ -221,14 +304,42 @@ namespace SerialMonitorTest03.ControllerFolder
                     for(int i = 0; i < setInfoTypes.Count; i++)
                     {
                         temp.Sort();
-                        if (temp[i].Equals("a"))
-                        {
+                        if (temp[i].Equals("a")){
                             this._main.listInfoType.Items.Add("a: Accelerometer");
                         }else if(temp[i].Equals("g")){
                             this._main.listInfoType.Items.Add("g: Gyroscope");
                         }else if(temp[i].Equals("c")){
                             this._main.listInfoType.Items.Add("c: Complementary Filter");
+                        }else if (temp[i].Equals("m")){
+                            this._main.listInfoType.Items.Add("m: Motor PWM");
                         }
+                        else if (temp[i].Equals("p")){
+                            this._main.listInfoType.Items.Add("p: PID");
+
+                            if (!pid[0].Equals("e"))
+                            {
+                                this._main.txtKp.Text = pid[0];
+                                this._main.txtKi.Text = pid[1];
+                                this._main.txtKd.Text = pid[2];
+                            }
+                            
+                            if (this._mainCtrl.pidOnOff)
+                            {
+                                SolidColorBrush dd = new SolidColorBrush();
+                                dd.Color = Colors.Green;
+                                this._main.lblPidIndicator.Content = "PID ON";
+                                this._main.lblPidIndicator.Background = dd;
+                            }
+                            else
+                            {
+                                SolidColorBrush dd = new SolidColorBrush();
+                                dd.Color = Colors.Red;
+                                this._main.lblPidIndicator.Content = "PID OFF";
+                                this._main.lblPidIndicator.Background = dd;
+                            }
+                        }
+                        
+                        
                         
                     }
                     temp.Clear();
@@ -237,10 +348,13 @@ namespace SerialMonitorTest03.ControllerFolder
                 setInfoTypes.Clear();
             }
 
-            private void updateMain(string[] gyro, string[] acc, string[] cFilter)
+            private void updateMain(string[] gyro, string[] acc, string[] cFilter, string[] motor )
             {
 
+                #region for loop calculating attitudes
+                
                 double norm, xRaw, yRaw, zRaw;
+                // this for loop calculates variables.
                 for (int i = 0; i < 3; i++)
                 {
 
@@ -278,7 +392,7 @@ namespace SerialMonitorTest03.ControllerFolder
                                 acc[9] = (Math.Acos(zRaw / norm) * 180 / Math.PI).ToString();
                             }
                         }
-                        else
+                        else if (i==2)
                         {
                             xRaw = Double.Parse(cFilter[0]);
                             yRaw = Double.Parse(cFilter[1]);
@@ -310,8 +424,11 @@ namespace SerialMonitorTest03.ControllerFolder
                         Console.WriteLine("cFilter[0]=" + cFilter[2]);
 
                     }
-                    
+
                 }
+                #endregion
+
+                #region for collection mode
 
                 if (this._collectionMode)
                 {
@@ -328,6 +445,10 @@ namespace SerialMonitorTest03.ControllerFolder
                     {
                         this._data.cFilter[i].Add(cFilter[i]);
                     }
+                    for (int i = 0; i < 4; i++)
+                    {
+                        this._data.motor[i].Add(motor[i]);
+                    }
                     this._numberOfDataGathered++;
                 }
                 else
@@ -335,6 +456,9 @@ namespace SerialMonitorTest03.ControllerFolder
                     this._numberOfDataGathered = 0;
                 }
 
+                #endregion
+
+                #region update main window
 
                 this._main.Dispatcher.Invoke(() =>
                 {
@@ -349,7 +473,17 @@ namespace SerialMonitorTest03.ControllerFolder
                     for (int i = 0; i < 10; i++)
                     {
                         this._main.cFilter[i].Text = cFilter[i];
+                        if (this._main.cFilter[i].Text.Equals("0"))
+                        {
+                            //Console.WriteLine("/" + this._testInstream+ "/");
+                        }
                     }
+
+                    this._main.txtMotor1.Text = motor[0];
+                    this._main.txtMotor2.Text = motor[1];
+                    this._main.txtMotor3.Text = motor[2];
+                    this._main.txtMotor4.Text = motor[3];
+                    this._mainCtrl.updateSlider();
                     if (this._numberOfDataGathered > 0)
                     {
                         this._main.txtNumberOfData.Text = this._numberOfDataGathered.ToString() + " data gathered.";
@@ -357,8 +491,11 @@ namespace SerialMonitorTest03.ControllerFolder
                     
                 });
 
-                
-                
+
+
+                #endregion
+
+
             }
 
         #endregion
@@ -367,7 +504,15 @@ namespace SerialMonitorTest03.ControllerFolder
 
             public void sendData(String value)
             {
-                this._serial.WriteLine(value);
+                try
+                {
+                    this._serial.WriteLine(value);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Check usb connection");
+                }
+                
             }
 
         #endregion

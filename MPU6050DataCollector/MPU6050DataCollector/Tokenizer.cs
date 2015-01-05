@@ -10,14 +10,51 @@ namespace Tokenizer
     {
         public static string trim(string x)
         {
+            if (x.Length < 2)
+            {
+                return x;
+            }
             int beginPos = findFirstChar(x, '[', true);
             int endPos = findFirstChar(x, ']', false);
-            string result = x.Substring(beginPos, endPos - beginPos +1);
+            string result="";
+            try
+            {
+                int length = endPos - beginPos + 1;
+                if (length > 0)
+                {
+                    result = x.Substring(beginPos, endPos - beginPos + 1);
+                    //Console.WriteLine("the string to trim:    " + x);
+                    
+                    if (result.ToCharArray()[0] == '['  && result.ToCharArray()[result.Length-1] == ']')
+                    {
+                        //Console.WriteLine("the string after trim: " + result + "    =============");
+                    }
+                    else
+                    {
+                        result = "abort";
+                    }
+                    //Console.Write(result.ToCharArray()[0] + " " + (result.ToCharArray()[0] != '[') + " ");
+                    //Console.WriteLine(result.ToCharArray()[0] + " " + (result.ToCharArray()[result.Length - 1] != ']'));
+                }
+                else
+                {
+                    result = "abort";
+                }
+                
+            }
+            catch(Exception damn){
+                Console.WriteLine("Abnormal Case - the string to trim: " + x);
+            }
+           
             return result;
         }
 
         private static int findFirstChar(string str, char x, bool fromFront)
         {
+            if (!str.Contains(x.ToString()))
+            {
+                return 0;
+            }
             int result = 0;
             if (fromFront)
             {
@@ -52,7 +89,12 @@ namespace Tokenizer
                 {
                     // get first token of the string
                     temp = str.Substring(beginPos + 1, endPos - beginPos - 1);
-                    result.Add(ignoreOdd(temp));
+                    if (ignoreOdd(temp))
+                    {
+                        result.Add(temp);
+                    }
+                    
+                    //Console.WriteLine(ignoreOdd(temp));
                    
                     // prepare the next string
                     str = str.Substring(endPos + 1, str.Length - endPos - 1);
@@ -68,9 +110,9 @@ namespace Tokenizer
             return result;
         }
 
-        private static string ignoreOdd(String x)
+        private static bool ignoreOdd(String x)
         {            
-            string result=null;
+            bool result=false;
             String criterion = "qwertyuiopasdfghjklzxcvbnm[]";
             List<String> temp = new List<String>();
             
@@ -84,11 +126,11 @@ namespace Tokenizer
             {
                 if (x.Contains(temp[i]))
                 {
-                    result = "0";
+                    result = false;
                 }
                 else
                 {
-                    result = x;
+                    result = true;
                 }
 
             }

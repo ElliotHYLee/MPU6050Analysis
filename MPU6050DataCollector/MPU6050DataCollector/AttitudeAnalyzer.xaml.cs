@@ -27,15 +27,23 @@ namespace MPU6050DataCollector
         private TextBox[] _gyro;
         private TextBox[] _acc;
         private TextBox[] _cFilter;
+        
 
         public MainWindow()
         {
             InitializeComponent();
+
+            Color color = new Color();
+            color = Colors.Azure;
+            this.Background = new SolidColorBrush(color);
+
+
             this._data = new AttitudeData();
             this._ctrl = new MainController(this, this._data);
             this._gyro = new TextBox[10];
             this._acc = new TextBox[10];
             this._cFilter = new TextBox[10];
+
 
 
             this._gyro[0] = this.txtGRawX;
@@ -108,6 +116,111 @@ namespace MPU6050DataCollector
         {
             this._ctrl.startCollecting();
         }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.Loaded();
+            //this._main.moterSlide1 = new Slider();
+            //this._main.motorSlide2 = new Slider();
+            //this._main.motorSlide3 = new Slider();
+            //this._main.motorSlide4 = new Slider();
+
+        }
+
+        private void txtCDegreeX_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                this._ctrl.updateAttitudeX(((TextBox)sender).Text);
+                this._ctrl.updateAttitudeY(this.txtCDegreeY.Text);
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(ex);
+            }
+            
+        }
+
+        private void btnDecreaseAll_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnStartPWM_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.prepareMode();
+        }
+
+        private void btnStop_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.idleMode();
+        }
+
+        private void btnIncreaseAll_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnIncreaseMotor1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnIncreaseMotor3_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnIncreaseMotor2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnIncreaseMotor4_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDecreaseMotor1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDecreaseMotor2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDecreaseMotor3_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDecreaseMotor4_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnGetPidConst_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.requestPidConst();
+        }
+
+        private void btnSetPidConst_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.updatePidConst();
+        }
+
+        private void moterSlide1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
+
+
+        //private void txtCDegreeX_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    this._ctrl.updateAttitude(((TextBox) sender).Text);
+        //}
 
  
     }
