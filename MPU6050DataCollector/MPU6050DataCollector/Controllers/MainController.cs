@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Office.Interop;
+//using Microsoft.Office.Interop;
 using System.Windows;
 using SerialMonitorTest03.ControllerFolder;
-using Excel = Microsoft.Office.Interop.Excel;
+//using Excel = Microsoft.Office.Interop.Excel;
 using WpfApplication1;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -105,105 +105,105 @@ namespace MPU6050DataCollector.Controllers
             this._main.txtFileName.Text = "data01.xlsx";
         }
 
-        public void saveToExcel()
-        {
-            Console.WriteLine("Saving...");
-            Excel.Application xlFile = new Microsoft.Office.Interop.Excel.Application();
+        //public void saveToExcel()
+        //{
+        //    Console.WriteLine("Saving...");
+        //    Excel.Application xlFile = new Microsoft.Office.Interop.Excel.Application();
 
-            if (xlFile == null)
-            {
-                MessageBox.Show("Excel is not properly installed!!");
-                return;
-            }
+        //    if (xlFile == null)
+        //    {
+        //        MessageBox.Show("Excel is not properly installed!!");
+        //        return;
+        //    }
 
-            Excel.Workbook xlBook;
-            Excel.Worksheet[] sheet = new Excel.Worksheet[3];
-            object misValue = System.Reflection.Missing.Value;
+        //    Excel.Workbook xlBook;
+        //    Excel.Worksheet[] sheet = new Excel.Worksheet[3];
+        //    object misValue = System.Reflection.Missing.Value;
 
-            xlBook = xlFile.Workbooks.Add(misValue);
+        //    xlBook = xlFile.Workbooks.Add(misValue);
             
-            int outterIteration = this._data.gyro.Length;
-            int innerIteration = this._data.gyro[0].Count;
+        //    int outterIteration = this._data.gyro.Length;
+        //    int innerIteration = this._data.gyro[0].Count;
           
-            // sheet one - gyro
-            sheet[0] = (Excel.Worksheet)xlBook.Worksheets.get_Item(1);
-            sheet[0].Name = (string) "Gyroscope";
-            sheet[0].Cells[1, 1] = "RawX";
-            sheet[0].Cells[1, 2] = "RawY";
-            sheet[0].Cells[1, 3] = "RawZ";
-            sheet[0].Cells[1, 4] = "Normal";
-            sheet[0].Cells[1, 5] = "DircosX";
-            sheet[0].Cells[1, 6] = "Degreex";
-            sheet[0].Cells[1, 7] = "DirCosY";
-            sheet[0].Cells[1, 8] = "DegreeY";
-            sheet[0].Cells[1, 9] = "DircosZ";
-            sheet[0].Cells[1, 10] = "DegreeZ";
-            for (int i = 0; i < outterIteration; i++)
-            {
-                List<string> temp = this._data.gyro[i];
-                for (int j = 0; j < innerIteration; j++)
-                {
-                    sheet[0].Cells[j + 2, i + 1] = temp[j];
-                }
-            }
-            // sheet two - acc
-            sheet[1] = (Excel.Worksheet)xlBook.Worksheets.Add();
-            sheet[1].Name = (string)"Accelerometer";
-            sheet[1].Cells[1, 1] = "RawX";
-            sheet[1].Cells[1, 2] = "RawY";
-            sheet[1].Cells[1, 3] = "RawZ";
-            sheet[1].Cells[1, 4] = "Normal";
-            sheet[1].Cells[1, 5] = "DircosX";
-            sheet[1].Cells[1, 6] = "Degreex";
-            sheet[1].Cells[1, 7] = "DirCosY";
-            sheet[1].Cells[1, 8] = "DegreeY";
-            sheet[1].Cells[1, 9] = "DircosZ";
-            sheet[1].Cells[1, 10] = "DegreeZ";
-            for (int i = 0; i < outterIteration; i++)
-            {
-                List<string> temp = this._data.acc[i];
-                for (int j = 0; j < innerIteration; j++)
-                {
-                    sheet[1].Cells[j + 2, i + 1] = temp[j];
-                }
-            }
+        //    // sheet one - gyro
+        //    sheet[0] = (Excel.Worksheet)xlBook.Worksheets.get_Item(1);
+        //    sheet[0].Name = (string) "Gyroscope";
+        //    sheet[0].Cells[1, 1] = "RawX";
+        //    sheet[0].Cells[1, 2] = "RawY";
+        //    sheet[0].Cells[1, 3] = "RawZ";
+        //    sheet[0].Cells[1, 4] = "Normal";
+        //    sheet[0].Cells[1, 5] = "DircosX";
+        //    sheet[0].Cells[1, 6] = "Degreex";
+        //    sheet[0].Cells[1, 7] = "DirCosY";
+        //    sheet[0].Cells[1, 8] = "DegreeY";
+        //    sheet[0].Cells[1, 9] = "DircosZ";
+        //    sheet[0].Cells[1, 10] = "DegreeZ";
+        //    for (int i = 0; i < outterIteration; i++)
+        //    {
+        //        List<string> temp = this._data.gyro[i];
+        //        for (int j = 0; j < innerIteration; j++)
+        //        {
+        //            sheet[0].Cells[j + 2, i + 1] = temp[j];
+        //        }
+        //    }
+        //    // sheet two - acc
+        //    sheet[1] = (Excel.Worksheet)xlBook.Worksheets.Add();
+        //    sheet[1].Name = (string)"Accelerometer";
+        //    sheet[1].Cells[1, 1] = "RawX";
+        //    sheet[1].Cells[1, 2] = "RawY";
+        //    sheet[1].Cells[1, 3] = "RawZ";
+        //    sheet[1].Cells[1, 4] = "Normal";
+        //    sheet[1].Cells[1, 5] = "DircosX";
+        //    sheet[1].Cells[1, 6] = "Degreex";
+        //    sheet[1].Cells[1, 7] = "DirCosY";
+        //    sheet[1].Cells[1, 8] = "DegreeY";
+        //    sheet[1].Cells[1, 9] = "DircosZ";
+        //    sheet[1].Cells[1, 10] = "DegreeZ";
+        //    for (int i = 0; i < outterIteration; i++)
+        //    {
+        //        List<string> temp = this._data.acc[i];
+        //        for (int j = 0; j < innerIteration; j++)
+        //        {
+        //            sheet[1].Cells[j + 2, i + 1] = temp[j];
+        //        }
+        //    }
             
-            // sheet three - cFilter
-            sheet[2] = (Excel.Worksheet)xlBook.Worksheets.Add();
-            sheet[2].Name = (string)"cFilter";
-            sheet[2].Cells[1, 1] = "RawX";
-            sheet[2].Cells[1, 2] = "RawY";
-            sheet[2].Cells[1, 3] = "RawZ";
-            sheet[2].Cells[1, 4] = "Normal";
-            sheet[2].Cells[1, 5] = "DircosX";
-            sheet[2].Cells[1, 6] = "Degreex";
-            sheet[2].Cells[1, 7] = "DirCosY";
-            sheet[2].Cells[1, 8] = "DegreeY";
-            sheet[2].Cells[1, 9] = "DircosZ";
-            sheet[2].Cells[1, 10] = "DegreeZ";
-            for (int i = 0; i < outterIteration; i++)
-            {
-                List<string> temp = this._data.cFilter[i];
-                for (int j = 0; j < innerIteration; j++)
-                {
-                    sheet[2].Cells[j + 2, i + 1] = temp[j];
-                }
-            }
+        //    // sheet three - cFilter
+        //    sheet[2] = (Excel.Worksheet)xlBook.Worksheets.Add();
+        //    sheet[2].Name = (string)"cFilter";
+        //    sheet[2].Cells[1, 1] = "RawX";
+        //    sheet[2].Cells[1, 2] = "RawY";
+        //    sheet[2].Cells[1, 3] = "RawZ";
+        //    sheet[2].Cells[1, 4] = "Normal";
+        //    sheet[2].Cells[1, 5] = "DircosX";
+        //    sheet[2].Cells[1, 6] = "Degreex";
+        //    sheet[2].Cells[1, 7] = "DirCosY";
+        //    sheet[2].Cells[1, 8] = "DegreeY";
+        //    sheet[2].Cells[1, 9] = "DircosZ";
+        //    sheet[2].Cells[1, 10] = "DegreeZ";
+        //    for (int i = 0; i < outterIteration; i++)
+        //    {
+        //        List<string> temp = this._data.cFilter[i];
+        //        for (int j = 0; j < innerIteration; j++)
+        //        {
+        //            sheet[2].Cells[j + 2, i + 1] = temp[j];
+        //        }
+        //    }
 
 
-            xlBook.SaveAs(this._main.lblAddress.Content + this._main.txtFileName.Text);
-            xlBook.Close(true, misValue, misValue);
-            xlFile.Quit();
+        //    xlBook.SaveAs(this._main.lblAddress.Content + this._main.txtFileName.Text);
+        //    xlBook.Close(true, misValue, misValue);
+        //    xlFile.Quit();
 
-            releaseObject(sheet[0]);
-            releaseObject(sheet[1]);
-            releaseObject(sheet[2]);
-            releaseObject(xlBook);
-            releaseObject(xlFile);
+        //    releaseObject(sheet[0]);
+        //    releaseObject(sheet[1]);
+        //    releaseObject(sheet[2]);
+        //    releaseObject(xlBook);
+        //    releaseObject(xlFile);
 
-            MessageBox.Show("Excel file created , you can find the file " + this._main.lblAddress.Content + this._main.txtFileName.Text);
-            this._data = new AttitudeData();
-            }
+        //    MessageBox.Show("Excel file created , you can find the file " + this._main.lblAddress.Content + this._main.txtFileName.Text);
+        //    this._data = new AttitudeData();
+        //    }
 
         private void releaseObject(object obj)
         {

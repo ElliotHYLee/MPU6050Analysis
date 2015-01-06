@@ -21,34 +21,34 @@
         <TextBox Name="txtARawX" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="122,172,0,0"/>
         <TextBox Name="txtARawY" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="260,172,0,0"/>
         <TextBox Name="txtARawZ" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="390,172,0,0"/>
-        <TextBox Name="txtCRawX" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="122,208,0,0"/>
-        <TextBox Name="txtCRawY" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="260,208,0,0"/>
-        <TextBox Name="txtCRawZ" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="390,208,0,0"/>
+        <TextBox Name="txtCRawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="122,208,0,0"/>
+        <TextBox Name="txtCRawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="260,208,0,0"/>
+        <TextBox Name="txtCRawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="390,208,0,0"/>
 
         <TextBox Name="txtGNorm" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="566,136,0,0"/>
         <TextBox Name="txtANorm" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="566,172,0,0"/>
-        <TextBox Name="txtCNorm" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="566,208,0,0"/>
+        <TextBox Name="txtCNorm" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="566,208,0,0"/>
 
         <TextBox Name="txtGDirCosX" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="741,136,0,0"/>
         <TextBox Name="txtGDegreeX" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="794,136,0,0"/>
         <TextBox Name="txtADirCosX" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="741,172,0,0"/>
         <TextBox Name="txtADegreeX" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="794,172,0,0"/>
-        <TextBox Name="txtCDirCosX"  HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="741,208,0,0"/>
-        <TextBox Name="txtCDegreeX" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="794,208,0,0" TextChanged="txtCDegreeX_TextChanged"/>
+        <TextBox Name="txtCDirCosX"  HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="741,208,0,0"/>
+        <TextBox Name="txtCDegreeX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="794,208,0,0" TextChanged="txtCDegreeX_TextChanged"/>
 
         <TextBox Name="txtGDirCosY" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="879,136,0,0"/>
         <TextBox Name="txtGDegreeY" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="932,136,0,0"/>
         <TextBox Name="txtADirCosY" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="879,172,0,0"/>
         <TextBox Name="txtADegreeY" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="932,172,0,0"/>
-        <TextBox Name="txtCDirCosY" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="879,208,0,0"/>
-        <TextBox Name="txtCDegreeY" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="932,208,0,0"/>
+        <TextBox Name="txtCDirCosY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="879,208,0,0"/>
+        <TextBox Name="txtCDegreeY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="932,208,0,0"/>
 
         <TextBox Name="txtGDirCosZ" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1009,136,0,0"/>
         <TextBox Name="txtGDegreeZ" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1062,136,0,0"/>
         <TextBox Name="txtADirCosZ" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1009,172,0,0"/>
         <TextBox Name="txtADegreeZ" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1062,172,0,0"/>
-        <TextBox Name="txtCDirCosZ" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1009,208,0,0"/>
-        <TextBox Name="txtCDegreeZ" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1062,208,0,0"/>
+        <TextBox Name="txtCDirCosZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1009,208,0,0"/>
+        <TextBox Name="txtCDegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1062,208,0,0"/>
 
         <Button Name="btnSave" Content="Save Recorded" HorizontalAlignment="Left" Margin="1009,70,0,0" VerticalAlignment="Top" Width="106" Height="20" Click="btnSave_Click"/>
         <Button Name="btnCollect" Content="Collect Data" HorizontalAlignment="Left" Height="20" Margin="544,67,0,0" VerticalAlignment="Top" Width="106" Click="btnCollect_Click"/>
@@ -147,11 +147,11 @@
         </Border>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="237" Margin="674,490,0,0" VerticalAlignment="Top" Width="441">
             <Grid HorizontalAlignment="Left" Height="237" Margin="-1" VerticalAlignment="Top" Width="441">
-                <TextBox Name="txtKp" HorizontalAlignment="Left" Height="16" Margin="53,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="82"/>
+                <TextBox Name="txtKp" HorizontalAlignment="Left" Height="29" Margin="53,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="82"/>
                 <Label Content="Kp" HorizontalAlignment="Left" Height="33" Margin="15,10,0,0" VerticalAlignment="Top" Width="38"/>
-                <TextBox Name="txtKi" HorizontalAlignment="Left" Height="16" Margin="53,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="82"/>
+                <TextBox Name="txtKi" HorizontalAlignment="Left" Height="29" Margin="53,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="82"/>
                 <Label Content="Ki" HorizontalAlignment="Left" Height="33" Margin="15,48,0,0" VerticalAlignment="Top" Width="38"/>
-                <TextBox Name="txtKd" HorizontalAlignment="Left" Height="16" Margin="53,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="82"/>
+                <TextBox Name="txtKd" HorizontalAlignment="Left" Height="29" Margin="53,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="82"/>
                 <Label  Content="Kd" HorizontalAlignment="Left" Height="33" Margin="15,86,0,0" VerticalAlignment="Top" Width="38"/>
                 <Button Name="btnSetPidConst" Content="Set PID Const" HorizontalAlignment="Left" Height="30" Margin="15,124,0,0" VerticalAlignment="Top" Width="120" Click="btnSetPidConst_Click"/>
                 <Button Name="btnGetPidConst" Content="Get PId Const" HorizontalAlignment="Left" Height="30" Margin="15,159,0,0" VerticalAlignment="Top" Width="120" Click="btnGetPidConst_Click"/>

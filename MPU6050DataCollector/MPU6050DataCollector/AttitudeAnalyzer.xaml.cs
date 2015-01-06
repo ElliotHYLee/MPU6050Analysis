@@ -99,7 +99,7 @@ namespace MPU6050DataCollector
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             this.lblBoard.Content = "Saving as Excel takes a whiel. Just wait a little...";
-            this._ctrl.saveToExcel();
+            //this._ctrl.saveToExcel();
         }
 
         private void btnConnect_Clicked(object sender, RoutedEventArgs e)
