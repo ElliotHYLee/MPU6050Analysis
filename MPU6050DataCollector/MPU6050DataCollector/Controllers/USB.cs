@@ -16,7 +16,7 @@ namespace SerialMonitorTest03.ControllerFolder
     // This class doesn't check convention
     class USB
     {
-        private bool regulator = true;
+        //private bool regulator = true;
         private MainWindow _main;
         private AttitudeData _data;
         private SerialPort _serial;
@@ -124,10 +124,10 @@ namespace SerialMonitorTest03.ControllerFolder
             {
                 
                 string inStream = (string)this._serial.ReadExisting();
-                if (inStream.Contains("p"))
-                {
-                    Console.WriteLine(inStream);
-                }
+                //if (inStream.Contains("p"))
+                //{
+                //    Console.WriteLine(inStream);
+                //}
                 //Console.WriteLine(inStream);
                 this._testInstream = inStream;
                 try

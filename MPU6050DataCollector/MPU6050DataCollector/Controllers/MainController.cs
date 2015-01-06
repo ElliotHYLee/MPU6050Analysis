@@ -249,6 +249,11 @@ namespace MPU6050DataCollector.Controllers
             k[2] = this._main.txtKd.Text;
             string result = "";
 
+            if (k[0].Equals("") || k[1].Equals("") || k[2].Equals(""))
+            {
+                MessageBox.Show("Check the connection and request propeller's pid constant");
+                return; 
+            }
 
             for (int i = 0; i < 3; i++)
             {
