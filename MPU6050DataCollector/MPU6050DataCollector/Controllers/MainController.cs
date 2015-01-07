@@ -342,10 +342,18 @@ namespace MPU6050DataCollector.Controllers
 
         public void updateSlider()
         {
-            this._main.moterSlide1.Value = Double.Parse(this._main.txtMotor1.Text);
-            this._main.motorSlide2.Value = Double.Parse(this._main.txtMotor2.Text);
-            this._main.motorSlide3.Value = Double.Parse(this._main.txtMotor3.Text);
-            this._main.motorSlide4.Value = Double.Parse(this._main.txtMotor4.Text);
+            try
+            {
+                this._main.moterSlide1.Value = Double.Parse(this._main.txtMotor1.Text);
+                this._main.motorSlide2.Value = Double.Parse(this._main.txtMotor2.Text);
+                this._main.motorSlide3.Value = Double.Parse(this._main.txtMotor3.Text);
+                this._main.motorSlide4.Value = Double.Parse(this._main.txtMotor4.Text);
+            }
+            catch (Exception ee)
+            {
+
+            }
+            
         }
 
         public void setSlider()
