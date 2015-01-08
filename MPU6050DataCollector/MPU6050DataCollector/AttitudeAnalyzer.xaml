@@ -18,19 +18,19 @@
             <Label Name="lblAddress" Content="Label" HorizontalAlignment="Left" Height="24" Margin="390,30,0,0" VerticalAlignment="Top" Width="614" Grid.RowSpan="2"/>
             <Label Name="lblBoard" Content="Label" HorizontalAlignment="Left" Height="32" Margin="674,67,0,0" VerticalAlignment="Top" Width="330" Grid.RowSpan="2"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="237" Margin="45,271,0,0" VerticalAlignment="Top" Width="605" Grid.RowSpan="2">
-                <Grid Height="237" Margin="-1" VerticalAlignment="Top">
+                <Grid Height="237" Margin="-11,-1,9,-1" VerticalAlignment="Top">
                     <TextBox Name="txtMotor1" HorizontalAlignment="Left" Height="23" Margin="74,66,0,0" TextWrapping="Wrap" Text="motor1" VerticalAlignment="Top" Width="86"  />
-                    <Button Name="btnDecreaseMotor1" Content="1-Decrease" HorizontalAlignment="Left" Margin="168,64,0,0" VerticalAlignment="Top" Width="70" Height="20" Click="btnDecreaseMotor1_Click"/>
-                    <Button Name="btnIncreaseMotor1" Content="1-Increase" HorizontalAlignment="Left" Margin="502,64,0,0" VerticalAlignment="Top" Width="70" Height="20" Click="btnIncreaseMotor1_Click"/>
+                    <Button Name="btnDecreaseMotor1" Content="Dec1" HorizontalAlignment="Left" Margin="168,64,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor1_Click"/>
+                    <Button Name="btnIncreaseMotor1" Content="Up1" HorizontalAlignment="Left" Margin="502,64,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor1_Click"/>
                     <TextBox Name="txtMotor2" HorizontalAlignment="Left" Height="22" Margin="74,105,0,0" TextWrapping="Wrap" Text="motor2" VerticalAlignment="Top" Width="86"  />
-                    <Button Name="btnDecreaseMotor2" Content="2-Decrease" HorizontalAlignment="Left" Margin="168,103,0,0" VerticalAlignment="Top" Width="70" Height="20" Click="btnDecreaseMotor2_Click"/>
-                    <Button Name="btnIncreaseMotor2" Content="2-Increase" HorizontalAlignment="Left" Margin="502,106,0,0" VerticalAlignment="Top" Width="70" Height="20" Click="btnIncreaseMotor2_Click"/>
+                    <Button Name="btnDecreaseMotor2" Content="Dec1" HorizontalAlignment="Left" Margin="168,103,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor2_Click"/>
+                    <Button Name="btnIncreaseMotor2" Content="Up1" HorizontalAlignment="Left" Margin="502,106,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor2_Click"/>
                     <TextBox Name="txtMotor3"  HorizontalAlignment="Left" Height="23" Margin="74,144,0,0" TextWrapping="Wrap" Text="motor3" VerticalAlignment="Top" Width="86"  />
-                    <Button Name="btnDecreaseMotor3" Content="3-Decrease" HorizontalAlignment="Left" Margin="168,146,0,0" VerticalAlignment="Top" Width="70" Height="20" Click="btnDecreaseMotor3_Click"/>
-                    <Button Name="btnIncreaseMotor3" Content="3-Increase" HorizontalAlignment="Left" Margin="502,146,0,0" VerticalAlignment="Top" Width="70" Height="20" Click="btnIncreaseMotor3_Click"/>
+                    <Button Name="btnDecreaseMotor3" Content="Dec1" HorizontalAlignment="Left" Margin="168,146,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor3_Click"/>
+                    <Button Name="btnIncreaseMotor3" Content="Up1" HorizontalAlignment="Left" Margin="502,146,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor3_Click"/>
                     <TextBox Name="txtMotor4" HorizontalAlignment="Left" Height="23" Margin="74,184,0,0" TextWrapping="Wrap" Text="motor4" VerticalAlignment="Top" Width="86" />
-                    <Button Name="btnDecreaseMotor4" Content="4-Decrease" HorizontalAlignment="Left" Margin="168,186,0,0" VerticalAlignment="Top" Width="70" Height="20" Click="btnDecreaseMotor4_Click"/>
-                    <Button Name="btnIncreaseMotor4" Content="4-Increase" HorizontalAlignment="Left" Margin="502,186,0,0" VerticalAlignment="Top" Width="70" Height="20" Click="btnIncreaseMotor4_Click"/>
+                    <Button Name="btnDecreaseMotor4" Content="Dec1" HorizontalAlignment="Left" Margin="168,186,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor4_Click"/>
+                    <Button Name="btnIncreaseMotor4" Content="Up1" HorizontalAlignment="Left" Margin="502,186,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor4_Click"/>
                     <Button Name="btnStartPWM" Content="PrepareMode" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top" Width="78" Click="btnStartPWM_Click" Height="27" Background="YellowGreen"/>
                     <Label Content="Motor1" HorizontalAlignment="Left" Margin="16,63,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.407,0.125" Width="52"/>
                     <Label Content="Motor2" HorizontalAlignment="Left" Margin="16,102,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.407,0.125" Width="52"/>
@@ -78,25 +78,39 @@
                     </Slider>
                     <Button Name="btnIncreaseAll" Content="Increase All" HorizontalAlignment="Left" Margin="502,14,0,0" VerticalAlignment="Top" Width="70" Click="btnIncreaseAll_Click"/>
                     <Button Name="btnDecreaseAll" Content="Decrease All" HorizontalAlignment="Left" Margin="168,14,0,0" VerticalAlignment="Top" Width="70" Click="btnDecreaseAll_Click"/>
-                    <TextBox Name ="txtDecraseCalInterval" HorizontalAlignment="Left" Height="20" Margin="168,39,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="70"/>
-                    <TextBox Name ="txtIncraseCalInterval" HorizontalAlignment="Left" Height="20" Margin="502,39,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="70" RenderTransformOrigin="1.057,-1.6"/>
+                    <TextBox Name ="txtDecraseCalInterval" HorizontalAlignment="Left" Height="20" Margin="168,39,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="70"/>
+                    <TextBox Name ="txtIncraseCalInterval" HorizontalAlignment="Left" Height="20" Margin="502,39,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="70" RenderTransformOrigin="1.057,-1.6"/>
                     <Button Name="btnStop" Content="Idle Mode" HorizontalAlignment="Left" Margin="380,10,0,0" VerticalAlignment="Top" Width="80" Height="27" Click="btnStop_Click" Background="Red"/>
+                    <Button Name="btnIncreaseMotor1By" Content="UpAs" HorizontalAlignment="Left" Margin="539,64,0,0" VerticalAlignment="Top" Width="33" Height="20" Click="btnIncreaseMotor1By_Click" />
+                    <Button Name="btnIncreaseMotor2By" Content="UpAs" HorizontalAlignment="Left" Margin="539,106,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor2By_Click" />
+                    <Button Name="btnIncreaseMotor3By" Content="UpAs" HorizontalAlignment="Left" Margin="539,146,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor3By_Click"/>
+                    <Button Name="btnIncreaseMotor4By" Content="UpAs" HorizontalAlignment="Left" Margin="539,186,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor4By_Click"/>
+                    <Button Name="btnDecreaseMotor1By" Content="DecBy" HorizontalAlignment="Left" Margin="202,64,0,0" VerticalAlignment="Top" Width="36" Height="20" Click="btnDecreaseMotor1By_Click" />
+                    <Button Name="btnDecreaseMotor2By" Content="DecBy" HorizontalAlignment="Left" Margin="202,103,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor2By_Click" />
+                    <Button Name="btnDecreaseMotor3By" Content="DecBy" HorizontalAlignment="Left" Margin="202,146,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor3By_Click"/>
+                    <Button Name="btnDecreaseMotor4By" Content="DecBy" HorizontalAlignment="Left" Margin="202,186,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor4By_Click"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="237" Margin="650,271,0,0" VerticalAlignment="Top" Width="519" Grid.RowSpan="2">
-                <Grid HorizontalAlignment="Left" Height="237" Margin="-1" VerticalAlignment="Top" Width="441">
+                <Grid HorizontalAlignment="Left" Height="237" Margin="-1" VerticalAlignment="Top" Width="519">
                     <TextBox Name="txtKp" HorizontalAlignment="Left" Height="29" Margin="53,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="82"/>
                     <Label Content="Kp" HorizontalAlignment="Left" Height="33" Margin="15,10,0,0" VerticalAlignment="Top" Width="38"/>
                     <TextBox Name="txtKi" HorizontalAlignment="Left" Height="29" Margin="53,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="82"/>
                     <Label Content="Ki" HorizontalAlignment="Left" Height="33" Margin="15,48,0,0" VerticalAlignment="Top" Width="38"/>
                     <TextBox Name="txtKd" HorizontalAlignment="Left" Height="29" Margin="53,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="82"/>
                     <Label  Content="Kd" HorizontalAlignment="Left" Height="33" Margin="15,86,0,0" VerticalAlignment="Top" Width="38"/>
-                    <Label Name="lblPidIndicator" Content="PID ON" HorizontalAlignment="Left" Height="28" Margin="174,10,0,0" VerticalAlignment="Top" Width="65"/>
-                    <Label Name="lblMpuIndicator" Content="MPU ON" HorizontalAlignment="Left" Height="28" Margin="174,48,0,0" VerticalAlignment="Top" Width="65"/>
+                    <Label Name="lblPidIndicator" Content="PID ON" HorizontalAlignment="Left" Height="28" Margin="225,20,0,0" VerticalAlignment="Top" Width="65"/>
+                    <Label Name="lblMpuIndicator" Content="MPU ON" HorizontalAlignment="Left" Height="28" Margin="225,58,0,0" VerticalAlignment="Top" Width="65"/>
                     <Button Name="btnSetPidConst" Content="Set PID Const" HorizontalAlignment="Left" Height="30" Margin="15,124,0,0" VerticalAlignment="Top" Width="120" Click="btnSetPidConst_Click"/>
                     <Button Name="btnGetPidConst" Content="Get PId Const" HorizontalAlignment="Left" Height="30" Margin="15,159,0,0" VerticalAlignment="Top" Width="120" Click="btnGetPidConst_Click"/>
-                    <Button Name="btnPidControl" Content="Button" HorizontalAlignment="Left" Height="20" Margin="244,13,0,0" VerticalAlignment="Top" Width="64"/>
-                    <Button Name="btnMpuControl" Content="Button" HorizontalAlignment="Left" Height="20" Margin="244,52,0,0" VerticalAlignment="Top" Width="64"/>
+                    <Button Name="btnPidControl" Content="PID On/Off" HorizontalAlignment="Left" Height="20" Margin="295,23,0,0" VerticalAlignment="Top" Width="64" Click="btnPidControl_Click"/>
+                    <Button Name="btnMpuControl" Content="MPU On/Off" HorizontalAlignment="Left" Height="20" Margin="295,62,0,0" VerticalAlignment="Top" Width="64"/>
+                    <Button Name="btnKpDown" Content="Do" HorizontalAlignment="Left" Height="29" Margin="140,14,0,0" VerticalAlignment="Top" Width="24" Click="btnKpDown_Click"/>
+                    <Button Name="btnKpUp" Content="Up" HorizontalAlignment="Left" Height="29" Margin="169,14,0,0" VerticalAlignment="Top" Width="24" Click="btnKpUp_Click"/>
+                    <Button Name="btnKdDown" Content="Do" HorizontalAlignment="Left" Height="29" Margin="140,90,0,0" VerticalAlignment="Top" Width="24" Click="btnKdDown_Click"/>
+                    <Button Name="btnKdUp" Content="Up" HorizontalAlignment="Left" Height="29" Margin="169,90,0,0" VerticalAlignment="Top" Width="24" Click="btnKdUp_Click"/>
+                    <Button Name="btnKiDown" Content="Do" HorizontalAlignment="Left" Height="29" Margin="140,53,0,0" VerticalAlignment="Top" Width="24" Click="btnKiDown_Click"/>
+                    <Button Name="btnKiUp" Content="Up" HorizontalAlignment="Left" Height="29" Margin="169,53,0,0" VerticalAlignment="Top" Width="24" Click="btnKiUp_Click"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="172" Margin="45,99,0,0" VerticalAlignment="Top" Width="1124" Grid.RowSpan="2">

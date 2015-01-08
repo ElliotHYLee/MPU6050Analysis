@@ -241,6 +241,55 @@ namespace MPU6050DataCollector.Controllers
         }
 
 
+        public void setPidStatus()
+        {
+            if (this._main.lblPidIndicator.Content.Equals("PID ON"))
+            {
+                this._usb.sendData("P10000");
+            }
+            else
+            {
+                this._usb.sendData("P10001");
+            }
+        }
+
+
+        public void preUpdatePidConst(int kType, int direction)
+        {
+            if (direction < 0)
+            {
+                if (kType == 1)
+                {
+                    this._main.txtKp.Text = (int.Parse(this._main.txtKp.Text) - 1).ToString();
+                }
+                else if (kType == 2)
+                {
+                    this._main.txtKi.Text = (int.Parse(this._main.txtKi.Text) - 1).ToString();
+                }
+                else if (kType == 3)
+                {
+                    this._main.txtKd.Text = (int.Parse(this._main.txtKd.Text) - 1).ToString();
+                }
+            }
+            else if (direction > 0)
+            {
+                if (kType == 1)
+                {
+                    this._main.txtKp.Text = (int.Parse(this._main.txtKp.Text) + 1).ToString();
+                }
+                else if (kType == 2)
+                {
+                    this._main.txtKi.Text = (int.Parse(this._main.txtKi.Text) + 1).ToString();
+                }
+                else if (kType == 3)
+                {
+                    this._main.txtKd.Text = (int.Parse(this._main.txtKd.Text) + 1).ToString();
+                }
+            }
+
+            updatePidConst();
+        }
+
         public void updatePidConst()
         {
             string[] k = new string[3]; // in order of kp, ki, kd
@@ -292,6 +341,7 @@ namespace MPU6050DataCollector.Controllers
             this._usb.sendData("D10001");
             Console.WriteLine("System Mode = prepare. Message sent: D10001");
         }
+
 
 
         public void requestPidConst()
@@ -369,6 +419,18 @@ namespace MPU6050DataCollector.Controllers
             this._main.motorSlide4.Maximum = 2500;
         }
 
+
+        public void decrease(int motor, string currentPwm, int delta)
+        {
+            int newPwm = int.Parse(currentPwm) - delta;
+            this._usb.sendData("M" + motor.ToString() + newPwm.ToString());
+        }
+
+        public void increase(int motor, string currentPwm, int delta)
+        {
+            int newPwm = int.Parse(currentPwm) + delta;
+            this._usb.sendData("M" + motor.ToString() + newPwm.ToString());
+        }
 
 
 
