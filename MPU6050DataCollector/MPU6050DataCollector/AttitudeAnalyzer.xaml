@@ -111,6 +111,12 @@
                     <Button Name="btnKdUp" Content="Up" HorizontalAlignment="Left" Height="29" Margin="169,90,0,0" VerticalAlignment="Top" Width="24" Click="btnKdUp_Click"/>
                     <Button Name="btnKiDown" Content="Do" HorizontalAlignment="Left" Height="29" Margin="140,53,0,0" VerticalAlignment="Top" Width="24" Click="btnKiDown_Click"/>
                     <Button Name="btnKiUp" Content="Up" HorizontalAlignment="Left" Height="29" Margin="169,53,0,0" VerticalAlignment="Top" Width="24" Click="btnKiUp_Click"/>
+                    <TextBox Name="txtPidOutput" HorizontalAlignment="Left" Height="22" Margin="310,159,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="74"/>
+                    <Label Content="Output" HorizontalAlignment="Left" Height="26" Margin="225,154,0,0" VerticalAlignment="Top" Width="55"/>
+                    <TextBox Name="txtPidDerivative" HorizontalAlignment="Left" Height="22" Margin="310,128,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="74"/>
+                    <Label Content="Derivative" HorizontalAlignment="Left" Height="26" Margin="225,128,0,0" VerticalAlignment="Top" Width="75"/>
+                    <TextBox Name="txtPidProportional" HorizontalAlignment="Left" Height="22" Margin="310,99,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="74"/>
+                    <Label Content="Proportional" HorizontalAlignment="Left" Height="26" Margin="225,97,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="172" Margin="45,99,0,0" VerticalAlignment="Top" Width="1124" Grid.RowSpan="2">

@@ -172,15 +172,16 @@ namespace MPU6050DataCollector
             this._ctrl.increase(1, this.txtMotor1.Text, 1);
         }
 
-        private void btnIncreaseMotor3_Click(object sender, RoutedEventArgs e)
+        private void btnIncreaseMotor2_Click(object sender, RoutedEventArgs e)
         {
             this._ctrl.increase(2, this.txtMotor2.Text, 1);
         }
 
-        private void btnIncreaseMotor2_Click(object sender, RoutedEventArgs e)
+        private void btnIncreaseMotor3_Click(object sender, RoutedEventArgs e)
         {
             this._ctrl.increase(3, this.txtMotor3.Text, 1);
         }
+
 
         private void btnIncreaseMotor4_Click(object sender, RoutedEventArgs e)
         {

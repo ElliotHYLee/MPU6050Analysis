@@ -245,11 +245,11 @@ namespace MPU6050DataCollector.Controllers
         {
             if (this._main.lblPidIndicator.Content.Equals("PID ON"))
             {
-                this._usb.sendData("P10000");
+                this._usb.sendData("P10000000");
             }
             else
             {
-                this._usb.sendData("P10001");
+                this._usb.sendData("P10000001");
             }
         }
 
@@ -309,13 +309,25 @@ namespace MPU6050DataCollector.Controllers
                 int temp =  (int) (Double.Parse(k[i]) + 0.5);
                 if ( temp < 10)
                 {
-                    result = "000" + temp.ToString();
+                    result = "000000" + temp.ToString();
                 }
                 else if (temp <100)
                 {
-                    result = "00" + temp.ToString();
+                    result = "00000" + temp.ToString();
                 }
                 else if (temp <1000)
+                {
+                    result = "0000" + temp.ToString();
+                }
+                else if (temp < 10000)
+                {
+                    result = "000" + temp.ToString();
+                }
+                else if (temp < 100000)
+                {
+                    result = "00" + temp.ToString();
+                }
+                else if (temp < 1000000)
                 {
                     result = "0" + temp.ToString();
                 }
@@ -324,7 +336,7 @@ namespace MPU6050DataCollector.Controllers
                     result = temp.ToString();
                 }
                 this._usb.sendData("P" + (i+2).ToString() + result);
-                Console.WriteLine("P" + (i + 2).ToString() + result);
+                Console.WriteLine("P" + (i+2).ToString() + result);
             }
 
             

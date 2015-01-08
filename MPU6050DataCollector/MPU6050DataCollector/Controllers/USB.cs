@@ -171,7 +171,9 @@ namespace SerialMonitorTest03.ControllerFolder
                 #region parsing tokens
 
 
-
+                string pidOut = "";
+                string pidProportional="";
+                string pidDerivative="";
                 for (int i = 0; i < listTokens.Count; i++)
                 {
                     infoType = listTokens[i].Substring(0, 1);
@@ -263,6 +265,26 @@ namespace SerialMonitorTest03.ControllerFolder
                         }
                         #endregion
                     }
+                    else if (infoType.Equals("k"))
+                    {
+                        
+                        if (listTokens[i].Substring(1, 1).Equals("0"))
+                        {
+                            pidOut = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        }
+                        else if (listTokens[i].Substring(1, 1).Equals("1"))
+                        {
+                            pidProportional = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        }
+                        else if (listTokens[i].Substring(1, 1).Equals("2"))
+                        {
+
+                        }
+                        else if (listTokens[i].Substring(1, 1).Equals("3"))
+                        {
+                            pidDerivative = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        }
+                    }
                     else if (infoType.Equals("p"))
                     {
                         // get direction of info 1,2,3,4 motor
@@ -280,14 +302,17 @@ namespace SerialMonitorTest03.ControllerFolder
                                 break;
                             case "o":
                                 Console.WriteLine("PID On/Off");
-                                if( listTokens[i].Substring(2, listTokens[i].Length - 2).Equals("1"))
+                                if (listTokens[i].Substring(2, listTokens[i].Length - 2).Equals("1"))
                                 {
                                     this._mainCtrl.pidOnOff = true;
-                                }else
+                                }
+                                else
                                 {
-                                     this._mainCtrl.pidOnOff = false;
+                                    this._mainCtrl.pidOnOff = false;
                                 }
                                 break;
+                           
+                            
                         }
                     }
 
@@ -299,10 +324,16 @@ namespace SerialMonitorTest03.ControllerFolder
 
                 this._main.Dispatcher.Invoke(() =>
                 {
+                    this._main.txtPidOutput.Text = pidOut;
+                    this._main.txtPidProportional.Text = pidProportional;
+                    this._main.txtPidDerivative.Text = pidDerivative;
+
+
                     this._main.listInfoType.Items.Clear();
                     List<string> temp = setInfoTypes.ToList<string>();
                     for(int i = 0; i < setInfoTypes.Count; i++)
                     {
+                        
                         temp.Sort();
                         if (temp[i].Equals("a")){
                             this._main.listInfoType.Items.Add("a: Accelerometer");
