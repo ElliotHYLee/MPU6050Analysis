@@ -95,7 +95,15 @@ namespace SerialMonitorTest03.ControllerFolder
                 // LHS is empty event for serial object, which original has this empty even handler(method)
                 // RHS is the actual methods that I have to implement
                 this._serial.DataReceived += serial_DataReceived;
-                this._serial.Open();
+                try
+                {
+                    this._serial.Open();
+                }
+                catch (Exception ee)
+                {
+                    MessageBox.Show("wait for loading ends");
+                    return false;
+                }
                 result = true;
                 this.keepUsbConvention(result);
                 return result;
