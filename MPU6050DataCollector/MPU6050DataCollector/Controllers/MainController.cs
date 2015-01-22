@@ -55,7 +55,6 @@ namespace MPU6050DataCollector.Controllers
                 {
                     this._usbConnected = this._usb.disconnect();
                     this.refreshComports();
-                    
                 }
                 else // not yet connected. So connect usb here
                 {

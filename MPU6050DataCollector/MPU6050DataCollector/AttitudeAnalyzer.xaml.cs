@@ -32,11 +32,7 @@ namespace MPU6050DataCollector
         public MainWindow()
         {
             InitializeComponent();
-            load();
-        }
 
-        public void load()
-        {
             Color color = new Color();
             color = Colors.Azure;
             this.Background = new SolidColorBrush(color);
