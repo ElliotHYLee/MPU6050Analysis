@@ -1,18 +1,18 @@
 ﻿MPU6050DataCollector
 
 
-exe
+winexe
 C#
 .cs
-C:\Users\Hongyun\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\
+C:\Users\Hongyun\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\
 MPU6050DataCollector
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\Hongyun\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\App.xaml
 1-1456069516
 
-15-973221200
+11-429890264
 15169041348
 AttitudeAnalyzer.xaml;
 

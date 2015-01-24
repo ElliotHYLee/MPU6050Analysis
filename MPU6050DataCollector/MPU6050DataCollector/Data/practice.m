@@ -1,20 +1,30 @@
 clc, clear, close all;
 
-filename = 'data01.xlsx';
+filename = 'data08.xlsx';
 
 tableCFilter = xlsread(filename, 'CFilter');
 cFilter_xRaw = tableCFilter(:,1);
-cFilter_xDirCos = tableCFilter(:,5);
+
 
 tableAccelerometer = xlsread(filename, 'Accelerometer');
 acc_xRaw = tableAccelerometer(:,1);
-acc_xDirCos = tableAccelerometer(:,5);
+
+
+tableGyro = xlsread(filename, 'Gyroscope');
+gyro_xRaw = tableGyro(:,1);
+
 
 figure(1)
-plot(cFilter_xRaw/10^5, cFilter_xDirCos, 'or')
-figure(2)
-plot(acc_xRaw, acc_xDirCos, 'ob')
+x=1:1:length(cFilter_xRaw)
+plot(x, cFilter_xRaw, '-r')
+hold on
 
-2147483647
-20000000
-16420201.81/10^5
+x=1:1:length(gyro_xRaw)
+plot(x, gyro_xRaw*10, '-g')
+
+x=1:1:length(acc_xRaw)
+plot(x, acc_xRaw, '-b')
+
+grid on
+
+legend('compFilter', 'gyro*10', 'acc')
