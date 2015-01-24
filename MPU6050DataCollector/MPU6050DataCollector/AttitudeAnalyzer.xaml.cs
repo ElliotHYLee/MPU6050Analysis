@@ -45,8 +45,6 @@ namespace MPU6050DataCollector
             this._acc = new TextBox[10];
             this._cFilter = new TextBox[10];
 
-
-
             this._gyro[0] = this.txtGRawX;
             this._gyro[1] = this.txtGRawY;
             this._gyro[2] = this.txtGRawZ;

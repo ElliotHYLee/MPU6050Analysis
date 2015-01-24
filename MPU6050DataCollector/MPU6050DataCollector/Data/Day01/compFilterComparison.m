@@ -1,9 +1,9 @@
 clc, clear, close all;
 
-filename1 = 'data01.xlsx';
-filename2 = 'data02.xlsx';
-filename3 = 'data03.xlsx';
-filename4 = 'data01.xlsx';
+filename1 = 'data06.xlsx';
+filename2 = 'data07.xlsx';
+filename3 = 'data08.xlsx';
+filename4 = 'data04.xlsx';
 
 tableCFilter1 = xlsread(filename1, 'CFilter');
 cFilter_xRaw1 = tableCFilter1(:,1);
@@ -34,7 +34,7 @@ plot(x, cFilter_xRaw3, '-b')
 
 grid on
 
-legend('compFilter1-gyro 2%', 'compFilter2-gyro 1.5%', 'compFilter3-gyro 1%')
+legend('compFilter1-gyro 97', 'compFilter2-gyro 85', 'compFilter3-gyro 90')
 
 
 
