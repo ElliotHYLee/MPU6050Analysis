@@ -1,10 +1,7 @@
 clc, clear, close all;
 
-<<<<<<< HEAD
-filename = 'data06.xlsx';
-=======
 filename = 'data01.xlsx';
->>>>>>> 3db923b9613e5f26af1cf25d84385db8ef3eb4e0
+
 
 tableCFilter = xlsread(filename, 'CFilter');
 cFilter_xRaw = tableCFilter(:,1);
