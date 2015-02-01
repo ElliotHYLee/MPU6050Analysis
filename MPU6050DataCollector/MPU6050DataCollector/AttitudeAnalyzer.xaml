@@ -1,7 +1,7 @@
 ﻿<Window x:Class="MPU6050DataCollector.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AttitudeAnalyzer" Height="844.711" Width="1233.482"
+        Title="AttitudeAnalyzer" Height="844.711" Width="1259.482"
         Loaded="MainWindow_Loaded">
     <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
         <Grid Name="mainGrid" Width="1222" >
