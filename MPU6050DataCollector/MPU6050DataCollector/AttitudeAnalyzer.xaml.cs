@@ -1,4 +1,9 @@
-﻿using MPU6050DataCollector.Controllers;
+﻿/*============================================================
+// Made by: Elliot Hongyun Lee
+// Undergrad Research Project
+============================================================*/
+
+using MPU6050DataCollector.Controllers;
 using MPU6050DataCollector.Model;
 using System;
 using System.Collections.Generic;
