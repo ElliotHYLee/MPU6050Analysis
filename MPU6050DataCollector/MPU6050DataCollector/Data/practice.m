@@ -1,6 +1,6 @@
 clc, clear, close all;
 
-filename = 'data05.xlsx';
+filename = 'data04.xlsx';
 
 
 tableCFilter = xlsread(filename, 'CFilter');
@@ -26,7 +26,7 @@ plot(x, acc_xRaw, '-b')
 grid on
 
 legend('compFilter', 'gyro*10', 'acc')
-
+ylim([-20000 20000])
 
 
 
