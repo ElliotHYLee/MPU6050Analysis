@@ -1,6 +1,6 @@
 clc, clear, close all;
 
-filename = 'data04.xlsx';
+filename = 'data02.xlsx';
 
 
 tableCFilter = xlsread(filename, 'CFilter');
