@@ -1,6 +1,6 @@
 clc, clear, close all;
 
-filename = 'data01.xlsx';
+filename = 'data02.xlsx';
 
 
 tableCFilter = xlsread(filename, 'CFilter');
@@ -18,14 +18,14 @@ plot(x, cFilter_xRaw, '-or')
 hold on
 
 x=1:1:length(gyro_xRaw);
-plot(x, gyro_xRaw, '-xg')
+plot(x, gyro_xRaw*10, '-g')
 
 x=1:1:length(acc_xRaw);
 plot(x, acc_xRaw, '-b')
 
 grid on
 
-legend('compFilter', 'gyro integral', 'acc')
+legend('compFilter', 'gyro*10', 'acc')
 ylim([-20000 20000])
 
 
