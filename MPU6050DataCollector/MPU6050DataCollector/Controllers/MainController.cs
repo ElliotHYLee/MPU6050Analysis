@@ -27,7 +27,7 @@ namespace MPU6050DataCollector.Controllers
         private USB _usb;
         private bool _usbConnected;
         private LineAttitude lineX, lineY, lineZ;
-        private bool _pidOnOff = true;        
+        private bool _pidOnOff = false;        
         public MainController(MainWindow x, AttitudeData y)
         {
             this._main = x;
