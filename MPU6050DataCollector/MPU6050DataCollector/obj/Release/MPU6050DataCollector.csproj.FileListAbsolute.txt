@@ -26,3 +26,7 @@ C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050Dat
 C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\MPU6050DataCollector.g.resources
 C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\MPU6050DataCollector.Properties.Resources.resources
 C:\Users\Elliot\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\MPU6050DataCollector.csproj.GenerateResource.Cache
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Release\MPU6050DataCollector.exe.config
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\MPU6050DataCollector.csproj.ResolveComReference.cache
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\MPU6050DataCollector.exe
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\MPU6050DataCollector.pdb
