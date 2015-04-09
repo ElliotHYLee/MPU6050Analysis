@@ -4,16 +4,24 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\
+=======
+C:\Users\Hongyun\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\
+>>>>>>> origin/master
 MPU6050DataCollector
 none
 false
 TRACE
+<<<<<<< HEAD
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\App.xaml
+=======
+C:\Users\Hongyun\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\App.xaml
+>>>>>>> origin/master
 1-1456069516
 
-15-1539864093
-157079867
+15-82738685
+15169041348
 AttitudeAnalyzer.xaml;
 
 False
