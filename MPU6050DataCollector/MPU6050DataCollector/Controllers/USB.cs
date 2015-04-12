@@ -28,6 +28,8 @@ namespace SerialMonitorTest03.ControllerFolder
         private MainController _mainCtrl;
         private string _testInstream;
 
+        private double _parsingRate;
+        private double _parsingCounter;
 
         private string[] _portsList;
         private int _numberOfPorts;
@@ -45,6 +47,8 @@ namespace SerialMonitorTest03.ControllerFolder
             this._numberOfPorts = this._portsList.Length;
             this._collectionMode = false;
             this._numberOfDataGathered = 0;
+            this._parsingRate = 50; //percentage
+            this._parsingCounter = 0;
         }
 
         #region Getter and Setter
@@ -125,6 +129,8 @@ namespace SerialMonitorTest03.ControllerFolder
 
         #region Data receiving
 
+
+            #region event handling when usb receives data
             private void serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
             {
                 
@@ -137,7 +143,22 @@ namespace SerialMonitorTest03.ControllerFolder
                 this._testInstream = inStream;
                 try
                 {
-                    this.parse(inStream);
+                    double targetCount = 100 - _parsingRate;
+                    double mult = 100 / targetCount;
+
+                    if (((int) this._parsingCounter) % ((int) mult) != 0)
+                    {
+                        //Console.WriteLine(inStream);
+                        //Console.WriteLine();
+                        //Console.WriteLine();
+                        this.parse(inStream);
+                    }
+
+                    this._parsingCounter++;
+                    if (this._parsingCounter > 100)
+                    {
+                        this._parsingCounter = 0;
+                    }
                     //if (regulator)// parse 50 % of incoming data
                     //{
                     //    //Console.WriteLine(inStream);
@@ -151,10 +172,11 @@ namespace SerialMonitorTest03.ControllerFolder
                     Console.WriteLine(err);
                 }
             }
+            #endregion
 
             private void parse(string x)
             {
-
+                #region preparation for parsing
                 string raw = Tokenizer.Tokenizer.trim(x);
                 if (raw.Equals("abort"))
                 {
@@ -172,6 +194,8 @@ namespace SerialMonitorTest03.ControllerFolder
                 string[] cFilter = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
                 string[] motor = { "0", "0", "0", "0"};
                 string[] pid = { "e", "e", "e" };
+
+                #endregion
 
                 #region parsing tokens
 
@@ -324,9 +348,11 @@ namespace SerialMonitorTest03.ControllerFolder
                 }
                 #endregion
 
-                this.updateMain(gyro, acc, cFilter, motor); 
-                
+                #region update information
+                this.updateMain(gyro, acc, cFilter, motor);
+                #endregion
 
+                #region update main for information type
                 this._main.Dispatcher.Invoke(() =>
                 {
                     this._main.txtPidOutput.Text = pidOut;
@@ -382,6 +408,8 @@ namespace SerialMonitorTest03.ControllerFolder
                     
                 });
                 setInfoTypes.Clear();
+
+        #endregion
             }
 
             private void updateMain(string[] gyro, string[] acc, string[] cFilter, string[] motor )
@@ -417,23 +445,31 @@ namespace SerialMonitorTest03.ControllerFolder
                             yRaw = Double.Parse(acc[1]);
                             zRaw = Double.Parse(acc[2]);
                             norm = Math.Sqrt(xRaw * xRaw + yRaw * yRaw + zRaw * zRaw);
+                           
                             if (norm != 0)
                             {
-                                acc[3] = norm.ToString();
-                                acc[4] = (xRaw / norm).ToString();
-                                acc[5] = (Math.Acos(xRaw / norm) * 180 / Math.PI).ToString();
-                                acc[6] = (yRaw / norm).ToString();
-                                acc[7] = (Math.Acos(yRaw / norm) * 180 / Math.PI).ToString();
-                                acc[8] = (zRaw / norm).ToString();
-                                acc[9] = (Math.Acos(zRaw / norm) * 180 / Math.PI).ToString();
+                                acc[3] = norm.ToString().Substring(0, 6);
+                                acc[4] = (xRaw / norm).ToString().Substring(0, 6);
+                                acc[5] = (Math.Acos(xRaw / norm) * 180 / Math.PI).ToString().Substring(0, 6);
+                                acc[6] = (yRaw / norm).ToString().Substring(0, 6);
+                                acc[7] = (Math.Acos(yRaw / norm) * 180 / Math.PI).ToString().Substring(0, 6);
+                                acc[8] = (zRaw / norm).ToString().Substring(0, 6);
+                                acc[9] = (Math.Acos(zRaw / norm) * 180 / Math.PI).ToString().Substring(0, 6);
                             }
                         }
-                        else if (i==2)
+                        else if (i==2)  // compFilter
                         {
                             xRaw = Double.Parse(cFilter[0]);
                             yRaw = Double.Parse(cFilter[1]);
                             zRaw = Double.Parse(cFilter[2]);
-                            norm = Math.Sqrt(xRaw * xRaw + yRaw * yRaw + zRaw * zRaw);
+                            norm = 100*Math.Sqrt(xRaw * xRaw/10000 + yRaw * yRaw/10000 + zRaw * zRaw/10000);
+                            if (norm > 8500 || norm < 8000)
+                            {
+                                Console.WriteLine("Cx = " + xRaw);
+                                Console.WriteLine("Cy = " + yRaw);
+                                Console.WriteLine("Cz = " + zRaw);
+                                Console.WriteLine("norm = " + norm);
+                            }
                             if (norm != 0)
                             {
                                 cFilter[3] = norm.ToString();
@@ -508,17 +544,34 @@ namespace SerialMonitorTest03.ControllerFolder
                     }
                     for (int i = 0; i < 10; i++)
                     {
-                        this._main.cFilter[i].Text = cFilter[i];
-                        if (this._main.cFilter[i].Text.Equals("0"))
+                        if (!cFilter[i].Equals("0"))
                         {
-                            //Console.WriteLine("/" + this._testInstream+ "/");
+                            this._main.cFilter[i].Text = cFilter[i];
+
+                        }
+                        else
+                        {
+                            break;
                         }
                     }
 
-                    this._main.txtMotor1.Text = motor[0];
-                    this._main.txtMotor2.Text = motor[1];
-                    this._main.txtMotor3.Text = motor[2];
-                    this._main.txtMotor4.Text = motor[3];
+                    if (!motor[0].Equals("0"))
+                    {
+                        this._main.txtMotor1.Text = motor[0];
+                    }
+                    if (!motor[1].Equals("0"))
+                    {
+                        this._main.txtMotor2.Text = motor[1];
+                    }
+                    if (!motor[2].Equals("0"))
+                    {
+                        this._main.txtMotor3.Text = motor[2];
+                    }
+                    if (!motor[3].Equals("0"))
+                    {
+                        this._main.txtMotor4.Text = motor[3];
+                    }
+                    
                     this._mainCtrl.updateSlider();
                     if (this._numberOfDataGathered > 0)
                     {
@@ -547,6 +600,7 @@ namespace SerialMonitorTest03.ControllerFolder
                 catch (Exception ex)
                 {
                     MessageBox.Show("Check usb connection");
+                    ex.GetType();
                 }
                 
             }

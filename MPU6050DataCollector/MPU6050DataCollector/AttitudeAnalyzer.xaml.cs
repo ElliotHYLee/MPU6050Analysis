@@ -136,11 +136,13 @@ namespace MPU6050DataCollector
             try
             {
                 this._ctrl.updateAttitudeX(((TextBox)sender).Text);
+
+                
                 this._ctrl.updateAttitudeY(this.txtCDegreeY.Text);
             }
             catch (Exception ex)
             {
-                //Console.WriteLine(ex);
+                ex.GetType();
             }
             
         }

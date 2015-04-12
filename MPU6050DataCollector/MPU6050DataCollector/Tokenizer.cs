@@ -49,6 +49,7 @@ namespace Tokenizer
             }
             catch(Exception damn){
                 Console.WriteLine("Abnormal Case - the string to trim: " + x);
+                Console.WriteLine("Abnormal Case - the string to trim: " + damn.GetType());
             }
            
             return result;

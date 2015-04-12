@@ -418,7 +418,7 @@ namespace MPU6050DataCollector.Controllers
             }
             catch (Exception ee)
             {
-
+                ee.GetType();
             }
             
         }

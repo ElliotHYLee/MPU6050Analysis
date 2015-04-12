@@ -1,6 +1,6 @@
 clc, clear, close all;
 
-filename = 'data07.xlsx';
+filename = 'data05.xlsx';
 
 
 tableCFilter = xlsread(filename, 'CFilter');
@@ -16,7 +16,7 @@ figure(1)
 x=1:1:length(cFilter_xRaw);
 plot(x, cFilter_xRaw/8234*90, '-or')
 hold on
-
+%plot(x, sin(0.05*x+5)-1.388)
 % x=1:1:length(gyro_xRaw);
 % plot(x, gyro_xRaw, '-xg')
 % 
