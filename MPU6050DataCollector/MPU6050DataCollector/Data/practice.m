@@ -1,6 +1,6 @@
 clc, clear, close all;
 
-filename = 'data07.xlsx';
+filename = 'data01.xlsx';
 
 
 tableCFilter = xlsread(filename, 'CFilter');
@@ -26,7 +26,7 @@ hold on
 grid on
 hold off
 legend('compFilter', 'gyro integral', 'acc')
-ylim([-10 10])
+%ylim([-10 10])
 xlabel('iteration')
 ylabel('degree')
 

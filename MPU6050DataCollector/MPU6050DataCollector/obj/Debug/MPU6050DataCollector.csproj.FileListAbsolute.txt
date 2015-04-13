@@ -26,3 +26,17 @@ C:\Users\Hongyun\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050Da
 C:\Users\Hongyun\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.csproj.GenerateResource.Cache
 C:\Users\Hongyun\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Debug\MPU6050DataCollector.exe
 C:\Users\Hongyun\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Debug\MPU6050DataCollector.pdb
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Debug\MPU6050DataCollector.exe.config
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.csproj.ResolveComReference.cache
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.exe
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.pdb
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Debug\MPU6050DataCollector.exe
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Debug\MPU6050DataCollector.pdb
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.csprojResolveAssemblyReference.cache
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\AttitudeAnalyzer.baml
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\AttitudeAnalyzer.g.cs
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\App.g.cs
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector_MarkupCompile.cache
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.g.resources
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.Properties.Resources.resources
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.csproj.GenerateResource.Cache
