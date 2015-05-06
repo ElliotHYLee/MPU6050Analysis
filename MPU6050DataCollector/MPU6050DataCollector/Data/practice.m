@@ -1,6 +1,6 @@
 clc, clear, close all;
 
-filename = 'data04.xlsx';
+filename = 'data02.xlsx';
 
 
 tableCFilter = xlsread(filename, 'CFilter');
@@ -14,7 +14,7 @@ gyro_xRaw = tableGyro(:,1);
 
 figure(1)
 x=1:1:length(cFilter_xRaw);
-degree = cFilter_xRaw/8234*90
+degree = cFilter_xRaw/8234*90;
 plot(x, degree, '-r')
 hold on
 
@@ -23,10 +23,10 @@ hold on
 % 
 % x=1:1:length(acc_xRaw);
 % plot(x, acc_xRaw, '-b')
-avg = mean(degree)
 
-t=0:0.1:600
-plot(x, ones*avg)
+Ess = mean(degree)
+t=0:0.1:600;
+plot(x, ones*Ess, '-b')
 
 grid on
 hold off
@@ -35,6 +35,12 @@ ylim([-20 20])
 xlabel('iteration')
 ylabel('degree')
 title('kp=85 , ki=8000 , kd=250 ')
-mean(cFilter_xRaw/8234*90)
+
+
+highAmp = abs(max(cFilter_xRaw/8324*90) - Ess)
+lowAmp = abs(min(cFilter_xRaw/8324*90) - Ess)
+
+
+
 
 
