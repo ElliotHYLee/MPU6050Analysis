@@ -40,3 +40,5 @@ D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\MPU6050DataCollector.csproj.GenerateResource.Cache
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Release\MPU6050DataCollector.exe
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Release\MPU6050DataCollector.pdb
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\PIDMonitor.baml
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\PIDMonitor.g.cs

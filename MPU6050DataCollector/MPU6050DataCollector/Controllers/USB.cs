@@ -35,7 +35,10 @@ namespace SerialMonitorTest03.ControllerFolder
         private int _numberOfPorts;
         private bool _collectionMode;
         private int _numberOfDataGathered;
+        private string[] pid = { "e", "e", "e", "e", "e", "e", "e", "e", "e" };
 
+        private bool updatePidConst = false;
+        private bool updatePidOnOffStatus = false;
 
         public USB(MainWindow x, AttitudeData y, MainController z)
         {
@@ -139,7 +142,7 @@ namespace SerialMonitorTest03.ControllerFolder
                 //{
                 //    Console.WriteLine(inStream);
                 //}
-                //Console.WriteLine(inStream);
+
                 this._testInstream = inStream;
                 try
                 {
@@ -148,7 +151,7 @@ namespace SerialMonitorTest03.ControllerFolder
 
                     if (((int) this._parsingCounter) % ((int) mult) != 0)
                     {
-                        //Console.WriteLine(inStream);
+                        Console.WriteLine(inStream);
                         //Console.WriteLine();
                         //Console.WriteLine();
                         this.parse(inStream);
@@ -185,27 +188,30 @@ namespace SerialMonitorTest03.ControllerFolder
 
                 List<string> listTokens = Tokenizer.Tokenizer.getTokens(raw);
                 ISet<string> setInfoTypes = new HashSet<string>();
-                
+
                 string infoType = "";
                 string infoDir = "";
 
                 string[] gyro = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
                 string[] acc = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
                 string[] cFilter = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
-                string[] motor = { "0", "0", "0", "0"};
-                string[] pid = { "e", "e", "e" };
+                string[] motor = { "0", "0", "0", "0", "0", "0" };
+
 
                 #endregion
 
                 #region parsing tokens
 
 
-                string pidOut = "";
-                string pidProportional="";
-                string pidDerivative="";
+                string[] pidPro = { "", "", "" };
+                string[] pidDer = { "", "", "" };
+                string[] pidInt = { "", "", "" };
+                string[] pidOutput = { "", "", "" };
+
                 for (int i = 0; i < listTokens.Count; i++)
                 {
                     infoType = listTokens[i].Substring(0, 1);
+      //              Console.WriteLine("type: " + infoType);
 
                     // report types of information incoming
                     if (!setInfoTypes.Contains(infoType))
@@ -233,7 +239,7 @@ namespace SerialMonitorTest03.ControllerFolder
                         }
                         #endregion
                     }
-                    else if (infoType.Equals("a"))
+                    if (infoType.Equals("a"))
                     {
                         #region parse acc
                         // get direction of info (x,y,z)
@@ -253,7 +259,7 @@ namespace SerialMonitorTest03.ControllerFolder
                         }
                         #endregion
                     }
-                    else if (infoType.Equals("c"))
+                    if (infoType.Equals("c"))
                     {
                         #region parse cFilter
                         // get direction of info (x,y,z)
@@ -272,7 +278,7 @@ namespace SerialMonitorTest03.ControllerFolder
                         }
                         #endregion
                     }
-                    else if (infoType.Equals("m"))
+                    if (infoType.Equals("m"))
                     {
                         #region parse motor
                         // get direction of info 1,2,3,4 motor
@@ -291,58 +297,159 @@ namespace SerialMonitorTest03.ControllerFolder
                             case "4":
                                 motor[3] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                                 break;
+                            case "5":
+                                motor[4] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "6":
+                                motor[5] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
                         }
                         #endregion
                     }
-                    else if (infoType.Equals("k"))
+                    if (infoType.Equals("k")) // pid calculation
                     {
-                        
+                        //[k0value] : xProportional calc result
+                        //[k1value] : xDerivative calc result
+                        //[k2value] : xIntegral calc result
+                        //[k3value] : xOutput calc result
+                        //[k4value] : yProportioanl calc reuslt
+                        //....
+                        #region parse PIDcalcuations
                         if (listTokens[i].Substring(1, 1).Equals("0"))
                         {
-                            pidOut = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                            pidPro[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                         }
                         else if (listTokens[i].Substring(1, 1).Equals("1"))
                         {
-                            pidProportional = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                            pidDer[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                         }
                         else if (listTokens[i].Substring(1, 1).Equals("2"))
                         {
-
+                            pidInt[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                         }
                         else if (listTokens[i].Substring(1, 1).Equals("3"))
                         {
-                            pidDerivative = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                            pidOutput[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                         }
+                        else if (listTokens[i].Substring(1, 1).Equals("4"))
+                        {
+                            pidPro[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        }
+                        else if (listTokens[i].Substring(1, 1).Equals("5"))
+                        {
+                            pidDer[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        }
+                        else if (listTokens[i].Substring(1, 1).Equals("6"))
+                        {
+                            pidInt[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        }
+                        else if (listTokens[i].Substring(1, 1).Equals("7"))
+                        {
+                            pidOutput[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        }
+                        else if (listTokens[i].Substring(1, 1).Equals("8"))
+                        {
+                            pidPro[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        }
+                        else if (listTokens[i].Substring(1, 1).Equals("9"))
+                        {
+                            pidDer[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        }
+                        else if (listTokens[i].Substring(1, 1).Equals("A"))
+                        {
+                            pidInt[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        }
+                        else if (listTokens[i].Substring(1, 1).Equals("B"))
+                        {
+                            pidOutput[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        }
+                        #endregion
+
                     }
-                    else if (infoType.Equals("p"))
+                    if (infoType.Equals("p"))  // pid constants(gains)
                     {
-                        // get direction of info 1,2,3,4 motor
+                        this.updatePidConst = true;
+                        #region parse pid constants
+                        // get pid constatns
                         infoDir = listTokens[i].Substring(1, 1);
                         switch (infoDir)
                         {
-                            case "p":
+                            case "0":
                                 pid[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                                 break;
-                            case "i":
+                            case "1":
                                 pid[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                                 break;
-                            case "d":
+                            case "2":
                                 pid[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                                 break;
-                            case "o":
-                                Console.WriteLine("PID On/Off");
-                                if (listTokens[i].Substring(2, listTokens[i].Length - 2).Equals("1"))
+                            case "3":
+                                pid[3] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "4":
+                                pid[4] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "5":
+                                pid[5] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "6":
+                                pid[6] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "7":
+                                pid[7] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "8":
+                                pid[8] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                        #endregion
+                        }
+                    }
+                    if (infoType.Equals("o"))
+                    {
+                        #region pid on off status
+                        this.updatePidOnOffStatus = true;
+                        // get pid on/off status
+                        infoDir = listTokens[i].Substring(1, 1);
+                        string onOff;
+
+                        switch (infoDir)
+                        {
+                            case "0":
+                                onOff = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                if (onOff.Equals("0"))
                                 {
-                                    this._mainCtrl.pidOnOff = true;
+                                    this._mainCtrl.pidOnOffX = false;
+
                                 }
-                                else
+                                if (onOff.Equals("1"))
                                 {
-                                    this._mainCtrl.pidOnOff = false;
+                                    this._mainCtrl.pidOnOffX = true;
                                 }
                                 break;
-                           
-                            
+                            case "1":
+                                onOff = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                if (onOff.Equals("0"))
+                                {
+                                    this._mainCtrl.pidOnOffX = false;
+                                }
+                                if (onOff.Equals("1"))
+                                {
+                                    this._mainCtrl.pidOnOffX = true;
+                                }
+                                break;
+                            case "2":
+                                onOff = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                if (onOff.Equals("0"))
+                                {
+                                    this._mainCtrl.pidOnOffX = false;
+                                }
+                                if (onOff.Equals("1"))
+                                {
+                                    this._mainCtrl.pidOnOffX = true;
+                                }
+                                break;
                         }
+                        #endregion
                     }
 
                 }
@@ -352,64 +459,190 @@ namespace SerialMonitorTest03.ControllerFolder
                 this.updateMain(gyro, acc, cFilter, motor);
                 #endregion
 
-                #region update main for information type
-                this._main.Dispatcher.Invoke(() =>
+                #region update monitors for information type
+
+                #region updating pid calculation output
+                // updating pid monitor for calculated output
+
+                if (this._mainCtrl._pidMonitorIsOpen)
                 {
-                    this._main.txtPidOutput.Text = pidOut;
-                    this._main.txtPidProportional.Text = pidProportional;
-                    this._main.txtPidDerivative.Text = pidDerivative;
+                    this._mainCtrl._pidMonitor.Dispatcher.Invoke(() =>
+                     {
+                         //update pid monitor
+                         this._mainCtrl._pidMonitor.txtXPro.Text = pidPro[0];
+                         this._mainCtrl._pidMonitor.txtXDer.Text = pidDer[0];
+                         this._mainCtrl._pidMonitor.txtXInt.Text = pidInt[0];
+                         this._mainCtrl._pidMonitor.txtXOutput.Text = pidOutput[0];
 
+                         this._mainCtrl._pidMonitor.txtYPro.Text = pidPro[1];
+                         this._mainCtrl._pidMonitor.txtYDer.Text = pidDer[1];
+                         this._mainCtrl._pidMonitor.txtYInt.Text = pidInt[1];
+                         this._mainCtrl._pidMonitor.txtYOutput.Text = pidOutput[1];
 
-                    this._main.listInfoType.Items.Clear();
-                    List<string> temp = setInfoTypes.ToList<string>();
-                    for(int i = 0; i < setInfoTypes.Count; i++)
+                         this._mainCtrl._pidMonitor.txtZPro.Text = pidPro[2];
+                         this._mainCtrl._pidMonitor.txtZDer.Text = pidDer[2];
+                         this._mainCtrl._pidMonitor.txtZInt.Text = pidInt[2];
+                         this._mainCtrl._pidMonitor.txtZOutput.Text = pidOutput[2];
+
+                     });
+                }
+                #endregion
+
+                #region pidConst_on/off_pidMonitor
+
+                // updating pid monitor for pid constants and on/off status in pidMonitor
+                if (this._mainCtrl._pidMonitorIsOpen)
+                {
+                    if (this.updatePidConst)
                     {
-                        
-                        temp.Sort();
-                        if (temp[i].Equals("a")){
-                            this._main.listInfoType.Items.Add("a: Accelerometer");
-                        }else if(temp[i].Equals("g")){
-                            this._main.listInfoType.Items.Add("g: Gyroscope");
-                        }else if(temp[i].Equals("c")){
-                            this._main.listInfoType.Items.Add("c: Complementary Filter");
-                        }else if (temp[i].Equals("m")){
-                            this._main.listInfoType.Items.Add("m: Motor PWM");
-                        }
-                        else if (temp[i].Equals("p")){
-                            this._main.listInfoType.Items.Add("p: PID");
+                        this._mainCtrl._pidMonitor.Dispatcher.Invoke(() =>
+                        {
+                            //update pid constants
+                            #region update pid constants
+                            this._mainCtrl._pidMonitor.txtXKp.Text = pid[0];
+                            this._mainCtrl._pidMonitor.txtXKi.Text = pid[1];
+                            this._mainCtrl._pidMonitor.txtXKd.Text = pid[2];
+                            this._mainCtrl._pidMonitor.txtYKp.Text = pid[3];
+                            this._mainCtrl._pidMonitor.txtYKi.Text = pid[4];
+                            this._mainCtrl._pidMonitor.txtYKd.Text = pid[5];
+                            this._mainCtrl._pidMonitor.txtZKp.Text = pid[6];
+                            this._mainCtrl._pidMonitor.txtZKi.Text = pid[7];
+                            this._mainCtrl._pidMonitor.txtZKd.Text = pid[8];
+                            #endregion
+                        });
+                        this.updatePidConst = false;
+                    }
 
-                            if (!pid[0].Equals("e"))
-                            {
-                                this._main.txtKp.Text = pid[0];
-                                this._main.txtKi.Text = pid[1];
-                                this._main.txtKd.Text = pid[2];
-                            }
-                            
-                            if (this._mainCtrl.pidOnOff)
+                    if (this.updatePidOnOffStatus)
+                    {
+                        this._mainCtrl._pidMonitor.Dispatcher.Invoke(() =>
+                        {
+                            #region update pid on off
+                            //update pid on/off
+
+                            // x axis
+                            if (this._mainCtrl.pidOnOffX)
                             {
                                 SolidColorBrush dd = new SolidColorBrush();
                                 dd.Color = Colors.Green;
-                                this._main.lblPidIndicator.Content = "PID ON";
-                                this._main.lblPidIndicator.Background = dd;
+                                this._mainCtrl._pidMonitor.btnXonoff.Background = dd;
+                                this._mainCtrl._pidMonitor.btnXonoff.Content = "PID On";
                             }
                             else
                             {
                                 SolidColorBrush dd = new SolidColorBrush();
                                 dd.Color = Colors.Red;
-                                this._main.lblPidIndicator.Content = "PID OFF";
-                                this._main.lblPidIndicator.Background = dd;
+                                this._mainCtrl._pidMonitor.btnXonoff.Background = dd;
+                                this._mainCtrl._pidMonitor.btnXonoff.Content = "PID Off";
                             }
-                        }
-                        
-                        
-                        
+
+                            // y axis
+                            if (this._mainCtrl.pidOnOffY)
+                            {
+                                SolidColorBrush dd = new SolidColorBrush();
+                                dd.Color = Colors.Green;
+                                this._mainCtrl._pidMonitor.btnYonoff.Background = dd;
+                                this._mainCtrl._pidMonitor.btnYonoff.Content = "PID On";
+                            }
+                            else
+                            {
+                                SolidColorBrush dd = new SolidColorBrush();
+                                dd.Color = Colors.Red;
+                                this._mainCtrl._pidMonitor.btnYonoff.Background = dd;
+                                this._mainCtrl._pidMonitor.btnYonoff.Content = "PID Off";
+                            }
+
+                            // z axis
+                            if (this._mainCtrl.pidOnOffZ)
+                            {
+                                SolidColorBrush dd = new SolidColorBrush();
+                                dd.Color = Colors.Green;
+                                this._mainCtrl._pidMonitor.btnZonoff.Background = dd;
+                                this._mainCtrl._pidMonitor.btnZonoff.Content = "PID On";
+                            }
+                            else
+                            {
+                                SolidColorBrush dd = new SolidColorBrush();
+                                dd.Color = Colors.Red;
+                                this._mainCtrl._pidMonitor.btnZonoff.Background = dd;
+                                this._mainCtrl._pidMonitor.btnZonoff.Content = "PID Off";
+                            }
+                            #endregion
+
+                        });
+                        this.updatePidOnOffStatus = false;
+                    }
+                }
+
+
+                #endregion
+
+
+                this._main.Dispatcher.Invoke(() =>
+                {
+                    this._main.listInfoType.Items.Clear();
+                });
+
+
+
+                List<string> temp = setInfoTypes.ToList<string>();
+                for (int i = 0; i < setInfoTypes.Count; i++)
+                {
+                    #region dataTypesMainMonitor
+                    // updating incoming data types in main monitor
+                    temp.Sort();
+                    if (temp[i].Equals("a"))
+                    {
+                        this._main.Dispatcher.Invoke(() =>
+                        {
+                            this._main.listInfoType.Items.Add("a: Accelerometer");
+                        });
+                    }
+                    else if (temp[i].Equals("g"))
+                    {
+                        this._main.Dispatcher.Invoke(() =>
+                        {
+                            this._main.listInfoType.Items.Add("g: Gyroscope");
+                        });
+
+                    }
+                    else if (temp[i].Equals("c"))
+                    {
+                        this._main.Dispatcher.Invoke(() =>
+                        {
+                            this._main.listInfoType.Items.Add("c: Complementary Filter");
+                        });
+
+                    }
+                    else if (temp[i].Equals("m"))
+                    {
+                        this._main.Dispatcher.Invoke(() =>
+                        {
+                            this._main.listInfoType.Items.Add("m: Motor PWM");
+                        });
+
+                    }
+
+
+
+                    else if (temp[i].Equals("p"))
+                    {
+
+                        this._main.Dispatcher.Invoke(() =>
+                        {
+                            this._main.listInfoType.Items.Add("p: PID");
+                        });
+
+                    #endregion
+
                     }
                     temp.Clear();
-                    
-                });
-                setInfoTypes.Clear();
 
-        #endregion
+
+                    setInfoTypes.Clear();
+
+                #endregion
+                }
             }
 
             private void updateMain(string[] gyro, string[] acc, string[] cFilter, string[] motor )
@@ -463,13 +696,13 @@ namespace SerialMonitorTest03.ControllerFolder
                             yRaw = Double.Parse(cFilter[1]);
                             zRaw = Double.Parse(cFilter[2]);
                             norm = 100*Math.Sqrt(xRaw * xRaw/10000 + yRaw * yRaw/10000 + zRaw * zRaw/10000);
-                            if (norm > 8500 || norm < 8000)
-                            {
-                                Console.WriteLine("Cx = " + xRaw);
-                                Console.WriteLine("Cy = " + yRaw);
-                                Console.WriteLine("Cz = " + zRaw);
-                                Console.WriteLine("norm = " + norm);
-                            }
+                            //if (norm > 8500 || norm < 8000)
+                            //{
+                            //    Console.WriteLine("Cx = " + xRaw);
+                            //    Console.WriteLine("Cy = " + yRaw);
+                            //    Console.WriteLine("Cz = " + zRaw);
+                            //    Console.WriteLine("norm = " + norm);
+                            //}
                             if (norm != 0)
                             {
                                 cFilter[3] = norm.ToString();
@@ -571,7 +804,16 @@ namespace SerialMonitorTest03.ControllerFolder
                     {
                         this._main.txtMotor4.Text = motor[3];
                     }
-                    
+                    if (!motor[4].Equals("0"))
+                    {
+                        this._main.txtMotor5.Text = motor[4];
+                    }
+                    if (!motor[5].Equals("0"))
+                    {
+                        this._main.txtMotor6.Text = motor[5];
+                    }
+
+
                     this._mainCtrl.updateSlider();
                     if (this._numberOfDataGathered > 0)
                     {

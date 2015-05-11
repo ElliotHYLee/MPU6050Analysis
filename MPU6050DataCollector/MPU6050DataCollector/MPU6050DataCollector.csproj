@@ -58,6 +58,9 @@
     </ApplicationDefinition>
     <Compile Include="AbsAddress.cs" />
     <Compile Include="LineAttitude.cs" />
+    <Compile Include="PIDMonitor.xaml.cs">
+      <DependentUpon>PIDMonitor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tokenizer.cs" />
     <Page Include="AttitudeAnalyzer.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -71,6 +74,10 @@
       <DependentUpon>AttitudeAnalyzer.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PIDMonitor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\MainController.cs" />

@@ -219,10 +219,10 @@ namespace MPU6050DataCollector
             this._ctrl.requestPidConst();
         }
 
-        private void btnSetPidConst_Click(object sender, RoutedEventArgs e)
-        {
-            this._ctrl.updatePidConst();
-        }
+        //private void btnSetPidConst_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this._ctrl.updatePidConst();
+        //}
 
         private void moterSlide1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -271,35 +271,51 @@ namespace MPU6050DataCollector
             this._ctrl.increase(4, this.txtMotor4.Text, int.Parse(this.txtIncraseCalInterval.Text));
         }
 
-        private void btnKpDown_Click(object sender, RoutedEventArgs e)
-        {
 
-            this._ctrl.preUpdatePidConst(1,-1);
+
+        private void btnOpenPID_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.openPIDMonitor();
         }
 
-        private void btnKpUp_Click(object sender, RoutedEventArgs e)
+        private void btnDecreaseMotor5_Click(object sender, RoutedEventArgs e)
         {
-            this._ctrl.preUpdatePidConst(1, 1);
+
         }
 
-        private void btnKiDown_Click(object sender, RoutedEventArgs e)
+        private void btnDecreaseMotor5By_Click(object sender, RoutedEventArgs e)
         {
-            this._ctrl.preUpdatePidConst(2, -1);
+
         }
 
-        private void btnKiUp_Click(object sender, RoutedEventArgs e)
+        private void btnDecreaseMotor6_Click(object sender, RoutedEventArgs e)
         {
-            this._ctrl.preUpdatePidConst(2, 1);
+
         }
 
-        private void btnKdDown_Click(object sender, RoutedEventArgs e)
+        private void btnDecreaseMotor6By_Click(object sender, RoutedEventArgs e)
         {
-            this._ctrl.preUpdatePidConst(3, -1);
+
         }
 
-        private void btnKdUp_Click(object sender, RoutedEventArgs e)
+        private void btnIncreaseMotor5_Click(object sender, RoutedEventArgs e)
         {
-            this._ctrl.preUpdatePidConst(3, 1);
+
+        }
+
+        private void btnIncreaseMotor5By_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnIncreaseMotor6_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnIncreaseMotor6By_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
 

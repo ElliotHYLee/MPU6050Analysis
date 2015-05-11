@@ -16,7 +16,8 @@ using Excel = Microsoft.Office.Interop.Excel;
 using WpfApplication1;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Controls; 
+using System.Windows.Controls;
+using System.ComponentModel; 
 
 namespace MPU6050DataCollector.Controllers
 {
@@ -27,7 +28,10 @@ namespace MPU6050DataCollector.Controllers
         private USB _usb;
         private bool _usbConnected;
         private LineAttitude lineX, lineY, lineZ;
-        private bool _pidOnOff = false;        
+        private bool[] _pidOnOff = {false, false, false};
+        public bool _pidMonitorIsOpen = false;
+        internal PIDMonitor _pidMonitor= null;
+
         public MainController(MainWindow x, AttitudeData y)
         {
             this._main = x;
@@ -36,8 +40,6 @@ namespace MPU6050DataCollector.Controllers
             this._usbConnected = false;
             this.setDataAddress();
             this.refreshComports();
-
-            
         }
 
         #region connection and disconnection
@@ -83,6 +85,7 @@ namespace MPU6050DataCollector.Controllers
                 }
 
                 this._main.comboBaudRate.Items.Insert(0, 9600);
+                this._main.comboBaudRate.Items.Insert(0, 57600);
                 this._main.comboBaudRate.Items.Insert(0, 115200);
             
 
@@ -98,10 +101,20 @@ namespace MPU6050DataCollector.Controllers
 
         #endregion
 
-        public bool pidOnOff
+        public bool pidOnOffX
         {
-            set { this._pidOnOff= value;}
-            get { return this._pidOnOff; }
+            set { this._pidOnOff[0]= value;}
+            get { return this._pidOnOff[0]; }
+        }
+        public bool pidOnOffY
+        {
+            set { this._pidOnOff[1] = value; }
+            get { return this._pidOnOff[1]; }
+        }
+        public bool pidOnOffZ
+        {
+            set { this._pidOnOff[2] = value; }
+            get { return this._pidOnOff[2]; }
         }
         
         public void setDataAddress()
@@ -250,57 +263,58 @@ namespace MPU6050DataCollector.Controllers
         {
             if (this._main.lblPidIndicator.Content.Equals("PID ON"))
             {
-                this._usb.sendData("P10000000");
+                this._usb.sendData("P00000000");
             }
             else
             {
-                this._usb.sendData("P10000001");
+                this._usb.sendData("P00000001");
             }
         }
 
 
-        public void preUpdatePidConst(int kType, int direction)
-        {
-            if (direction < 0)
-            {
-                if (kType == 1)
-                {
-                    this._main.txtKp.Text = (int.Parse(this._main.txtKp.Text) - 1).ToString();
-                }
-                else if (kType == 2)
-                {
-                    this._main.txtKi.Text = (int.Parse(this._main.txtKi.Text) - 1).ToString();
-                }
-                else if (kType == 3)
-                {
-                    this._main.txtKd.Text = (int.Parse(this._main.txtKd.Text) - 1).ToString();
-                }
-            }
-            else if (direction > 0)
-            {
-                if (kType == 1)
-                {
-                    this._main.txtKp.Text = (int.Parse(this._main.txtKp.Text) + 1).ToString();
-                }
-                else if (kType == 2)
-                {
-                    this._main.txtKi.Text = (int.Parse(this._main.txtKi.Text) + 1).ToString();
-                }
-                else if (kType == 3)
-                {
-                    this._main.txtKd.Text = (int.Parse(this._main.txtKd.Text) + 1).ToString();
-                }
-            }
+        //public void preUpdatePidConst(int kType, int direction)
+        //{
+        //    if (direction < 0)
+        //    {
+        //        if (kType == 1)
+        //        {
+        //            this._main.txtKp.Text = (int.Parse(this._main.txtKp.Text) - 1).ToString();
+        //        }
+        //        else if (kType == 2)
+        //        {
+        //            this._main.txtKi.Text = (int.Parse(this._main.txtKi.Text) - 1).ToString();
+        //        }
+        //        else if (kType == 3)
+        //        {
+        //            this._main.txtKd.Text = (int.Parse(this._main.txtKd.Text) - 1).ToString();
+        //        }
+        //    }
+        //    else if (direction > 0)
+        //    {
+        //        if (kType == 1)
+        //        {
+        //            this._main.txtKp.Text = (int.Parse(this._main.txtKp.Text) + 1).ToString();
+        //        }
+        //        else if (kType == 2)
+        //        {
+        //            this._main.txtKi.Text = (int.Parse(this._main.txtKi.Text) + 1).ToString();
+        //        }
+        //        else if (kType == 3)
+        //        {
+        //            this._main.txtKd.Text = (int.Parse(this._main.txtKd.Text) + 1).ToString();
+        //        }
+        //    }
 
-            updatePidConst();
-        }
+        //    updatePidConst();
+        //}
 
-        public void updatePidConst()
+        public void updatePidConstX()
         {
-            string[] k = new string[3]; // in order of kp, ki, kd
-            k[0] = this._main.txtKp.Text;
-            k[1] = this._main.txtKi.Text;
-            k[2] = this._main.txtKd.Text;
+            string[] k = new string[9]; // in order of kp, ki, kd
+            k[0] = this._pidMonitor.txtXKp.Text;
+            k[1] = this._pidMonitor.txtXKi.Text;
+            k[2] = this._pidMonitor.txtXKd.Text;
+
             string result = "";
 
             if (k[0].Equals("") || k[1].Equals("") || k[2].Equals(""))
@@ -340,11 +354,119 @@ namespace MPU6050DataCollector.Controllers
                 {
                     result = temp.ToString();
                 }
-                this._usb.sendData("P" + (i+2).ToString() + result);
-                Console.WriteLine("P" + (i+2).ToString() + result);
+                this._usb.sendData("P" + (i+1).ToString() + result);
+                Console.WriteLine("P" + (i+1).ToString() + result);
             }
 
             
+        }
+
+        public void updatePidConstY()
+        {
+            string[] k = new string[9]; // in order of kp, ki, kd
+
+            k[3] = this._pidMonitor.txtYKp.Text;
+            k[4] = this._pidMonitor.txtYKi.Text;
+            k[5] = this._pidMonitor.txtYKd.Text;
+            
+            string result = "";
+
+            if (k[3].Equals("") || k[4].Equals("") || k[5].Equals(""))
+            {
+                MessageBox.Show("Check the connection and request propeller's pid constant");
+                return;
+            }
+
+            for (int i = 3; i < 6; i++)
+            {
+                int temp = (int)(Double.Parse(k[i]) + 0.5);
+                if (temp < 10)
+                {
+                    result = "000000" + temp.ToString();
+                }
+                else if (temp < 100)
+                {
+                    result = "00000" + temp.ToString();
+                }
+                else if (temp < 1000)
+                {
+                    result = "0000" + temp.ToString();
+                }
+                else if (temp < 10000)
+                {
+                    result = "000" + temp.ToString();
+                }
+                else if (temp < 100000)
+                {
+                    result = "00" + temp.ToString();
+                }
+                else if (temp < 1000000)
+                {
+                    result = "0" + temp.ToString();
+                }
+                else
+                {
+                    result = temp.ToString();
+                }
+                this._usb.sendData("P" + (i + 1).ToString() + result);
+                Console.WriteLine("P" + (i + 1).ToString() + result);
+            }
+
+
+        }
+
+        public void updatePidConstZ()
+        {
+            string[] k = new string[9]; // in order of kp, ki, kd
+
+            k[6] = this._pidMonitor.txtZKp.Text;
+            k[7] = this._pidMonitor.txtZKi.Text;
+            k[8] = this._pidMonitor.txtZKd.Text;
+
+            string result = "";
+
+            if (k[6].Equals("") || k[7].Equals("") || k[8].Equals(""))
+            {
+                MessageBox.Show("Check the connection and request propeller's pid constant");
+                return;
+            }
+
+            for (int i = 6; i < 9; i++)
+            {
+                int temp = (int)(Double.Parse(k[i]) + 0.5);
+                if (temp < 10)
+                {
+                    result = "000000" + temp.ToString();
+                }
+                else if (temp < 100)
+                {
+                    result = "00000" + temp.ToString();
+                }
+                else if (temp < 1000)
+                {
+                    result = "0000" + temp.ToString();
+                }
+                else if (temp < 10000)
+                {
+                    result = "000" + temp.ToString();
+                }
+                else if (temp < 100000)
+                {
+                    result = "00" + temp.ToString();
+                }
+                else if (temp < 1000000)
+                {
+                    result = "0" + temp.ToString();
+                }
+                else
+                {
+                    result = temp.ToString();
+                }
+                this._usb.sendData("P" + (i + 1).ToString() + result);
+                Console.WriteLine("P" + (i + 1).ToString() + result);
+            }
+
+
         }
 
         public void prepareMode()
@@ -359,6 +481,12 @@ namespace MPU6050DataCollector.Controllers
             Console.WriteLine("System Mode = prepare. Message sent: D10001");
         }
 
+        public void requestPidOnOffStatus()
+        {
+            string command = "R12";
+            this._usb.sendData(command);
+            Console.WriteLine("PID on off status requested: " + command);
+        }
 
 
         public void requestPidConst()
@@ -449,8 +577,28 @@ namespace MPU6050DataCollector.Controllers
             this._usb.sendData("M" + motor.ToString() + newPwm.ToString());
         }
 
+        public void openPIDMonitor()
+        {
+            if (!_pidMonitorIsOpen)
+            {
+               this._pidMonitor = new PIDMonitor(this);
+               this._pidMonitor.Closing += new CancelEventHandler(closePIDMonitor);
+               this._pidMonitorIsOpen = true;
+               this._pidMonitor.Show();
 
 
+               this.requestPidOnOffStatus();
+               this.requestPidConst();
+
+               
+                
+            }
+        }
+
+        public void closePIDMonitor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this._pidMonitorIsOpen = false;
+        }
 
 
     }
