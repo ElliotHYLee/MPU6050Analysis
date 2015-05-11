@@ -42,3 +42,5 @@ D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Release\
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Release\MPU6050DataCollector.pdb
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\PIDMonitor.baml
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\PIDMonitor.g.cs
+C:\Users\Hongyun\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\PIDMonitor.baml
+C:\Users\Hongyun\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\PIDMonitor.g.cs
