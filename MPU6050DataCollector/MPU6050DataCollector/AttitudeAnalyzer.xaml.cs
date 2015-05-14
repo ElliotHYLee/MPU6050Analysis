@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -153,6 +154,8 @@ namespace MPU6050DataCollector
             this._ctrl.increase(2, this.txtMotor2.Text, int.Parse(this.txtDecraseCalInterval.Text));
             this._ctrl.increase(3, this.txtMotor3.Text, int.Parse(this.txtDecraseCalInterval.Text));
             this._ctrl.increase(4, this.txtMotor4.Text, int.Parse(this.txtDecraseCalInterval.Text));
+            this._ctrl.increase(5, this.txtMotor5.Text, int.Parse(this.txtDecraseCalInterval.Text));
+            this._ctrl.increase(6, this.txtMotor6.Text, int.Parse(this.txtDecraseCalInterval.Text));
         }
 
         private void btnStartPWM_Click(object sender, RoutedEventArgs e)
@@ -171,6 +174,9 @@ namespace MPU6050DataCollector
             this._ctrl.increase(2, this.txtMotor2.Text, int.Parse(this.txtIncraseCalInterval.Text));
             this._ctrl.increase(3, this.txtMotor3.Text, int.Parse(this.txtIncraseCalInterval.Text));
             this._ctrl.increase(4, this.txtMotor4.Text, int.Parse(this.txtIncraseCalInterval.Text));
+            Thread.Sleep(10);
+            this._ctrl.increase(5, this.txtMotor5.Text, int.Parse(this.txtIncraseCalInterval.Text));
+            this._ctrl.increase(6, this.txtMotor6.Text, int.Parse(this.txtIncraseCalInterval.Text));
         }
 
         private void btnIncreaseMotor1_Click(object sender, RoutedEventArgs e)
@@ -314,6 +320,21 @@ namespace MPU6050DataCollector
         }
 
         private void btnIncreaseMotor6By_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtMotor6_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txtMotor4_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void motorSlide4_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
         }

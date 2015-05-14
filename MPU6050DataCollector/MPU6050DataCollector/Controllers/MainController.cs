@@ -487,8 +487,7 @@ namespace MPU6050DataCollector.Controllers
             this._usb.sendData(command);
             Console.WriteLine("PID on off status requested: " + command);
         }
-
-
+        
         public void requestPidConst()
         {
             // R11 = request PID contants like Kp, Ki, Kd
@@ -543,6 +542,8 @@ namespace MPU6050DataCollector.Controllers
                 this._main.motorSlide2.Value = Double.Parse(this._main.txtMotor2.Text);
                 this._main.motorSlide3.Value = Double.Parse(this._main.txtMotor3.Text);
                 this._main.motorSlide4.Value = Double.Parse(this._main.txtMotor4.Text);
+                this._main.motorSlide5.Value = Double.Parse(this._main.txtMotor5.Text);
+                this._main.motorSlide6.Value = Double.Parse(this._main.txtMotor6.Text);
             }
             catch (Exception ee)
             {
@@ -557,11 +558,15 @@ namespace MPU6050DataCollector.Controllers
             this._main.motorSlide2.Minimum = 1100;
             this._main.motorSlide3.Minimum = 1100;
             this._main.motorSlide4.Minimum = 1100;
+            this._main.motorSlide5.Minimum = 1100;
+            this._main.motorSlide6.Minimum = 1100;
 
             this._main.moterSlide1.Maximum = 2500;
             this._main.motorSlide2.Maximum = 2500;
             this._main.motorSlide3.Maximum = 2500;
             this._main.motorSlide4.Maximum = 2500;
+            this._main.motorSlide5.Maximum = 2500;
+            this._main.motorSlide6.Maximum = 2500;
         }
 
 

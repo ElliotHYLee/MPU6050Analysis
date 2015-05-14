@@ -28,7 +28,7 @@
                     <TextBox Name="txtMotor3"  HorizontalAlignment="Left" Height="23" Margin="74,144,0,0" TextWrapping="Wrap" Text="motor3" VerticalAlignment="Top" Width="86"  />
                     <Button Name="btnDecreaseMotor3" Content="Dec1" HorizontalAlignment="Left" Margin="168,146,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor3_Click"/>
                     <Button Name="btnIncreaseMotor3" Content="Up1" HorizontalAlignment="Left" Margin="502,146,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor3_Click"/>
-                    <TextBox Name="txtMotor4" HorizontalAlignment="Left" Height="23" Margin="74,184,0,0" TextWrapping="Wrap" Text="motor4" VerticalAlignment="Top" Width="86" />
+                    <TextBox Name="txtMotor4" HorizontalAlignment="Left" Height="23" Margin="74,184,0,0" TextWrapping="Wrap" Text="motor4" VerticalAlignment="Top" Width="86" TextChanged="txtMotor4_TextChanged" />
                     <Button Name="btnDecreaseMotor4" Content="Dec1" HorizontalAlignment="Left" Margin="168,186,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor4_Click"/>
                     <Button Name="btnIncreaseMotor4" Content="Up1" HorizontalAlignment="Left" Margin="502,186,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor4_Click"/>
                     <Button Name="btnStartPWM" Content="PrepareMode" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top" Width="78" Click="btnStartPWM_Click" Height="27" Background="YellowGreen"/>
@@ -66,7 +66,7 @@
                             </TransformGroup>
                         </Slider.RenderTransform>
                     </Slider>
-                    <Slider Name="motorSlide4" HorizontalAlignment="Left" Margin="264,185,0,0" VerticalAlignment="Top" Height="23" Width="216" RenderTransformOrigin="0.574,5.89" >
+                    <Slider Name="motorSlide4" HorizontalAlignment="Left" Margin="264,185,0,0" VerticalAlignment="Top" Height="23" Width="216" RenderTransformOrigin="0.574,5.89" ValueChanged="motorSlide4_ValueChanged" >
                         <Slider.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -89,12 +89,12 @@
                     <Button Name="btnDecreaseMotor2By" Content="DecBy" HorizontalAlignment="Left" Margin="202,103,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor2By_Click" />
                     <Button Name="btnDecreaseMotor3By" Content="DecBy" HorizontalAlignment="Left" Margin="202,146,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor3By_Click"/>
                     <Button Name="btnDecreaseMotor4By" Content="DecBy" HorizontalAlignment="Left" Margin="202,186,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor4By_Click"/>
-                    <TextBox Name="txtThrottle" HorizontalAlignment="Left" Height="23" Margin="74,17,0,0" TextWrapping="Wrap" Text="Throttle" VerticalAlignment="Top" Width="86"  />
-                    <Label Content="Throttle" HorizontalAlignment="Left" Margin="16,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.407,0.125" Width="52"/>
+                    <TextBox Name="txtMainThrottle" HorizontalAlignment="Left" Height="23" Margin="606,53,0,0" TextWrapping="Wrap" Text="Throttle" VerticalAlignment="Top" Width="86"  />
+                    <Label Content="Main Throttle" HorizontalAlignment="Left" Margin="606,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.407,0.125" Width="86"/>
                     <TextBox Name="txtMotor5"  HorizontalAlignment="Left" Height="23" Margin="74,221,0,0" TextWrapping="Wrap" Text="motor5" VerticalAlignment="Top" Width="86"  />
                     <Button Name="btnDecreaseMotor5" Content="Dec1" HorizontalAlignment="Left" Margin="168,223,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor5_Click"/>
                     <Button Name="btnIncreaseMotor5" Content="Up1" HorizontalAlignment="Left" Margin="502,223,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor5_Click"/>
-                    <TextBox Name="txtMotor6" HorizontalAlignment="Left" Height="23" Margin="74,261,0,0" TextWrapping="Wrap" Text="motor6" VerticalAlignment="Top" Width="86" />
+                    <TextBox Name="txtMotor6" HorizontalAlignment="Left" Height="23" Margin="74,261,0,0" TextWrapping="Wrap" Text="motor6" VerticalAlignment="Top" Width="86" TextChanged="txtMotor6_TextChanged" />
                     <Button Name="btnDecreaseMotor6" Content="Dec1" HorizontalAlignment="Left" Margin="168,263,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor6_Click"/>
                     <Button Name="btnIncreaseMotor6" Content="Up1" HorizontalAlignment="Left" Margin="502,263,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor6_Click"/>
                     <Label Content="Motor5" HorizontalAlignment="Left" Margin="16,221,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.407,0.125" Width="52"/>
@@ -123,6 +123,7 @@
                     <Button Name="btnIncreaseMotor6By" Content="UpAs" HorizontalAlignment="Left" Margin="539,263,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor6By_Click"/>
                     <Button Name="btnDecreaseMotor5By" Content="DecBy" HorizontalAlignment="Left" Margin="202,223,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor5By_Click"/>
                     <Button Name="btnDecreaseMotor6By" Content="DecBy" HorizontalAlignment="Left" Margin="202,263,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor6By_Click"/>
+                    <Slider Name="sldrMainThrottle" Orientation="Vertical" HorizontalAlignment="Left" Height="245" Margin="606,81,0,0" VerticalAlignment="Top" Width="22"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="366" Margin="975,271,0,0" VerticalAlignment="Top" Width="194">
