@@ -37,6 +37,7 @@ namespace SerialMonitorTest03.ControllerFolder
         private int _numberOfDataGathered;
         private string[] pid = { "e", "e", "e", "e", "e", "e", "e", "e", "e" };
 
+        private string[] throttle = new string[3];
         private bool updatePidConst = false;
         private bool updatePidOnOffStatus = false;
 
@@ -303,6 +304,26 @@ namespace SerialMonitorTest03.ControllerFolder
                             case "6":
                                 motor[5] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                                 break;
+                        }
+                        #endregion
+                    }
+                    if (infoType.Equals("t"))
+                    {
+                        Console.WriteLine("+====================");
+                        #region parse throttle
+                        infoDir = listTokens[i].Substring(1, 1);
+                        if (infoDir.Equals("0"))
+                        {
+                            throttle[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                            Console.WriteLine(throttle[0]);
+                        }
+                        if (infoDir.Equals("1"))
+                        {
+                            throttle[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        }
+                        if (infoDir.Equals("2"))
+                        {
+                            throttle[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                         }
                         #endregion
                     }
@@ -813,8 +834,13 @@ namespace SerialMonitorTest03.ControllerFolder
                         this._main.txtMotor6.Text = motor[5];
                     }
 
+                    this._main.txtMainThrottle.Text = throttle[0];
+
 
                     this._mainCtrl.updateSlider();
+
+
+
                     if (this._numberOfDataGathered > 0)
                     {
                         this._main.txtNumberOfData.Text = this._numberOfDataGathered.ToString() + " data gathered.";
