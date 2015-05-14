@@ -48,9 +48,10 @@
         <TextBox Name ="txtXOutput" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="75" Margin="166,357,0,0"/>
         <TextBox Name ="txtYOutput" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="75" Margin="277,356,0,0"/>
         <TextBox Name ="txtZOutput" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="75" Margin="385,357,0,0"/>
-        <Button Name ="btnUpdate" Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" Width="63" Margin="85,185,0,0" Click="btnUpdate_Click" Height="27"/>
+        <Button Name ="btnUpdateOnOff" Content="Update On/Off" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="55,213,0,0" Click="btnUpdate_Click" Height="27"/>
         <Button Name="btnSetY" Content="Set" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Margin="267,136,0,0" Height="27" Click="btnSetY_Click" />
         <Button Name="btnSetZ" Content="Set" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Margin="433,136,0,0" Height="27" Click="btnSetZ_Click" />
+        <Button Name ="btnUpDateConst" Content="Update pidConst" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="54,181,0,0"  Height="27" Click="btnUpDateConst_Click"/>
 
 
     </Grid>

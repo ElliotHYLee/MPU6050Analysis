@@ -31,6 +31,7 @@ namespace SerialMonitorTest03.ControllerFolder
         private double _parsingRate;
         private double _parsingCounter;
 
+        private bool[] pidAxisOnOff = { false, false, false };
         private string[] _portsList;
         private int _numberOfPorts;
         private bool _collectionMode;
@@ -152,6 +153,10 @@ namespace SerialMonitorTest03.ControllerFolder
 
                     if (((int) this._parsingCounter) % ((int) mult) != 0)
                     {
+                        //if (inStream.Equals("========"))
+                        //{
+                        //    Console.WriteLine(inStream);
+                        //}
                         Console.WriteLine(inStream);
                         //Console.WriteLine();
                         //Console.WriteLine();
@@ -309,13 +314,13 @@ namespace SerialMonitorTest03.ControllerFolder
                     }
                     if (infoType.Equals("t"))
                     {
-                        Console.WriteLine("+====================");
+                        //Console.WriteLine("+====================");
                         #region parse throttle
                         infoDir = listTokens[i].Substring(1, 1);
                         if (infoDir.Equals("0"))
                         {
                             throttle[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
-                            Console.WriteLine(throttle[0]);
+                            //Console.WriteLine(throttle[0]);
                         }
                         if (infoDir.Equals("1"))
                         {
@@ -432,41 +437,46 @@ namespace SerialMonitorTest03.ControllerFolder
                         // get pid on/off status
                         infoDir = listTokens[i].Substring(1, 1);
                         string onOff;
-
+                        Console.WriteLine(listTokens[i].Substring(1, listTokens[i].Length - 2));
                         switch (infoDir)
                         {
                             case "0":
                                 onOff = listTokens[i].Substring(2, listTokens[i].Length - 2);
                                 if (onOff.Equals("0"))
                                 {
-                                    this._mainCtrl.pidOnOffX = false;
-
+                                    this.pidAxisOnOff[0] = false;
+                                    Console.WriteLine("PC: pid x is off");
                                 }
                                 if (onOff.Equals("1"))
                                 {
-                                    this._mainCtrl.pidOnOffX = true;
+                                    this.pidAxisOnOff[0] = true;
+                                    Console.WriteLine("PC: pid x is on");
                                 }
                                 break;
                             case "1":
                                 onOff = listTokens[i].Substring(2, listTokens[i].Length - 2);
                                 if (onOff.Equals("0"))
                                 {
-                                    this._mainCtrl.pidOnOffX = false;
+                                    this.pidAxisOnOff[1] = false;
+                                    Console.WriteLine("PC: pid y is off");
                                 }
                                 if (onOff.Equals("1"))
                                 {
-                                    this._mainCtrl.pidOnOffX = true;
+                                    this.pidAxisOnOff[1] = true;
+                                    Console.WriteLine("PC: pid y is on");
                                 }
                                 break;
                             case "2":
                                 onOff = listTokens[i].Substring(2, listTokens[i].Length - 2);
                                 if (onOff.Equals("0"))
                                 {
-                                    this._mainCtrl.pidOnOffX = false;
+                                    this.pidAxisOnOff[2] = false;
+                                    Console.WriteLine("PC: pid z is off");
                                 }
                                 if (onOff.Equals("1"))
                                 {
-                                    this._mainCtrl.pidOnOffX = true;
+                                    this.pidAxisOnOff[2] = true;
+                                    Console.WriteLine("PC: pid z is on");
                                 }
                                 break;
                         }
@@ -534,6 +544,7 @@ namespace SerialMonitorTest03.ControllerFolder
                         this.updatePidConst = false;
                     }
 
+                    Console.WriteLine("PC: this.updatePidOnOffStatus: " + this.updatePidOnOffStatus);
                     if (this.updatePidOnOffStatus)
                     {
                         this._mainCtrl._pidMonitor.Dispatcher.Invoke(() =>
@@ -542,12 +553,15 @@ namespace SerialMonitorTest03.ControllerFolder
                             //update pid on/off
 
                             // x axis
-                            if (this._mainCtrl.pidOnOffX)
+                            Console.WriteLine("PC: this._mainCtrl.pidOnOffX: " + this._mainCtrl.pidOnOffX);
+                            if (this.pidAxisOnOff[0])
                             {
                                 SolidColorBrush dd = new SolidColorBrush();
                                 dd.Color = Colors.Green;
                                 this._mainCtrl._pidMonitor.btnXonoff.Background = dd;
+                                Console.WriteLine("PC: pid x is on so color changed to green");
                                 this._mainCtrl._pidMonitor.btnXonoff.Content = "PID On";
+                                this._mainCtrl._pidMonitor.pidXStatus = true;
                             }
                             else
                             {
@@ -555,15 +569,17 @@ namespace SerialMonitorTest03.ControllerFolder
                                 dd.Color = Colors.Red;
                                 this._mainCtrl._pidMonitor.btnXonoff.Background = dd;
                                 this._mainCtrl._pidMonitor.btnXonoff.Content = "PID Off";
+                                this._mainCtrl._pidMonitor.pidXStatus = false;
                             }
 
                             // y axis
-                            if (this._mainCtrl.pidOnOffY)
+                            if (this.pidAxisOnOff[1])
                             {
                                 SolidColorBrush dd = new SolidColorBrush();
                                 dd.Color = Colors.Green;
                                 this._mainCtrl._pidMonitor.btnYonoff.Background = dd;
                                 this._mainCtrl._pidMonitor.btnYonoff.Content = "PID On";
+                                this._mainCtrl._pidMonitor.pidYStatus = true;
                             }
                             else
                             {
@@ -571,15 +587,17 @@ namespace SerialMonitorTest03.ControllerFolder
                                 dd.Color = Colors.Red;
                                 this._mainCtrl._pidMonitor.btnYonoff.Background = dd;
                                 this._mainCtrl._pidMonitor.btnYonoff.Content = "PID Off";
+                                this._mainCtrl._pidMonitor.pidYStatus = false;
                             }
 
                             // z axis
-                            if (this._mainCtrl.pidOnOffZ)
+                            if (this.pidAxisOnOff[2])
                             {
                                 SolidColorBrush dd = new SolidColorBrush();
                                 dd.Color = Colors.Green;
                                 this._mainCtrl._pidMonitor.btnZonoff.Background = dd;
                                 this._mainCtrl._pidMonitor.btnZonoff.Content = "PID On";
+                                this._mainCtrl._pidMonitor.pidZStatus = true;
                             }
                             else
                             {
@@ -587,6 +605,7 @@ namespace SerialMonitorTest03.ControllerFolder
                                 dd.Color = Colors.Red;
                                 this._mainCtrl._pidMonitor.btnZonoff.Background = dd;
                                 this._mainCtrl._pidMonitor.btnZonoff.Content = "PID Off";
+                                this._mainCtrl._pidMonitor.pidZStatus = false;
                             }
                             #endregion
 
@@ -603,8 +622,6 @@ namespace SerialMonitorTest03.ControllerFolder
                 {
                     this._main.listInfoType.Items.Clear();
                 });
-
-
 
                 List<string> temp = setInfoTypes.ToList<string>();
                 for (int i = 0; i < setInfoTypes.Count; i++)
@@ -643,8 +660,6 @@ namespace SerialMonitorTest03.ControllerFolder
                         });
 
                     }
-
-
 
                     else if (temp[i].Equals("p"))
                     {

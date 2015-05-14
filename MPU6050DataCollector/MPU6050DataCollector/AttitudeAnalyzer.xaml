@@ -124,6 +124,8 @@
                     <Button Name="btnDecreaseMotor5By" Content="DecBy" HorizontalAlignment="Left" Margin="202,223,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor5By_Click"/>
                     <Button Name="btnDecreaseMotor6By" Content="DecBy" HorizontalAlignment="Left" Margin="202,263,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor6By_Click"/>
                     <Slider Name="sldrMainThrottle" Orientation="Vertical" HorizontalAlignment="Left" Height="245" Margin="606,81,0,0" VerticalAlignment="Top" Width="22"/>
+                    <Button Name="btnThrottleUp" Content="btnThrottleUp" HorizontalAlignment="Left" Height="29" Margin="633,137,0,0" VerticalAlignment="Top" Width="63" Click="btnThrottleUp_Click"/>
+                    <Button Name="btnThrottleDown" Content="btnThrottleDown" HorizontalAlignment="Left" Height="29" Margin="633,186,0,0" VerticalAlignment="Top" Width="63"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="366" Margin="975,271,0,0" VerticalAlignment="Top" Width="194">

@@ -150,12 +150,12 @@ namespace MPU6050DataCollector
 
         private void btnDecreaseAll_Click(object sender, RoutedEventArgs e)
         {
-            this._ctrl.increase(1, this.txtMotor1.Text, int.Parse(this.txtDecraseCalInterval.Text));
-            this._ctrl.increase(2, this.txtMotor2.Text, int.Parse(this.txtDecraseCalInterval.Text));
-            this._ctrl.increase(3, this.txtMotor3.Text, int.Parse(this.txtDecraseCalInterval.Text));
-            this._ctrl.increase(4, this.txtMotor4.Text, int.Parse(this.txtDecraseCalInterval.Text));
-            this._ctrl.increase(5, this.txtMotor5.Text, int.Parse(this.txtDecraseCalInterval.Text));
-            this._ctrl.increase(6, this.txtMotor6.Text, int.Parse(this.txtDecraseCalInterval.Text));
+            this._ctrl.decrease(1, this.txtMotor1.Text, int.Parse(this.txtDecraseCalInterval.Text));
+            this._ctrl.decrease(2, this.txtMotor2.Text, int.Parse(this.txtDecraseCalInterval.Text));
+            this._ctrl.decrease(3, this.txtMotor3.Text, int.Parse(this.txtDecraseCalInterval.Text));
+            this._ctrl.decrease(4, this.txtMotor4.Text, int.Parse(this.txtDecraseCalInterval.Text));
+            this._ctrl.decrease(5, this.txtMotor5.Text, int.Parse(this.txtDecraseCalInterval.Text));
+            this._ctrl.decrease(6, this.txtMotor6.Text, int.Parse(this.txtDecraseCalInterval.Text));
         }
 
         private void btnStartPWM_Click(object sender, RoutedEventArgs e)
@@ -335,6 +335,11 @@ namespace MPU6050DataCollector
         }
 
         private void motorSlide4_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
+
+        private void btnThrottleUp_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -258,6 +258,10 @@ namespace MPU6050DataCollector.Controllers
             }
         }
 
+        public void setPidStatusNew(string val)
+        {
+            this._usb.sendData(val);
+        }
 
         public void setPidStatus()
         {
@@ -411,7 +415,6 @@ namespace MPU6050DataCollector.Controllers
                 this._usb.sendData("P" + (i + 1).ToString() + result);
                 Console.WriteLine("P" + (i + 1).ToString() + result);
             }
-
 
         }
 
@@ -593,7 +596,7 @@ namespace MPU6050DataCollector.Controllers
 
 
                this.requestPidOnOffStatus();
-               this.requestPidConst();
+               //this.requestPidConst();
 
                
                 
