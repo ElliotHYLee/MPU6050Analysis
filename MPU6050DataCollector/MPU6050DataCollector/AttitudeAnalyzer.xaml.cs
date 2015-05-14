@@ -339,10 +339,41 @@ namespace MPU6050DataCollector
 
         }
 
-        private void btnThrottleUp_Click(object sender, RoutedEventArgs e)
+        private void btnThrottleUp100_Click(object sender, RoutedEventArgs e)
+        {
+            int newThrottle = int.Parse(this.txtMainThrottle.Text) + 100;
+            this._ctrl.updateThrottle(newThrottle);
+        }
+
+        private void btnThrottleUp50_Click(object sender, RoutedEventArgs e)
+        {
+            int newThrottle = int.Parse(this.txtMainThrottle.Text) + 50;
+            this._ctrl.updateThrottle(newThrottle);
+        }
+
+        private void btnThrottleDown50_Click(object sender, RoutedEventArgs e)
+        {
+            int newThrottle = int.Parse(this.txtMainThrottle.Text) - 50;
+            this._ctrl.updateThrottle(newThrottle);
+        }
+
+        private void btnThrottleDown100_Click(object sender, RoutedEventArgs e)
+        {
+            int newThrottle = int.Parse(this.txtMainThrottle.Text) - 100;
+            this._ctrl.updateThrottle(newThrottle);
+        }
+
+        private void sldrMainThrottle_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
         }
+
+        private void btnSetThrottle_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.updateThrottle(int.Parse(this.txtSetThrottle.Text));
+        }
+
+ 
 
 
 

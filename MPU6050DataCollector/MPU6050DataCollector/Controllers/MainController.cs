@@ -121,8 +121,6 @@ namespace MPU6050DataCollector.Controllers
         {
             this._main.lblAddress.Content = AbsAddress.getFolderAddr("Data");
             this._main.txtFileName.Text = "data01.xlsx";
-
-
         }
 
         public void saveToExcel()
@@ -547,6 +545,7 @@ namespace MPU6050DataCollector.Controllers
                 this._main.motorSlide4.Value = Double.Parse(this._main.txtMotor4.Text);
                 this._main.motorSlide5.Value = Double.Parse(this._main.txtMotor5.Text);
                 this._main.motorSlide6.Value = Double.Parse(this._main.txtMotor6.Text);
+                this._main.sldrMainThrottle.Value = Double.Parse(this._main.txtMainThrottle.Text);
             }
             catch (Exception ee)
             {
@@ -563,6 +562,7 @@ namespace MPU6050DataCollector.Controllers
             this._main.motorSlide4.Minimum = 1100;
             this._main.motorSlide5.Minimum = 1100;
             this._main.motorSlide6.Minimum = 1100;
+            this._main.sldrMainThrottle.Minimum = 1100;
 
             this._main.moterSlide1.Maximum = 2500;
             this._main.motorSlide2.Maximum = 2500;
@@ -570,9 +570,9 @@ namespace MPU6050DataCollector.Controllers
             this._main.motorSlide4.Maximum = 2500;
             this._main.motorSlide5.Maximum = 2500;
             this._main.motorSlide6.Maximum = 2500;
+            this._main.sldrMainThrottle.Maximum = 2500;
         }
-
-
+        
         public void decrease(int motor, string currentPwm, int delta)
         {
             int newPwm = int.Parse(currentPwm) - delta;
@@ -607,6 +607,13 @@ namespace MPU6050DataCollector.Controllers
         {
             this._pidMonitorIsOpen = false;
         }
+
+        public void updateThrottle(int val)
+        {
+            string msg = "TH" + val.ToString();
+            this._usb.sendData(msg);
+        }
+
 
 
     }

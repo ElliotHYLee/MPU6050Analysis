@@ -123,9 +123,14 @@
                     <Button Name="btnIncreaseMotor6By" Content="UpAs" HorizontalAlignment="Left" Margin="539,263,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor6By_Click"/>
                     <Button Name="btnDecreaseMotor5By" Content="DecBy" HorizontalAlignment="Left" Margin="202,223,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor5By_Click"/>
                     <Button Name="btnDecreaseMotor6By" Content="DecBy" HorizontalAlignment="Left" Margin="202,263,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor6By_Click"/>
-                    <Slider Name="sldrMainThrottle" Orientation="Vertical" HorizontalAlignment="Left" Height="245" Margin="606,81,0,0" VerticalAlignment="Top" Width="22"/>
-                    <Button Name="btnThrottleUp" Content="btnThrottleUp" HorizontalAlignment="Left" Height="29" Margin="633,137,0,0" VerticalAlignment="Top" Width="63" Click="btnThrottleUp_Click"/>
-                    <Button Name="btnThrottleDown" Content="btnThrottleDown" HorizontalAlignment="Left" Height="29" Margin="633,186,0,0" VerticalAlignment="Top" Width="63"/>
+                    <Slider Name="sldrMainThrottle" Orientation="Vertical" HorizontalAlignment="Left" Height="245" Margin="606,81,0,0" VerticalAlignment="Top" Width="22" ValueChanged="sldrMainThrottle_ValueChanged"/>
+                    <Button Name="btnThrottleUp100" Content="+100" HorizontalAlignment="Left" Height="29" Margin="633,175,0,0" VerticalAlignment="Top" Width="63" Click="btnThrottleUp100_Click" />
+                    <Button Name="btnThrottleDown100" Content="-100" HorizontalAlignment="Left" Height="29" Margin="633,298,0,0" VerticalAlignment="Top" Width="63" Click="btnThrottleDown100_Click"/>
+                    <Button Name="btnThrottleUp50" Content="+50" HorizontalAlignment="Left" Height="31" Margin="633,216,0,0" VerticalAlignment="Top" Width="63" Click="btnThrottleUp50_Click"/>
+                    <Button Name="btnThrottleDown50" Content="-50" HorizontalAlignment="Left" Height="31" Margin="633,255,0,0" VerticalAlignment="Top" Width="63" Click="btnThrottleDown50_Click"/>
+                    <Label Content="Set As:" HorizontalAlignment="Left" Height="28" Margin="633,76,0,0" VerticalAlignment="Top" Width="59"/>
+                    <TextBox Name="txtSetThrottle" HorizontalAlignment="Left" Height="31" Margin="633,106,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="59"/>
+                    <Button Name="btnSetThrottle" Content="Set" HorizontalAlignment="Left" Height="29" Margin="633,137,0,0" VerticalAlignment="Top" Width="59" Click="btnSetThrottle_Click"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="366" Margin="975,271,0,0" VerticalAlignment="Top" Width="194">
