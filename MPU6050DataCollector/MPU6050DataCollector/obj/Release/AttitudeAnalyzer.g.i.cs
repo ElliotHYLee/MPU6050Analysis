@@ -1370,12 +1370,6 @@ namespace MPU6050DataCollector {
             return;
             case 75:
             this.txtCRawX = ((System.Windows.Controls.TextBox)(target));
-            
-            #line 168 "..\..\AttitudeAnalyzer.xaml"
-            this.txtCRawX.TextChanged += new System.Windows.Controls.TextChangedEventHandler(this.txtCRawX_TextChanged);
-            
-            #line default
-            #line hidden
             return;
             case 76:
             this.txtCRawY = ((System.Windows.Controls.TextBox)(target));
