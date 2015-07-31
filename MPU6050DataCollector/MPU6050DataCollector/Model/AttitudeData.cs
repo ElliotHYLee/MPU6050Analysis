@@ -16,25 +16,38 @@ namespace MPU6050DataCollector.Model
         private List<string>[] _acc;
         private List<string>[] _cFilter;
         private List<string>[] _motor;
+        private List<string>[] _mag;
         public AttitudeData()
         {
             this._gyro = new List<string>[10];
             this._acc = new List<string>[10];
             this._cFilter = new List<string>[10];
-            this._motor = new List<string>[4];
+            this._motor = new List<string>[6];
+            this._mag = new List<string>[3];
             for (int i = 0; i < 10; i++)
             {
                 this._gyro[i] = new List<string>();
                 this._acc[i] = new List<string>();
                 this._cFilter[i] = new List<string>();
-                if (i < 4)
+                if (i < 6)
                 {
                     this._motor[i] = new List<string>();
+                }
+                if (i < 3)
+                {
+                    this._mag[i] = new List<string>();
                 }
             }
 
             
         }
+
+        public List<string>[] mag
+        {
+            set { this._mag = value; }
+            get { return this._mag; }
+        }
+
         public List<string>[] motor
         {
             set { this._motor = value; }

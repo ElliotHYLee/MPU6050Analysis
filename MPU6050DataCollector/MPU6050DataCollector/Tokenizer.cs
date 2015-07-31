@@ -27,16 +27,20 @@ namespace Tokenizer
                 int length = endPos - beginPos + 1;
                 if (length > 0)
                 {
+                    // get fist char of string as "["
+                    // so result = "[~~~..."
                     result = x.Substring(beginPos, endPos - beginPos + 1);
                     //Console.WriteLine("the string to trim:    " + x);
                     
                     if (result.ToCharArray()[0] == '['  && result.ToCharArray()[result.Length-1] == ']')
                     {
+                        // do nothing
                         //Console.WriteLine("the string after trim: " + result + "    =============");
                     }
                     else
                     {
                         result = "abort";
+                        Console.WriteLine("abort");
                     }
                     //Console.Write(result.ToCharArray()[0] + " " + (result.ToCharArray()[0] != '[') + " ");
                     //Console.WriteLine(result.ToCharArray()[0] + " " + (result.ToCharArray()[result.Length - 1] != ']'));

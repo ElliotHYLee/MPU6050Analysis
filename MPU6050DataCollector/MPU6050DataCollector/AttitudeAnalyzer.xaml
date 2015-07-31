@@ -17,7 +17,7 @@
             <TextBox Name="txtFileName" HorizontalAlignment="Left" Height="26" Margin="1009,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Grid.RowSpan="2"/>
             <Label Name="lblAddress" Content="Label" HorizontalAlignment="Left" Height="24" Margin="390,30,0,0" VerticalAlignment="Top" Width="614" Grid.RowSpan="2"/>
             <Label Name="lblBoard" Content="Label" HorizontalAlignment="Left" Height="32" Margin="674,67,0,0" VerticalAlignment="Top" Width="330" Grid.RowSpan="2"/>
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="366" Margin="45,271,0,0" VerticalAlignment="Top" Width="930">
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="366" Margin="45,333,0,0" VerticalAlignment="Top" Width="930">
                 <Grid Height="366" Margin="-1" VerticalAlignment="Top">
                     <TextBox Name="txtMotor1" HorizontalAlignment="Left" Height="23" Margin="74,66,0,0" TextWrapping="Wrap" Text="motor1" VerticalAlignment="Top" Width="86"  />
                     <Button Name="btnDecreaseMotor1" Content="Dec1" HorizontalAlignment="Left" Margin="168,64,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor1_Click"/>
@@ -133,7 +133,7 @@
                     <Button Name="btnSetThrottle" Content="Set" HorizontalAlignment="Left" Height="29" Margin="633,137,0,0" VerticalAlignment="Top" Width="59" Click="btnSetThrottle_Click"/>
                 </Grid>
             </Border>
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="366" Margin="975,271,0,0" VerticalAlignment="Top" Width="194">
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="366" Margin="975,333,0,0" VerticalAlignment="Top" Width="194">
                 <Grid HorizontalAlignment="Right" Height="366" Margin="-1" VerticalAlignment="Top" Width="194">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -143,11 +143,11 @@
                     <Button Name="btnPidControl" Content="PID On/Off" HorizontalAlignment="Left" Height="20" Margin="80,38,0,0" VerticalAlignment="Top" Width="90" Click="btnPidControl_Click"/>
                     <Button Name="btnMpuControl" Content="MPU On/Off" HorizontalAlignment="Left" Height="20" Margin="80,78,0,0" VerticalAlignment="Top" Width="90"/>
                     <Button Name="btnOpenPID" Content="OpenPIDMonitor" HorizontalAlignment="Left" Height="30" Margin="44,145,0,0" VerticalAlignment="Top" Width="104" Click="btnOpenPID_Click"/>
-                    <Button Name="btnJoyStick" Content="Button" HorizontalAlignment="Left" Height="37" Margin="46,319,0,0" VerticalAlignment="Top" Width="102"/>
+                    <Button Name="btnJoyStick" Content="JoyStick" HorizontalAlignment="Left" Height="37" Margin="46,319,0,0" VerticalAlignment="Top" Width="102"/>
                 </Grid>
             </Border>
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="172" Margin="45,99,0,0" VerticalAlignment="Top" Width="1124" Grid.RowSpan="2">
-                <Grid HorizontalAlignment="Left" Height="172" Margin="-1" VerticalAlignment="Top" Width="1124">
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="229" Margin="45,99,0,0" VerticalAlignment="Top" Width="1124">
+                <Grid HorizontalAlignment="Left" Height="229" Margin="-1" VerticalAlignment="Top" Width="1124">
                     <Label Content="X-Raw" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,17,0,0" Width="106"/>
                     <Label Content="Y-Raw" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="227,17,0,0" Width="106"/>
                     <Label Content="Z-Raw" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="357,17,0,0" Width="106"/>
@@ -193,25 +193,33 @@
                     <TextBox x:Name="txtADegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1029,85,0,0"/>
                     <TextBox x:Name="txtCDirCosZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="976,121,0,0"/>
                     <TextBox x:Name="txtCDegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1029,121,0,0"/>
+                    <Label Content="Heading" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,159,0,0" Width="72" Height="32"/>
+                    <TextBox Name="txtHeadingX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="89,159,0,0"/>
+                    <TextBox Name="txtHeadingY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="227,163,0,0"/>
+                    <TextBox Name="txtHeadingZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="357,163,0,0"/>
                 </Grid>
             </Border>
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="260" Margin="45,637,0,0" VerticalAlignment="Top" Width="1124">
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="260" Margin="45,699,0,0" VerticalAlignment="Top" Width="1124">
                 <Grid HorizontalAlignment="Left" Height="262" Margin="-1,-1,-1,-3" VerticalAlignment="Top" Width="1124">
-                    <ListBox x:Name="listInfoType" HorizontalAlignment="Left" Height="174" Margin="16,47,0,0" VerticalAlignment="Top" Width="150"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="58*"/>
+                        <RowDefinition Height="73*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="listInfoType" HorizontalAlignment="Left" Height="174" Margin="16,47,0,0" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
                     <Label Content="Incoming Data" HorizontalAlignment="Left" Height="26" Margin="16,21,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="220,21,0,0" VerticalAlignment="Top" Width="200">
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="220,21,0,0" VerticalAlignment="Top" Width="200" Grid.RowSpan="2">
                         <Canvas x:Name="canvasAttitudeX" HorizontalAlignment="Left" Height="200" Margin="-1" VerticalAlignment="Top" Width="200"/>
                     </Border>
 
-                    <Label Content="XZ-Plane" HorizontalAlignment="Left" Height="30" Margin="289,221,0,0" VerticalAlignment="Top" Width="66"/>
-                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="570,21,0,0" VerticalAlignment="Top" Width="200">
+                    <Label Content="XZ-Plane" HorizontalAlignment="Left" Height="30" Margin="289,105,0,0" VerticalAlignment="Top" Width="66" Grid.Row="1"/>
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="570,21,0,0" VerticalAlignment="Top" Width="200" Grid.RowSpan="2">
                         <Canvas x:Name="canvasAttitudeY" HorizontalAlignment="Left" Height="200" Margin="-1,-1,0,-1" VerticalAlignment="Top" Width="200"/>
                     </Border>
-                    <Label Content="YZ-Plane" HorizontalAlignment="Left" Height="30" Margin="629,222,0,0" VerticalAlignment="Top" Width="66"/>
-                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="880,21,-253,0" VerticalAlignment="Top" Width="200">
+                    <Label Content="YZ-Plane" HorizontalAlignment="Left" Height="30" Margin="629,106,0,0" VerticalAlignment="Top" Width="66" Grid.Row="1"/>
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="880,21,0,0" VerticalAlignment="Top" Width="200" Grid.RowSpan="2">
                         <Canvas x:Name="canvasHeading" HorizontalAlignment="Left" Height="200" Margin="-1" VerticalAlignment="Top" Width="200"/>
                     </Border>
-                    <Label Content="XY-Plane" HorizontalAlignment="Left" Height="30" Margin="956,221,0,0" VerticalAlignment="Top" Width="66"/>
+                    <Label Content="XY-Plane" HorizontalAlignment="Left" Height="30" Margin="956,105,0,0" VerticalAlignment="Top" Width="66" Grid.Row="1"/>
                 </Grid>
             </Border>
 
