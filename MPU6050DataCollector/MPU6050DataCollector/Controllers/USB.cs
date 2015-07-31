@@ -21,6 +21,7 @@ namespace SerialMonitorTest03.ControllerFolder
     // This class doesn't check convention
     class USB
     {
+        private string instreamGlobalVar;
         //private bool regulator = true;
         private MainWindow _main;
         private AttitudeData _data;
@@ -140,12 +141,24 @@ namespace SerialMonitorTest03.ControllerFolder
             {
                 
                 string inStream = (string)this._serial.ReadExisting();
+                this._serial.DiscardInBuffer();
+                this._serial.DiscardOutBuffer();
+                Console.WriteLine("---------------------");
+                Console.WriteLine(inStream);
+                Console.WriteLine("---------------------");
+
                 //if (inStream.Contains("p"))
                 //{
                 //    Console.WriteLine(inStream);
                 //}
 
                 this._testInstream = inStream;
+                if (inStream.Equals(""))
+                {
+                    return;
+                }
+                instreamGlobalVar = inStream;
+                _parsingRate = 50;
                 try
                 {
                     double targetCount = 100 - _parsingRate;
@@ -157,7 +170,7 @@ namespace SerialMonitorTest03.ControllerFolder
                         //{
                         //    Console.WriteLine(inStream);
                         //}
-                        Console.WriteLine(inStream);
+                        //Console.WriteLine(inStream);
                         //Console.WriteLine();
                         //Console.WriteLine();
                         this.parse(inStream);
@@ -202,6 +215,7 @@ namespace SerialMonitorTest03.ControllerFolder
                 string[] acc = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
                 string[] cFilter = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
                 string[] motor = { "0", "0", "0", "0", "0", "0" };
+                string[] mag = { "0", "0", "0" };
 
 
                 #endregion
@@ -309,6 +323,26 @@ namespace SerialMonitorTest03.ControllerFolder
                             case "6":
                                 motor[5] = listTokens[i].Substring(2, listTokens[i].Length - 2);
                                 break;
+                        }
+                        #endregion
+                    }
+                    if (infoType.Equals("q"))
+                    {
+                        #region parse magnetometer
+                        // get direction of info 1,2,3 magnetometer
+                        infoDir = listTokens[i].Substring(1, 1);
+                        switch (infoDir)
+                        {
+                            case "x":
+                                mag[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "y":
+                                mag[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "z":
+                                mag[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+
                         }
                         #endregion
                     }
@@ -487,7 +521,7 @@ namespace SerialMonitorTest03.ControllerFolder
                 #endregion
 
                 #region update information
-                this.updateMain(gyro, acc, cFilter, motor);
+                this.updateMain(gyro, acc, cFilter, motor, mag);
                 #endregion
 
                 #region update monitors for information type
@@ -681,92 +715,92 @@ namespace SerialMonitorTest03.ControllerFolder
                 }
             }
 
-            private void updateMain(string[] gyro, string[] acc, string[] cFilter, string[] motor )
+            private void updateMain(string[] gyro, string[] acc, string[] cFilter, string[] motor, string[] mag)
             {
 
                 #region for loop calculating attitudes
                 
-                double norm, xRaw, yRaw, zRaw;
-                // this for loop calculates variables.
-                for (int i = 0; i < 3; i++)
-                {
+                //double norm, xRaw, yRaw, zRaw;
+                //// this for loop calculates variables.
+                //for (int i = 0; i < 3; i++)
+                //{
 
-                    try 
-                    {
-                        if (i == 0) // gyro
-                        {
-                            xRaw = Double.Parse(gyro[0]);
-                            yRaw = Double.Parse(gyro[1]);
-                            zRaw = Double.Parse(gyro[2]);
-                            norm = Math.Sqrt(xRaw * xRaw + yRaw * yRaw + zRaw * zRaw);
-                            gyro[3] = norm.ToString();
-                            gyro[4] = (xRaw / norm).ToString();
-                            gyro[5] = (Math.Acos(xRaw / norm) * 180 / Math.PI).ToString();
-                            gyro[6] = (yRaw / norm).ToString();
-                            gyro[7] = (Math.Acos(yRaw / norm) * 180 / Math.PI).ToString();
-                            gyro[8] = (zRaw / norm).ToString();
-                            gyro[9] = (Math.Acos(zRaw / norm) * 180 / Math.PI).ToString();
+                //    try 
+                //    {
+                //        if (i == 0) // gyro
+                //        {
+                //            xRaw = Double.Parse(gyro[0]);
+                //            yRaw = Double.Parse(gyro[1]);
+                //            zRaw = Double.Parse(gyro[2]);
+                //            norm = Math.Sqrt(xRaw * xRaw + yRaw * yRaw + zRaw * zRaw);
+                //            gyro[3] = norm.ToString();
+                //            gyro[4] = (xRaw / norm).ToString();
+                //            gyro[5] = (Math.Acos(xRaw / norm) * 180 / Math.PI).ToString();
+                //            gyro[6] = (yRaw / norm).ToString();
+                //            gyro[7] = (Math.Acos(yRaw / norm) * 180 / Math.PI).ToString();
+                //            gyro[8] = (zRaw / norm).ToString();
+                //            gyro[9] = (Math.Acos(zRaw / norm) * 180 / Math.PI).ToString();
 
-                        }
-                        else if (i == 1) //acc
-                        {
-                            xRaw = Double.Parse(acc[0]);
-                            yRaw = Double.Parse(acc[1]);
-                            zRaw = Double.Parse(acc[2]);
-                            norm = Math.Sqrt(xRaw * xRaw + yRaw * yRaw + zRaw * zRaw);
+                //        }
+                //        else if (i == 1) //acc
+                //        {
+                //            xRaw = Double.Parse(acc[0]);
+                //            yRaw = Double.Parse(acc[1]);
+                //            zRaw = Double.Parse(acc[2]);
+                //            norm = Math.Sqrt(xRaw * xRaw + yRaw * yRaw + zRaw * zRaw);
                            
-                            if (norm != 0)
-                            {
-                                acc[3] = norm.ToString().Substring(0, 6);
-                                acc[4] = (xRaw / norm).ToString().Substring(0, 6);
-                                acc[5] = (Math.Acos(xRaw / norm) * 180 / Math.PI).ToString().Substring(0, 6);
-                                acc[6] = (yRaw / norm).ToString().Substring(0, 6);
-                                acc[7] = (Math.Acos(yRaw / norm) * 180 / Math.PI).ToString().Substring(0, 6);
-                                acc[8] = (zRaw / norm).ToString().Substring(0, 6);
-                                acc[9] = (Math.Acos(zRaw / norm) * 180 / Math.PI).ToString().Substring(0, 6);
-                            }
-                        }
-                        else if (i==2)  // compFilter
-                        {
-                            xRaw = Double.Parse(cFilter[0]);
-                            yRaw = Double.Parse(cFilter[1]);
-                            zRaw = Double.Parse(cFilter[2]);
-                            norm = 100*Math.Sqrt(xRaw * xRaw/10000 + yRaw * yRaw/10000 + zRaw * zRaw/10000);
-                            //if (norm > 8500 || norm < 8000)
-                            //{
-                            //    Console.WriteLine("Cx = " + xRaw);
-                            //    Console.WriteLine("Cy = " + yRaw);
-                            //    Console.WriteLine("Cz = " + zRaw);
-                            //    Console.WriteLine("norm = " + norm);
-                            //}
-                            if (norm != 0)
-                            {
-                                cFilter[3] = norm.ToString();
-                                cFilter[4] = (xRaw / norm).ToString();
-                                cFilter[5] = (Math.Acos(xRaw / norm) * 180 / Math.PI).ToString();
-                                cFilter[6] = (yRaw / norm).ToString();
-                                cFilter[7] = (Math.Acos(yRaw / norm) * 180 / Math.PI).ToString();
-                                cFilter[8] = (zRaw / norm).ToString();
-                                cFilter[9] = (Math.Acos(zRaw / norm) * 180 / Math.PI).ToString();
-                            }
+                //            //if (norm != 0)
+                //            //{
+                //            //    acc[3] = norm.ToString().Substring(0, 6);
+                //            //    acc[4] = (xRaw / norm).ToString().Substring(0, 6);
+                //            //    acc[5] = (Math.Acos(xRaw / norm) * 180 / Math.PI).ToString().Substring(0, 6);
+                //            //    acc[6] = (yRaw / norm).ToString().Substring(0, 6);
+                //            //    acc[7] = (Math.Acos(yRaw / norm) * 180 / Math.PI).ToString().Substring(0, 6);
+                //            //    acc[8] = (zRaw / norm).ToString().Substring(0, 6);
+                //            //    acc[9] = (Math.Acos(zRaw / norm) * 180 / Math.PI).ToString().Substring(0, 6);
+                //            //}
+                //        }
+                //        else if (i==2)  // compFilter
+                //        {
+                //            xRaw = Double.Parse(cFilter[0]);
+                //            yRaw = Double.Parse(cFilter[1]);
+                //            zRaw = Double.Parse(cFilter[2]);
+                //            norm = 100*Math.Sqrt(xRaw * xRaw/10000 + yRaw * yRaw/10000 + zRaw * zRaw/10000);
+                //            //if (norm > 8500 || norm < 8000)
+                //            //{
+                //            //    Console.WriteLine("Cx = " + xRaw);
+                //            //    Console.WriteLine("Cy = " + yRaw);
+                //            //    Console.WriteLine("Cz = " + zRaw);
+                //            //    Console.WriteLine("norm = " + norm);
+                //            //}
+                //            if (norm != 0)
+                //            {
+                //                cFilter[3] = norm.ToString();
+                //                cFilter[4] = (xRaw / norm).ToString();
+                //                cFilter[5] = (Math.Acos(xRaw / norm) * 180 / Math.PI).ToString();
+                //                cFilter[6] = (yRaw / norm).ToString();
+                //                cFilter[7] = (Math.Acos(yRaw / norm) * 180 / Math.PI).ToString();
+                //                cFilter[8] = (zRaw / norm).ToString();
+                //                cFilter[9] = (Math.Acos(zRaw / norm) * 180 / Math.PI).ToString();
+                //            }
 
-                        }
-                    }catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                        Console.WriteLine("acc[0]=" + acc[0]);
-                        Console.WriteLine("acc[1]=" + acc[1]);
-                        Console.WriteLine("acc[2]=" + acc[2]);
-                        Console.WriteLine("gyro[0]=" + gyro[0]);
-                        Console.WriteLine("gyro[0]=" + gyro[1]);
-                        Console.WriteLine("gyro[0]=" + gyro[2]);
-                        Console.WriteLine("cFilter[0]=" + cFilter[0]);
-                        Console.WriteLine("cFilter[0]=" + cFilter[1]);
-                        Console.WriteLine("cFilter[0]=" + cFilter[2]);
+                //        }
+                //    }catch (Exception e)
+                //    {
+                //        Console.WriteLine(e);
+                //        Console.WriteLine("acc[0]=" + acc[0]);
+                //        Console.WriteLine("acc[1]=" + acc[1]);
+                //        Console.WriteLine("acc[2]=" + acc[2]);
+                //        Console.WriteLine("gyro[0]=" + gyro[0]);
+                //        Console.WriteLine("gyro[0]=" + gyro[1]);
+                //        Console.WriteLine("gyro[0]=" + gyro[2]);
+                //        Console.WriteLine("cFilter[0]=" + cFilter[0]);
+                //        Console.WriteLine("cFilter[0]=" + cFilter[1]);
+                //        Console.WriteLine("cFilter[0]=" + cFilter[2]);
 
-                    }
+                //    }
 
-                }
+                //}
                 #endregion
 
                 #region for collection mode
@@ -790,6 +824,11 @@ namespace SerialMonitorTest03.ControllerFolder
                     {
                         this._data.motor[i].Add(motor[i]);
                     }
+                    for (int i = 0; i < 3; i++)
+                    {
+                        this._data.mag[i].Add(mag[i]);
+                        //Console.WriteLine("added" + mag[i]);
+                    }
                     this._numberOfDataGathered++;
                 }
                 else
@@ -803,14 +842,32 @@ namespace SerialMonitorTest03.ControllerFolder
 
                 this._main.Dispatcher.Invoke(() =>
                 {
-                    for (int i = 0; i < 10; i++)
+                    // gyro update
+                    //for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 3; i++)
                     {
                         this._main.gyro[i].Text = gyro[i];
                     }
-                    for (int i = 0; i < 10; i++)
+
+                    // acc update
+                    //for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 3; i++)    
                     {
+                        if (acc[i].Equals("0"))
+                        {
+                            Console.WriteLine(instreamGlobalVar);
+                            Console.WriteLine();
+                        }
                         this._main.acc[i].Text = acc[i];
                     }
+
+                    // magnetometer update
+                    this._main.txtHeadingX.Text = mag[0];
+                    this._main.txtHeadingY.Text = mag[1];
+                    this._main.txtHeadingZ.Text = mag[2];
+
+
+                    // comp. filter update
                     for (int i = 0; i < 10; i++)
                     {
                         if (!cFilter[i].Equals("0"))
@@ -824,6 +881,8 @@ namespace SerialMonitorTest03.ControllerFolder
                         }
                     }
 
+
+                    //motor update
                     if (!motor[0].Equals("0"))
                     {
                         this._main.txtMotor1.Text = motor[0];

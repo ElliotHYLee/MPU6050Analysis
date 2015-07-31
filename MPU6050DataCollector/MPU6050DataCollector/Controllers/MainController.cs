@@ -135,7 +135,7 @@ namespace MPU6050DataCollector.Controllers
             }
 
             Excel.Workbook xlBook;
-            Excel.Worksheet[] sheet = new Excel.Worksheet[3];
+            Excel.Worksheet[] sheet = new Excel.Worksheet[4];
             object misValue = System.Reflection.Missing.Value;
 
             xlBook = xlFile.Workbooks.Add(misValue);
@@ -207,6 +207,22 @@ namespace MPU6050DataCollector.Controllers
                     sheet[2].Cells[j + 2, i + 1] = temp[j];
                 }
             }
+            // sheet three - magnetometer
+            sheet[3] = (Excel.Worksheet)xlBook.Worksheets.Add();
+            sheet[3].Name = (string)"Magnetometer";
+            sheet[3].Cells[1, 1] = "MagX";
+            sheet[3].Cells[1, 2] = "MagY";
+            sheet[3].Cells[1, 3] = "MagZ";
+            for (int i = 0; i < 3; i++)
+            {
+                List<string> temp = this._data.mag[i];
+                for (int j = 0; j < innerIteration; j++)
+                {
+                    sheet[3].Cells[j + 2, i + 1] = temp[j];
+                    //Console.WriteLine(temp[j] + " is added,");
+                }
+            }
+
 
 
             xlBook.SaveAs(this._main.lblAddress.Content + this._main.txtFileName.Text);
