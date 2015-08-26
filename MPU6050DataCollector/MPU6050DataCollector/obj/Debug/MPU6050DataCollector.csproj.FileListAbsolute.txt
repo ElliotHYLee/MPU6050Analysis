@@ -46,4 +46,6 @@ C:\Users\Hongyun\Documents\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050Da
 D:\Github\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\PIDMonitor.baml
 D:\Github\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\PIDMonitor.g.cs
 =======
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\PIDMonitor.baml
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\PIDMonitor.g.cs
 >>>>>>> origin/master
