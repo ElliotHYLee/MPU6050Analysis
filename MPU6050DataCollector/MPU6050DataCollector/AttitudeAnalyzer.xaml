@@ -78,8 +78,8 @@
                     </Slider>
                     <Button Name="btnIncreaseAll" Content="Increase All" HorizontalAlignment="Left" Margin="502,14,0,0" VerticalAlignment="Top" Width="70" Click="btnIncreaseAll_Click"/>
                     <Button Name="btnDecreaseAll" Content="Decrease All" HorizontalAlignment="Left" Margin="168,14,0,0" VerticalAlignment="Top" Width="70" Click="btnDecreaseAll_Click"/>
-                    <TextBox Name ="txtDecraseCalInterval" HorizontalAlignment="Left" Height="20" Margin="168,39,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="70"/>
-                    <TextBox Name ="txtIncraseCalInterval" HorizontalAlignment="Left" Height="20" Margin="502,39,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="70" RenderTransformOrigin="1.057,-1.6"/>
+                    <TextBox Name ="txtDecraseCalInterval" HorizontalAlignment="Left" Height="20" Margin="168,39,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="70"/>
+                    <TextBox Name ="txtIncraseCalInterval" HorizontalAlignment="Left" Height="20" Margin="502,39,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="70" RenderTransformOrigin="1.057,-1.6"/>
                     <Button Name="btnStop" Content="Idle Mode" HorizontalAlignment="Left" Margin="380,10,0,0" VerticalAlignment="Top" Width="80" Height="27" Click="btnStop_Click" Background="Red"/>
                     <Button Name="btnIncreaseMotor1By" Content="UpAs" HorizontalAlignment="Left" Margin="539,64,0,0" VerticalAlignment="Top" Width="33" Height="20" Click="btnIncreaseMotor1By_Click" />
                     <Button Name="btnIncreaseMotor2By" Content="UpAs" HorizontalAlignment="Left" Margin="539,106,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor2By_Click" />
