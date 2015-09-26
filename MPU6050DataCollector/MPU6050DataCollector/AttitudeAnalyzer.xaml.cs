@@ -199,6 +199,17 @@ namespace MPU6050DataCollector
         {
             this._ctrl.increase(4, this.txtMotor4.Text, 1);
         }
+        private void btnIncreaseMotor5_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.increase(5, this.txtMotor5.Text, 1);
+        }
+
+        private void btnIncreaseMotor6_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.increase(6, this.txtMotor6.Text, 1);
+        }
+
+
 
         private void btnDecreaseMotor1_Click(object sender, RoutedEventArgs e)
         {
@@ -218,6 +229,14 @@ namespace MPU6050DataCollector
         private void btnDecreaseMotor4_Click(object sender, RoutedEventArgs e)
         {
             this._ctrl.decrease(4, this.txtMotor4.Text, 1);
+        }
+        private void btnDecreaseMotor5_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.decrease(5, this.txtMotor5.Text, 1);
+        }
+        private void btnDecreaseMotor6_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.decrease(6, this.txtMotor6.Text, 1);
         }
 
         private void btnGetPidConst_Click(object sender, RoutedEventArgs e)
@@ -260,6 +279,23 @@ namespace MPU6050DataCollector
             this._ctrl.decrease(4, this.txtMotor4.Text, int.Parse(this.txtDecraseCalInterval.Text));
         }
 
+
+
+        private void btnDecreaseMotor5By_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.decrease(5, this.txtMotor5.Text, int.Parse(this.txtDecraseCalInterval.Text));
+        }
+
+      
+
+        private void btnDecreaseMotor6By_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.decrease(6, this.txtMotor6.Text, int.Parse(this.txtDecraseCalInterval.Text));
+        }
+
+
+
+
         private void btnIncreaseMotor1By_Click(object sender, RoutedEventArgs e)
         {
             this._ctrl.increase(1, this.txtMotor1.Text, int.Parse(this.txtIncraseCalInterval.Text));
@@ -277,52 +313,24 @@ namespace MPU6050DataCollector
             this._ctrl.increase(4, this.txtMotor4.Text, int.Parse(this.txtIncraseCalInterval.Text));
         }
 
-
+        private void btnIncreaseMotor5By_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.increase(5, this.txtMotor5.Text, int.Parse(this.txtIncraseCalInterval.Text));
+        }
+        private void btnIncreaseMotor6By_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.increase(6, this.txtMotor6.Text, int.Parse(this.txtIncraseCalInterval.Text));
+        }
 
         private void btnOpenPID_Click(object sender, RoutedEventArgs e)
         {
             this._ctrl.openPIDMonitor();
         }
 
-        private void btnDecreaseMotor5_Click(object sender, RoutedEventArgs e)
-        {
+        
 
-        }
-
-        private void btnDecreaseMotor5By_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnDecreaseMotor6_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnDecreaseMotor6By_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnIncreaseMotor5_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnIncreaseMotor5By_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnIncreaseMotor6_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnIncreaseMotor6By_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
+        
 
         private void txtMotor6_TextChanged(object sender, TextChangedEventArgs e)
         {
