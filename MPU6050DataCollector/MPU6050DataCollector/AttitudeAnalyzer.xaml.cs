@@ -381,7 +381,7 @@ namespace MPU6050DataCollector
             this._ctrl.updateThrottle(int.Parse(this.txtSetThrottle.Text));
         }
 
-<<<<<<< HEAD
+
         private void txtCRawX_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -395,11 +395,12 @@ namespace MPU6050DataCollector
             {
                 ex.GetType();
             }
-=======
+        }
+
         private void btnController_Click(object sender, RoutedEventArgs e)
         {
             this._ctrl.openJoyStick();
->>>>>>> origin/master
+
         }
 
 
