@@ -17,7 +17,8 @@ using WpfApplication1;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls;
-using System.ComponentModel; 
+using System.ComponentModel;
+
 
 namespace MPU6050DataCollector.Controllers
 {
@@ -31,6 +32,8 @@ namespace MPU6050DataCollector.Controllers
         private bool[] _pidOnOff = {false, false, false};
         public bool _pidMonitorIsOpen = false;
         internal PIDMonitor _pidMonitor= null;
+        internal JoyStickController _joyStick = null;
+        public bool _joyStickIsOpen = false;
 
         public MainController(MainWindow x, AttitudeData y)
         {
@@ -614,7 +617,6 @@ namespace MPU6050DataCollector.Controllers
                this.requestPidOnOffStatus();
                //this.requestPidConst();
 
-               
                 
             }
         }
@@ -624,6 +626,28 @@ namespace MPU6050DataCollector.Controllers
             this._pidMonitorIsOpen = false;
         }
 
+
+        public void openJoyStick()
+        {
+            if (!_joyStickIsOpen)
+            {
+                this._joyStick = new JoyStickController();
+                this._joyStick.Closing += new CancelEventHandler(closeJoyStick);
+                this._joyStickIsOpen = true;
+                this._joyStick.Show();
+
+
+                this.requestPidOnOffStatus();
+                //this.requestPidConst();
+
+
+            }
+        }
+
+        public void closeJoyStick(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this._joyStickIsOpen = false;
+        }
         public void updateThrottle(int val)
         {
             string msg = "TH" + val.ToString();
