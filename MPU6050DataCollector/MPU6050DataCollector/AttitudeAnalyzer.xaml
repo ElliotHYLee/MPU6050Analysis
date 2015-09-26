@@ -165,7 +165,7 @@
                     <TextBox x:Name="txtARawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="89,85,0,0"/>
                     <TextBox x:Name="txtARawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="227,85,0,0"/>
                     <TextBox x:Name="txtARawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="357,85,0,0"/>
-                    <TextBox x:Name="txtCRawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="89,121,0,0"/>
+                    <TextBox x:Name="txtCRawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="89,121,0,0" TextChanged="txtCRawX_TextChanged"/>
                     <TextBox x:Name="txtCRawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="227,121,0,0"/>
                     <TextBox x:Name="txtCRawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="357,121,0,0"/>
 

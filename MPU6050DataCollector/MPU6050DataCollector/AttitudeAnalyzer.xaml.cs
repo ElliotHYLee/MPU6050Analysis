@@ -381,7 +381,22 @@ namespace MPU6050DataCollector
             this._ctrl.updateThrottle(int.Parse(this.txtSetThrottle.Text));
         }
 
- 
+        private void txtCRawX_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                this._ctrl.updateAttitudeX(((TextBox)sender).Text);
+
+
+                this._ctrl.updateAttitudeY(this.txtCRawY.Text);
+            }
+            catch (Exception ex)
+            {
+                ex.GetType();
+            }
+        }
+
+
 
 
 
@@ -390,6 +405,6 @@ namespace MPU6050DataCollector
         //    this._ctrl.updateAttitude(((TextBox) sender).Text);
         //}
 
- 
+
     }
 }
