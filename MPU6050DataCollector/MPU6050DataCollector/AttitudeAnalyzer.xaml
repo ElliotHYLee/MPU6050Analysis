@@ -131,6 +131,7 @@
                     <Label Content="Set As:" HorizontalAlignment="Left" Height="28" Margin="633,76,0,0" VerticalAlignment="Top" Width="59"/>
                     <TextBox Name="txtSetThrottle" HorizontalAlignment="Left" Height="31" Margin="633,106,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="59"/>
                     <Button Name="btnSetThrottle" Content="Set" HorizontalAlignment="Left" Height="29" Margin="633,137,0,0" VerticalAlignment="Top" Width="59" Click="btnSetThrottle_Click"/>
+                    <Button Name="btnController" Content="Open Controller" HorizontalAlignment="Left" Height="26" Margin="750,22,0,0" VerticalAlignment="Top" Width="86" Click="btnController_Click"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="366" Margin="975,333,0,0" VerticalAlignment="Top" Width="194">

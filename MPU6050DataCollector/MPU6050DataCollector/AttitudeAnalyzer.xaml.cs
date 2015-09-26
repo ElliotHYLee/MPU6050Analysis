@@ -373,7 +373,12 @@ namespace MPU6050DataCollector
             this._ctrl.updateThrottle(int.Parse(this.txtSetThrottle.Text));
         }
 
- 
+        private void btnController_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.openJoyStick();
+        }
+
+
 
 
 
@@ -382,6 +387,6 @@ namespace MPU6050DataCollector
         //    this._ctrl.updateAttitude(((TextBox) sender).Text);
         //}
 
- 
+
     }
 }
