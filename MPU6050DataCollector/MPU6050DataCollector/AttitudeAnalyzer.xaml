@@ -131,7 +131,6 @@
                     <Label Content="Set As:" HorizontalAlignment="Left" Height="28" Margin="633,76,0,0" VerticalAlignment="Top" Width="59"/>
                     <TextBox Name="txtSetThrottle" HorizontalAlignment="Left" Height="31" Margin="633,106,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="59"/>
                     <Button Name="btnSetThrottle" Content="Set" HorizontalAlignment="Left" Height="29" Margin="633,137,0,0" VerticalAlignment="Top" Width="59" Click="btnSetThrottle_Click"/>
-                    <Button Name="btnController" Content="Open Controller" HorizontalAlignment="Left" Height="26" Margin="750,22,0,0" VerticalAlignment="Top" Width="86" Click="btnController_Click"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="366" Margin="975,333,0,0" VerticalAlignment="Top" Width="194">
@@ -144,7 +143,7 @@
                     <Button Name="btnPidControl" Content="PID On/Off" HorizontalAlignment="Left" Height="20" Margin="80,38,0,0" VerticalAlignment="Top" Width="90" Click="btnPidControl_Click"/>
                     <Button Name="btnMpuControl" Content="MPU On/Off" HorizontalAlignment="Left" Height="20" Margin="80,78,0,0" VerticalAlignment="Top" Width="90"/>
                     <Button Name="btnOpenPID" Content="OpenPIDMonitor" HorizontalAlignment="Left" Height="30" Margin="44,145,0,0" VerticalAlignment="Top" Width="104" Click="btnOpenPID_Click"/>
-                    <Button Name="btnJoyStick" Content="JoyStick" HorizontalAlignment="Left" Height="37" Margin="46,319,0,0" VerticalAlignment="Top" Width="102"/>
+                    <Button Name="btnJoyStick" Content="JoyStick" HorizontalAlignment="Left" Height="37" Margin="46,319,0,0" VerticalAlignment="Top" Width="102" Click="btnJoyStick_Click"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="229" Margin="45,99,0,0" VerticalAlignment="Top" Width="1124">

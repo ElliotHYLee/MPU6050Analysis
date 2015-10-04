@@ -397,10 +397,10 @@ namespace MPU6050DataCollector
             }
         }
 
-        private void btnController_Click(object sender, RoutedEventArgs e)
+
+        private void btnJoyStick_Click(object sender, RoutedEventArgs e)
         {
             this._ctrl.openJoyStick();
-
         }
 
 

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MPU6050DataCollector.Controllers;
 
 namespace MPU6050DataCollector
 {
@@ -25,15 +26,18 @@ namespace MPU6050DataCollector
         int rotationXValue = 0;
         int rotationYValue = 0;
         bool isFirst = true;
+        int oldPwm = 0;
+        int newPwm = 0;
+        internal MainController _mainCtrl;
 
-
-        public JoyStickController()
+        internal JoyStickController(MainController controller)
         {
             InitializeComponent();
             GetSticks();
             Sticks = GetSticks();
             stick1 = Sticks[0];
             isFirst = true;
+            this._mainCtrl = controller;
             //Console.WriteLine("here");
 
         }
@@ -42,10 +46,7 @@ namespace MPU6050DataCollector
         {
             Joystick[] joystick = GetSticks();
             this.timer1.Enabled = true;
-            //while (true)
-            //{
-            //    //StickHandlingLogic(stick1, 0);
-            //}
+            
         }
 
         void StickHandlingLogic(Joystick stick, int id)
@@ -88,8 +89,9 @@ namespace MPU6050DataCollector
 
             //Console.Write("thrust = " + th);
             this.txtThrustPercent.Text = th.ToString();
-            this.txtThrustPWM.Text = (1100 + (2500 - 1100) * th / 100).ToString();
-
+            this.txtThrustPWM.Text = (1101 + (2500 - 1101) * th / 100).ToString();
+            this.oldPwm = newPwm;
+            this.newPwm = (1101 + (2500 - 1101) * th / 100);
 
             //Console.WriteLine(" x = " + xValue + " y = " + yValue + " z = " + zValue + " rot x = " + rotationXValue + " rot y = " + rotationYValue + " rot Z = " + rotationZValue);
             this.txtPitch.Text = (yValue*90/100).ToString();
@@ -151,6 +153,16 @@ namespace MPU6050DataCollector
          //       StickHandlingLogic(Sticks[i], i);
          //   }
             StickHandlingLogic(stick1, 0);
+            
+            if (oldPwm != newPwm)
+            {
+                Console.WriteLine("oldPwm" + oldPwm);
+                Console.WriteLine("newPwm" + newPwm);
+                int pwm = Int32.Parse(this.txtThrustPWM.Text);
+                this._mainCtrl.updateThrottle(pwm);
+                
+            }
+            
         }
     }
 }

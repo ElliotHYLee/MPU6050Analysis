@@ -17,7 +17,7 @@
         <Label Content="yKd" HorizontalAlignment="Left" Height="27" Margin="218,95,0,0" VerticalAlignment="Top" Width="30"/>
         <TextBox Name="txtYKi" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="81" Margin="253,72,0,0"/>
         <Label Content="yKi" HorizontalAlignment="Left" Height="27" Margin="218,68,0,0" VerticalAlignment="Top" Width="30"/>
-        <Label Content="Y-Axis" HorizontalAlignment="Left" Height="27" Margin="218,10,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label Content="pitch-Axis (Y)&#xD;&#xA;" HorizontalAlignment="Left" Height="27" Margin="218,10,0,0" VerticalAlignment="Top" Width="101"/>
         <TextBox Name="txtZKp" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="81" Margin="419,41,0,0"/>
         <Label Content="zKp" HorizontalAlignment="Left" Height="27" Margin="384,37,0,0" VerticalAlignment="Top" Width="30"/>
         <TextBox Name="txtZKd" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="81" Margin="420,99,0,0"/>

@@ -630,8 +630,8 @@ namespace MPU6050DataCollector.Controllers
         public void openJoyStick()
         {
             if (!_joyStickIsOpen)
-            {
-                this._joyStick = new JoyStickController();
+            {  
+                this._joyStick = new JoyStickController(this);
                 this._joyStick.Closing += new CancelEventHandler(closeJoyStick);
                 this._joyStickIsOpen = true;
                 this._joyStick.Show();
@@ -652,6 +652,8 @@ namespace MPU6050DataCollector.Controllers
         {
             string msg = "TH" + val.ToString();
             this._usb.sendData(msg);
+            Console.WriteLine(val);
+
         }
 
 
