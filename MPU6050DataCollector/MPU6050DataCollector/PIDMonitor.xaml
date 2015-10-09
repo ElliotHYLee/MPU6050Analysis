@@ -38,8 +38,8 @@
         <TextBox Name="txtZPro" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="75" Margin="385,258,0,0"/>
         <TextBox Name="txtZDer" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="75" Margin="385,289,0,0"/>
         <TextBox Name ="txtZInt" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="75" Margin="384,320,0,0"/>
-        <Label Content="X axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="178,187,0,0"/>
-        <Label Content="Y axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="291,186,0,0"/>
+        <Label Content="Roll(X) axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="178,187,0,0"/>
+        <Label Content="Pitch(Y) axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="291,186,0,0"/>
         <Label Content="Z axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="395,186,0,0" RenderTransformOrigin="2.45,0.846"/>
         <Button Name="btnXonoff" Content="Off" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="165,218,0,0" Click="btnXonoff_Click"/>
         <Button Name="btnYonoff" Content="Off" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="276,218,0,0" Click="btnYonoff_Click"/>
