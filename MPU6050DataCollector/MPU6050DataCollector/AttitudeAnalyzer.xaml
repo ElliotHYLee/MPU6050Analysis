@@ -165,9 +165,9 @@
                     <TextBox x:Name="txtARawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="89,85,0,0"/>
                     <TextBox x:Name="txtARawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="227,85,0,0"/>
                     <TextBox x:Name="txtARawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="357,85,0,0"/>
-                    <TextBox x:Name="txtCRawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="89,121,0,0" TextChanged="txtCRawX_TextChanged"/>
-                    <TextBox x:Name="txtCRawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="227,121,0,0"/>
-                    <TextBox x:Name="txtCRawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="357,121,0,0"/>
+                    <TextBox x:Name="txtCRawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="106" Margin="89,121,0,0" TextChanged="txtCRawX_TextChanged"/>
+                    <TextBox x:Name="txtCRawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="106" Margin="227,121,0,0" TextChanged="txtCRawY_TextChanged"/>
+                    <TextBox x:Name="txtCRawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="106" Margin="357,121,0,0"/>
 
                     <TextBox x:Name="txtGNorm" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="533,49,0,0"/>
                     <TextBox x:Name="txtANorm" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="533,85,0,0"/>
@@ -217,7 +217,10 @@
                     </Border>
                     <Label Content="YZ-Plane" HorizontalAlignment="Left" Height="30" Margin="629,106,0,0" VerticalAlignment="Top" Width="66" Grid.Row="1"/>
                     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="880,21,0,0" VerticalAlignment="Top" Width="200" Grid.RowSpan="2">
-                        <Canvas x:Name="canvasHeading" HorizontalAlignment="Left" Height="200" Margin="-1" VerticalAlignment="Top" Width="200"/>
+                        <Canvas Name="canvasHeading" HorizontalAlignment="Left" Height="200" Margin="-1" VerticalAlignment="Top" Width="200">
+                            <Canvas Name="canvasHeading_indicator" Height="94" Canvas.Left="54" Canvas.Top="54" Width="92" RenderTransformOrigin="0.489,0.537"/>
+                        </Canvas>
+
                     </Border>
                     <Label Content="XY-Plane" HorizontalAlignment="Left" Height="30" Margin="956,105,0,0" VerticalAlignment="Top" Width="66" Grid.Row="1"/>
                 </Grid>

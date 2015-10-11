@@ -387,9 +387,9 @@ namespace MPU6050DataCollector
             try
             {
                 this._ctrl.updateAttitudeX(((TextBox)sender).Text);
-
-
                 this._ctrl.updateAttitudeY(this.txtCRawY.Text);
+                this._ctrl.updateAttitudeZ(this.txtCRawZ.Text);
+              
             }
             catch (Exception ex)
             {
@@ -402,6 +402,13 @@ namespace MPU6050DataCollector
         {
             this._ctrl.openJoyStick();
         }
+
+        private void txtCRawY_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+   
 
 
 

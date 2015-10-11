@@ -35,6 +35,8 @@ namespace MPU6050DataCollector.Controllers
         internal JoyStickController _joyStick = null;
         public bool _joyStickIsOpen = false;
 
+        private ImageBrush bg3;
+
         public MainController(MainWindow x, AttitudeData y)
         {
             this._main = x;
@@ -527,6 +529,10 @@ namespace MPU6050DataCollector.Controllers
             bg2.ImageSource = new BitmapImage(new Uri(AbsAddress.getFolderAddr("Resource") + "HeadingWeel.bmp"));
             this._main.canvasHeading.Background = bg2;
 
+            bg3 = new ImageBrush();
+            bg3.ImageSource = new BitmapImage(new Uri(AbsAddress.getFolderAddr("Resource") + "HeadingIndicator_Aircraft.bmp"));
+            this._main.canvasHeading_indicator.Background = bg3;
+
             this.lineX = new LineAttitude(this._main.canvasAttitudeX);
             this.lineY = new LineAttitude(this._main.canvasAttitudeY);
             this.lineZ = new LineAttitude(this._main.canvasHeading);
@@ -552,6 +558,17 @@ namespace MPU6050DataCollector.Controllers
             this._main.canvasAttitudeY.Children.Clear();
             this._main.canvasAttitudeY.Children.Add(lineY.getLine(angle));
             //Console.WriteLine("deg: " + deg);
+        }
+
+        internal void updateAttitudeZ(string deg)
+        {
+            double rotationAngle = Double.Parse(deg);
+            rotationAngle /= 100;
+            var transform = Matrix.Identity;
+            transform.RotateAt(rotationAngle, 0.5, 0.5);
+            bg3.RelativeTransform = new MatrixTransform(transform);
+
+            this._main.canvasHeading_indicator.Background = bg3;
         }
 
         public void updateSlider()
