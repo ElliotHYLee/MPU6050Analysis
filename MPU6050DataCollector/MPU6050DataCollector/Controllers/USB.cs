@@ -872,7 +872,10 @@ namespace SerialMonitorTest03.ControllerFolder
                     {
                         if (!cFilter[i].Equals("0"))
                         {
-                            this._main.cFilter[i].Text = cFilter[i];
+                            double temp = Double.Parse(cFilter[i]);
+                            temp = temp / 100.00;
+
+                            this._main.cFilter[i].Text = temp.ToString();
 
                         }
                         else

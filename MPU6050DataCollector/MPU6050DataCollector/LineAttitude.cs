@@ -26,7 +26,7 @@ namespace MPU6050DataCollector
 
         public Line getLine(double x)
         {
-            double angle = x/100; // - 90;
+            double angle = x;///100; // - 90;
             double origin = this.canvasWidth / 2;
             this.line.Visibility = System.Windows.Visibility.Visible;
             this.line.Stroke = System.Windows.Media.Brushes.Black;

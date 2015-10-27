@@ -563,7 +563,7 @@ namespace MPU6050DataCollector.Controllers
         internal void updateAttitudeZ(string deg)
         {
             double rotationAngle = Double.Parse(deg);
-            rotationAngle /= 100;
+            //rotationAngle /= 100;
             var transform = Matrix.Identity;
             transform.RotateAt(rotationAngle, 0.5, 0.5);
             bg3.RelativeTransform = new MatrixTransform(transform);
