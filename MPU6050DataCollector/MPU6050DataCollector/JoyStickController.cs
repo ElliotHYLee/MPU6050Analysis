@@ -28,6 +28,17 @@ namespace MPU6050DataCollector
         bool isFirst = true;
         int oldPwm = 0;
         int newPwm = 0;
+
+        double oldPitch = 0;
+        double newPitch = 0;
+
+        double oldRoll = 0;
+        double newRoll = 0;
+
+        double oldYaw = 0;
+        double newYaw = 0;
+
+
         internal MainController _mainCtrl;
 
         internal JoyStickController(MainController controller)
@@ -94,9 +105,34 @@ namespace MPU6050DataCollector
             this.newPwm = (1101 + (2500 - 1101) * th / 100);
 
             //Console.WriteLine(" x = " + xValue + " y = " + yValue + " z = " + zValue + " rot x = " + rotationXValue + " rot y = " + rotationYValue + " rot Z = " + rotationZValue);
-            this.txtPitch.Text = (yValue*90/100).ToString();
-            this.txtRoll.Text = (xValue * 90 / 100).ToString();
-            this.txtYaw.Text = (rotationZValue * 50 / 100).ToString();
+
+            double pitchMaxAngle = 20; //3 degree
+            double rollMaxAngle = 20;
+            double yawMaxAgnle = 90; //90 degree
+
+            oldPitch = newPitch;
+            oldRoll = newRoll;
+            oldYaw = newYaw;
+
+
+
+            double pitch = (yValue* pitchMaxAngle / 100);
+            double roll = (xValue * rollMaxAngle / 100);
+            double yaw = (rotationZValue * yawMaxAgnle / 100);
+
+            newPitch = pitch;
+            newRoll = roll;
+            newYaw = yaw;
+            //send
+            this._mainCtrl.updateRefAttPitch(pitch);
+            this._mainCtrl.updateRefAttRoll(roll);
+            this._mainCtrl.updateRefAttYaw(yaw);
+
+            // update window
+            this.txtPitch.Text = pitch.ToString();
+            this.txtRoll.Text = roll.ToString();
+            this.txtYaw.Text = yaw.ToString();
+
 
 
             bool[] buttons = state.GetButtons(); // Stores the number of each button on the gamepad into the bool[] butons.
@@ -162,7 +198,51 @@ namespace MPU6050DataCollector
                 this._mainCtrl.updateThrottle(pwm);
                 
             }
+
+
+            // send the msg to MCU
             
+
+            /*
+            if (oldPitch != newPitch)
+            {
+                this._mainCtrl.updateRefAttPitch(newPitch);
+                if (newPitch == 0) 
+                {
+                    this._mainCtrl.updateRefAttPitch(newPitch);
+                    this._mainCtrl.updateRefAttPitch(newPitch);
+                    this._mainCtrl.updateRefAttPitch(newPitch);
+                }
+            }
+
+            if (oldRoll != newRoll)
+            {
+                this._mainCtrl.updateRefAttRoll(newRoll);
+                if (newRoll == 0)
+                {
+                    this._mainCtrl.updateRefAttRoll(newRoll);
+                    this._mainCtrl.updateRefAttRoll(newRoll);
+                    this._mainCtrl.updateRefAttRoll(newRoll);
+                }
+            }
+
+            if (oldYaw != newYaw)
+            {
+                this._mainCtrl.updateRefAttYaw(newYaw);
+                if (newYaw == 0)
+                {
+                    this._mainCtrl.updateRefAttYaw(newYaw);
+                    this._mainCtrl.updateRefAttYaw(newYaw);
+                    this._mainCtrl.updateRefAttYaw(newYaw);
+                }
+
+            }
+
+           */ 
+
+
         }
+
+
     }
 }

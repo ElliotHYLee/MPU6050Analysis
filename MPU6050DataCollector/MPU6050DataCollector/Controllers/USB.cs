@@ -239,8 +239,12 @@ namespace SerialMonitorTest03.ControllerFolder
                         setInfoTypes.Add(infoType);
                     }
 
-                    // check what type of information it is
-                    if (infoType.Equals("g"))
+                // check what type of information it is
+                if (infoType.Equals('r'))
+                { }
+                        
+
+                if (infoType.Equals("g"))
                     {
                         #region parse gyro
                         // get direction of info (x,y,z)
@@ -944,7 +948,7 @@ namespace SerialMonitorTest03.ControllerFolder
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Check usb connection");
+                    Console.WriteLine("Check usb connection");
                     ex.GetType();
                 }
                 

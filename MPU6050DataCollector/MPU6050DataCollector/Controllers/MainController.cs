@@ -673,7 +673,155 @@ namespace MPU6050DataCollector.Controllers
 
         }
 
+        public void updateRefAttPitch(double p)
+        {
+            int pitch = (int)( p * 100);
+            
 
+            String msg1 = "RA";
+            
+
+            if (pitch >= 0)
+            {
+                msg1 = msg1 + "1";
+                if (pitch<10)
+                {
+                    msg1 = msg1 + "000";
+                }
+                else if(pitch <100)
+                {
+                    msg1 = msg1 + "00";
+                }
+                else if (pitch < 1000)
+                {
+                    msg1 = msg1 + "0";
+                }
+                msg1 = msg1 + pitch.ToString();
+            }
+            else if(pitch < 0)
+            {
+                msg1 = msg1 + "2";
+                if (pitch > -10)
+                {
+                    msg1 = msg1 + "000";
+                }
+                else if (pitch > -100)
+                {
+                    msg1 = msg1 + "00";
+                }
+                else if (pitch > -1000)
+                {
+                    msg1 = msg1 + "0";
+                }
+                msg1 = msg1 + (-pitch).ToString();
+            }
+
+            
+            this._usb.sendData(msg1);
+            
+            Console.WriteLine(msg1);
+
+        }
+
+        public void updateRefAttRoll( double r)
+        {
+            
+            int roll = (int) (r * 100);
+            
+
+            
+            String msg2 = "RA";
+
+            if (roll >= 0)
+            {
+                msg2 = msg2 + "3";
+                if (roll < 10)
+                {
+                    msg2 = msg2 + "000";
+                }
+                else if (roll < 100)
+                {
+                    msg2 = msg2 + "00";
+                }
+                else if (roll < 1000)
+                {
+                    msg2 = msg2 + "0";
+                }
+                msg2 = msg2 + roll.ToString();
+            }
+            else if (roll < 0)
+            {
+                msg2 = msg2 + "4";
+                if (roll > -10)
+                {
+                    msg2 = msg2 + "000";
+                }
+                else if (roll > -100)
+                {
+                    msg2 = msg2 + "00";
+                }
+                else if (roll > -1000)
+                {
+                    msg2 = msg2 + "0";
+                }
+                msg2 = msg2 + (-roll).ToString();
+
+                
+            }
+
+
+            this._usb.sendData(msg2);
+            Console.WriteLine(msg2);
+
+
+        }
+
+        public void updateRefAttYaw(double y)
+        {
+            int yaw = (int) (y * 100);
+
+            String msg3 = "RA";
+
+
+            if (yaw >= 0)
+            {
+                msg3 = msg3 + "5";
+                if (yaw < 10)
+                {
+                    msg3 = msg3 + "000";
+                }
+                else if (yaw < 100)
+                {
+                    msg3 = msg3 + "00";
+                }
+                else if (yaw < 1000)
+                {
+                    msg3 = msg3 + "0";
+                }
+                msg3 = msg3 + yaw.ToString();
+            }
+            else if (yaw < 0)
+            {
+                msg3 = msg3 + "6";
+                if (yaw > -10)
+                {
+                    msg3 = msg3 + "000";
+                }
+                else if (yaw > -100)
+                {
+                    msg3 = msg3 + "00";
+                }
+                else if (yaw > -1000)
+                {
+                    msg3 = msg3 + "0";
+                }
+                msg3 = msg3 + (-yaw).ToString();
+            }
+
+            this._usb.sendData(msg3);
+            Console.WriteLine(msg3);
+
+        }
 
     }
 }
