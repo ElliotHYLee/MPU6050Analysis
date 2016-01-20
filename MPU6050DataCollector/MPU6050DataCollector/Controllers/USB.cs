@@ -216,7 +216,7 @@ namespace SerialMonitorTest03.ControllerFolder
                 string[] cFilter = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
                 string[] motor = { "0", "0", "0", "0", "0", "0" };
                 string[] mag = { "0", "0", "0" };
-
+                string distanceToGround = "0";
 
                 #endregion
 
@@ -520,12 +520,22 @@ namespace SerialMonitorTest03.ControllerFolder
                         }
                         #endregion
                     }
-
+                if (infoType.Equals("d")) // pid calculation
+                {
+                    #region distance info
+                    if (listTokens[i].Substring(1, 1).Equals("g"))
+                    {
+                        distanceToGround = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                    }
+                    #endregion
                 }
+
+
+            }
                 #endregion
 
                 #region update information
-                this.updateMain(gyro, acc, cFilter, motor, mag);
+                this.updateMain(gyro, acc, cFilter, motor, mag, distanceToGround);
                 #endregion
 
                 #region update monitors for information type
@@ -552,7 +562,7 @@ namespace SerialMonitorTest03.ControllerFolder
                          this._mainCtrl._pidMonitor.txtZDer.Text = pidDer[2];
                          this._mainCtrl._pidMonitor.txtZInt.Text = pidInt[2];
                          this._mainCtrl._pidMonitor.txtZOutput.Text = pidOutput[2];
-
+                         
                      });
                 }
                 #endregion
@@ -719,7 +729,7 @@ namespace SerialMonitorTest03.ControllerFolder
                 }
             }
 
-            private void updateMain(string[] gyro, string[] acc, string[] cFilter, string[] motor, string[] mag)
+            private void updateMain(string[] gyro, string[] acc, string[] cFilter, string[] motor, string[] mag, string distanceToGround)
             {
 
                 #region for loop calculating attitudes
@@ -846,6 +856,10 @@ namespace SerialMonitorTest03.ControllerFolder
 
                 this._main.Dispatcher.Invoke(() =>
                 {
+                    //distance to ground
+                    this._main.txtDist2Gnd.Text = distanceToGround;
+
+
                     // gyro update
                     //for (int i = 0; i < 10; i++)
                     for (int i = 0; i < 3; i++)
