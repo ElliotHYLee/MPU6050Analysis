@@ -857,7 +857,11 @@ namespace SerialMonitorTest03.ControllerFolder
                 this._main.Dispatcher.Invoke(() =>
                 {
                     //distance to ground
-                    this._main.txtDist2Gnd.Text = distanceToGround;
+                    if (!distanceToGround.Equals("0"))
+                    {
+                        this._main.txtDist2Gnd.Text = distanceToGround;
+                    }
+                    
 
 
                     // gyro update

@@ -201,7 +201,7 @@
                     <TextBox x:Name="txtCtrlRoll" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="89,192,0,0"/>
                     <TextBox x:Name="txtCtrlPitch" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="227,192,0,0"/>
                     <TextBox x:Name="txtCtrlYaw" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="357,192,0,0"/>
-                    <Label Name="label" Content="Dist2Gnd" HorizontalAlignment="Left" Height="23" Margin="533,159,0,0" VerticalAlignment="Top" Width="60"/>
+                    <Label Name="label" Content="Dist2Gnd (mm)" HorizontalAlignment="Left" Height="23" Margin="533,159,0,0" VerticalAlignment="Top" Width="106"/>
                     <TextBox Name="txtDist2Gnd" HorizontalAlignment="Left" Height="28" Margin="533,187,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115"/>
                 </Grid>
             </Border>

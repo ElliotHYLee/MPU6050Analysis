@@ -37,7 +37,7 @@ namespace MPU6050DataCollector
 
         double oldYaw = 0;
         double newYaw = 0;
-
+        JoystickState state;
 
         internal MainController _mainCtrl;
 
@@ -50,6 +50,7 @@ namespace MPU6050DataCollector
             isFirst = true;
             this._mainCtrl = controller;
             //Console.WriteLine("here");
+            state = new JoystickState();
 
         }
 
@@ -64,7 +65,7 @@ namespace MPU6050DataCollector
         {
             //Console.WriteLine("here2");
             // Creates an object from the class JoystickState.
-            JoystickState state = new JoystickState();
+            
 
             state = stick.GetCurrentState(); //Gets the state of the joystick
             //Console.WriteLine(state);
