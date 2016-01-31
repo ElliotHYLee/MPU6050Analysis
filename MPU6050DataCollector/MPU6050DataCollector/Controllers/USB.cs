@@ -217,10 +217,10 @@ namespace SerialMonitorTest03.ControllerFolder
                 string[] motor = { "0", "0", "0", "0", "0", "0" };
                 string[] mag = { "0", "0", "0" };
                 string distanceToGround = "0";
+                string[] localCoord = { "0", "0", "0" };
+            #endregion
 
-                #endregion
-
-                #region parsing tokens
+            #region parsing tokens
 
 
                 string[] pidPro = { "", "", "" };
@@ -244,7 +244,7 @@ namespace SerialMonitorTest03.ControllerFolder
                 { }
                         
 
-                if (infoType.Equals("g"))
+                    if (infoType.Equals("g"))
                     {
                         #region parse gyro
                         // get direction of info (x,y,z)
@@ -520,22 +520,41 @@ namespace SerialMonitorTest03.ControllerFolder
                         }
                         #endregion
                     }
-                if (infoType.Equals("d")) // pid calculation
-                {
-                    #region distance info
-                    if (listTokens[i].Substring(1, 1).Equals("g"))
+                    if (infoType.Equals("d")) // pid calculation
                     {
-                        distanceToGround = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        #region distance info
+                        if (listTokens[i].Substring(1, 1).Equals("g"))
+                        {
+                            distanceToGround = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                        }
+                        #endregion
                     }
-                    #endregion
-                }
+                    if (infoType.Equals("l"))
+                    {
+                        #region parse localCoord
+                        // get direction of info (x,y,z)
+                        infoDir = listTokens[i].Substring(1, 1);
+                        switch (infoDir)
+                        {
+                            case "x":
+                                localCoord[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "y":
+                                localCoord[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                            case "z":
+                                localCoord[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                break;
+                        }
+                        #endregion
+                    }
 
 
             }
                 #endregion
 
                 #region update information
-                this.updateMain(gyro, acc, cFilter, motor, mag, distanceToGround);
+                this.updateMain(gyro, acc, cFilter, motor, mag, distanceToGround, localCoord);
                 #endregion
 
                 #region update monitors for information type
@@ -729,7 +748,7 @@ namespace SerialMonitorTest03.ControllerFolder
                 }
             }
 
-            private void updateMain(string[] gyro, string[] acc, string[] cFilter, string[] motor, string[] mag, string distanceToGround)
+            private void updateMain(string[] gyro, string[] acc, string[] cFilter, string[] motor, string[] mag, string distanceToGround, string[] localCoord)
             {
 
                 #region for loop calculating attitudes
@@ -861,6 +880,11 @@ namespace SerialMonitorTest03.ControllerFolder
                     {
                         this._main.txtDist2Gnd.Text = distanceToGround;
                     }
+                    // localCord update
+
+                    this._main.txtLocalCoordX.Text = localCoord[0];
+                    this._main.txtLocalCoordY.Text = localCoord[1];
+                    this._main.txtLocalCoordZ.Text = localCoord[2];
                     
 
 
