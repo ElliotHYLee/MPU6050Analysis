@@ -881,10 +881,9 @@ namespace SerialMonitorTest03.ControllerFolder
                         this._main.txtDist2Gnd.Text = distanceToGround;
                     }
                     // localCord update
-
-                    this._main.txtLocalCoordX.Text = localCoord[0];
-                    this._main.txtLocalCoordY.Text = localCoord[1];
-                    this._main.txtLocalCoordZ.Text = localCoord[2];
+                    if (!localCoord[0].Equals("0")) this._main.txtLocalCoordX.Text = localCoord[0];
+                    if (!localCoord[1].Equals("0")) this._main.txtLocalCoordY.Text = localCoord[1];
+                    if (!localCoord[2].Equals("0")) this._main.txtLocalCoordZ.Text = localCoord[2];
                     
 
 
