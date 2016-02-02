@@ -153,7 +153,7 @@
                     <Label Content="Z-Raw" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="357,17,0,0" Width="106"/>
                     <Label Content="Gyro" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,45,0,0" Width="72" Height="32"/>
                     <Label Content="Acc" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,81,0,0" Width="72" Height="32"/>
-                    <Label Content="CompFilter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,117,0,0" Width="72" Height="32"/>
+                    <Label Content="CompFilter(deg)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-10,121,0,0" Width="99" Height="32"/>
                     <Label Content="X-DirCos / Degree" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="708,17,0,0" Width="106"/>
                     <Label Content="Y-DirCos / Degree" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="846,17,0,0" Width="106"/>
                     <Label Content="Z-DirCos / Degree" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="976,17,0,0" Width="106"/>
@@ -193,7 +193,7 @@
                     <TextBox x:Name="txtADegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1029,85,0,0"/>
                     <TextBox x:Name="txtCDirCosZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="976,121,0,0"/>
                     <TextBox x:Name="txtCDegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1029,121,0,0"/>
-                    <Label Content="Heading" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,159,0,0" Width="72" Height="32"/>
+                    <Label Content="Heading(deg)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,159,0,0" Width="84" Height="32"/>
                     <TextBox Name="txtHeadingX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="89,159,0,0"/>
                     <TextBox Name="txtHeadingY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="227,159,0,0"/>
                     <TextBox Name="txtHeadingZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="357,159,0,0"/>
