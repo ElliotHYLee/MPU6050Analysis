@@ -496,6 +496,17 @@ namespace MPU6050DataCollector.Controllers
             this._usb.sendData("D10002");
             Console.WriteLine("System Mode = prepare. Message sent: D10002");
         }
+        public void preTakeOffMode()
+        {
+            this._usb.sendData("D10003");
+            Console.WriteLine("System Mode = pre Take-off. Message sent: D10003");
+        }
+
+        public void takeOffMode()
+        {
+            this._usb.sendData("D10004");
+            Console.WriteLine("System Mode = take off. Message sent: D10004");
+        }
 
         public void idleMode()
         {

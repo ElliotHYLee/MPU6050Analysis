@@ -408,7 +408,17 @@ namespace MPU6050DataCollector
 
         }
 
-   
+        private void btnPreTakeOff_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.preTakeOffMode();
+        }
+
+        private void btnTakeOff_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.takeOffMode();
+        }
+
+
 
 
 
