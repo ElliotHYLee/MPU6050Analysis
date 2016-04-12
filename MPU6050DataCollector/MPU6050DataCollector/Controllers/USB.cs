@@ -339,6 +339,7 @@ namespace SerialMonitorTest03.ControllerFolder
                         {
                             case "x":
                                 mag[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                                //MessageBox.Show("asdf");
                                 break;
                             case "y":
                                 mag[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
@@ -907,9 +908,24 @@ namespace SerialMonitorTest03.ControllerFolder
                     }
 
                     // magnetometer update
+                    double x, y, z;
+                    x = double.Parse(mag[0]);
+                    y = double.Parse(mag[1]);
+                    z = double.Parse(mag[2]);
+                    x /= 172;
+                    y /= 172;
+                    z /= 172;
+
+
                     this._main.txtHeadingX.Text = mag[0];
                     this._main.txtHeadingY.Text = mag[1];
                     this._main.txtHeadingZ.Text = mag[2];
+
+                    //this._main.txtHeadingX.Text = x.ToString();
+                    //this._main.txtHeadingY.Text = y.ToString();
+                    //this._main.txtHeadingZ.Text = z.ToString();
+                    double head = Math.Atan2(double.Parse(mag[1]), double.Parse(mag[0]))*180/Math.PI;
+                    this._main.txtHeading.Text = head.ToString();
 
 
                     // comp. filter update

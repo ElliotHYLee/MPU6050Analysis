@@ -237,6 +237,7 @@
                     <Label Content="XY-Plane" HorizontalAlignment="Left" Height="30" Margin="956,105,0,0" VerticalAlignment="Top" Width="66" Grid.Row="1"/>
                 </Grid>
             </Border>
+            <TextBox Name="txtHeading" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="84" Margin="544,260,0,0"/>
 
 
 
