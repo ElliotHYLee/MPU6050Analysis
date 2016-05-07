@@ -39,6 +39,16 @@ namespace SerialMonitorTest03.ControllerFolder
         private int _numberOfDataGathered;
         private string[] pid = { "e", "e", "e", "e", "e", "e", "e", "e", "e" };
 
+        string[] gyro = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
+        string[] acc = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
+        string[] cFilter = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
+        string[] motor = { "0", "0", "0", "0", "0", "0" };
+        string[] mag = { "0", "0", "0" };
+        string distanceToGround = "0";
+        string[] localCoord = { "0", "0", "0" };
+        string[] ctrlReference = { "0", "0", "0" };
+
+
         private string[] throttle = new string[3];
         private bool updatePidConst = false;
         private bool updatePidOnOffStatus = false;
@@ -205,19 +215,20 @@ namespace SerialMonitorTest03.ControllerFolder
                 string infoType = "";
                 string infoDir = "";
 
-                string[] gyro = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
-                string[] acc = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
-                string[] cFilter = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
-                string[] motor = { "0", "0", "0", "0", "0", "0" };
-                string[] mag = { "0", "0", "0" };
-                string distanceToGround = "0";
-                string[] localCoord = { "0", "0", "0" };
+                //string[] gyro = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
+                //string[] acc = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
+                //string[] cFilter = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
+                //string[] motor = { "0", "0", "0", "0", "0", "0" };
+                //string[] mag = { "0", "0", "0" };
+                //string distanceToGround = "0";
+                //string[] localCoord = { "0", "0", "0" };
+                //string[] ctrlReference = { "0", "0", "0" };
             #endregion
 
             #region parsing tokens
 
 
-                string[] pidPro = { "", "", "" };
+            string[] pidPro = { "", "", "" };
                 string[] pidDer = { "", "", "" };
                 string[] pidInt = { "", "", "" };
                 string[] pidOutput = { "", "", "" };
@@ -544,12 +555,31 @@ namespace SerialMonitorTest03.ControllerFolder
                         #endregion
                     }
 
+                if (infoType.Equals("s"))
+                {
+                    #region parse localCoord
+                    // get direction of info (x,y,z)
+                    infoDir = listTokens[i].Substring(1, 1);
+                    switch (infoDir)
+                    {
+                        case "x":
+                            ctrlReference[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                            break;
+                        case "y":
+                            ctrlReference[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                            break;
+                        case "z":
+                            ctrlReference[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                            break;
+                    }
+                    #endregion
+                }
 
             }
                 #endregion
 
                 #region update information
-                this.updateMain(gyro, acc, cFilter, motor, mag, distanceToGround, localCoord);
+                this.updateMain(gyro, acc, cFilter, motor, mag, distanceToGround, localCoord, ctrlReference);
                 #endregion
 
                 #region update monitors for information type
@@ -743,7 +773,7 @@ namespace SerialMonitorTest03.ControllerFolder
                 }
             }
 
-            private void updateMain(string[] gyro, string[] acc, string[] cFilter, string[] motor, string[] mag, string distanceToGround, string[] localCoord)
+            private void updateMain(string[] gyro, string[] acc, string[] cFilter, string[] motor, string[] mag, string distanceToGround, string[] localCoord, string[] ctrlReference)
             {
 
                 #region for loop calculating attitudes
@@ -878,6 +908,13 @@ namespace SerialMonitorTest03.ControllerFolder
 
                 this._main.Dispatcher.Invoke(() =>
                 {
+                    // control reference angle
+
+                    this._main.txtCtrlRoll.Text = (Double.Parse(ctrlReference[0])/100).ToString();
+                    this._main.txtCtrlPitch.Text = (Double.Parse(ctrlReference[1]) / 100).ToString();
+                    this._main.txtCtrlYaw.Text = (Double.Parse(ctrlReference[2]) / 100).ToString();
+
+
                     //distance to ground
                     if (!distanceToGround.Equals("0"))
                     {
@@ -899,15 +936,19 @@ namespace SerialMonitorTest03.ControllerFolder
 
                     // acc update
                     //for (int i = 0; i < 10; i++)
-                    for (int i = 0; i < 3; i++)    
+                    if(!acc[0].Equals("0") && !acc[1].Equals("0") && !acc[2].Equals("0"))
                     {
-                        if (acc[i].Equals("0"))
+                        for (int i = 0; i < 3; i++)
                         {
-                            Console.WriteLine(instreamGlobalVar);
-                            Console.WriteLine();
+                            if (acc[i].Equals("0"))
+                            {
+                                Console.WriteLine(instreamGlobalVar);
+                                Console.WriteLine();
+                            }
+                            this._main.acc[i].Text = acc[i];
                         }
-                        this._main.acc[i].Text = acc[i];
                     }
+                        
 
                     // magnetometer update
                     double x, y, z;

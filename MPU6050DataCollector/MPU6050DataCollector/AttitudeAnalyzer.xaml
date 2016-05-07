@@ -144,8 +144,8 @@
                     <Label Name="lblMpuIndicator" Content="MPU ON" HorizontalAlignment="Left" Height="28" Margin="10,74,0,0" VerticalAlignment="Top" Width="66"/>
                     <Button Name="btnPidControl" Content="PID On/Off" HorizontalAlignment="Left" Height="20" Margin="80,38,0,0" VerticalAlignment="Top" Width="90" Click="btnPidControl_Click"/>
                     <Button Name="btnMpuControl" Content="MPU On/Off" HorizontalAlignment="Left" Height="20" Margin="80,78,0,0" VerticalAlignment="Top" Width="90"/>
-                    <Button Name="btnOpenPID" Content="OpenPIDMonitor" HorizontalAlignment="Left" Height="30" Margin="44,145,0,0" VerticalAlignment="Top" Width="104" Click="btnOpenPID_Click"/>
-                    <Button Name="btnJoyStick" Content="JoyStick" HorizontalAlignment="Left" Height="37" Margin="44,205,0,0" VerticalAlignment="Top" Width="102" Click="btnJoyStick_Click"/>
+                    <Button Name="btnOpenPID" Content="OpenPIDMonitor" HorizontalAlignment="Left" Height="30" Margin="10,128,0,0" VerticalAlignment="Top" Width="104" Click="btnOpenPID_Click"/>
+                    <Button Name="btnJoyStick" Content="JoyStick" HorizontalAlignment="Left" Height="37" Margin="10,163,0,0" VerticalAlignment="Top" Width="102" Click="btnJoyStick_Click"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="229" Margin="45,99,0,0" VerticalAlignment="Top" Width="1124">
@@ -156,59 +156,59 @@
                     <Label Content="Gyro" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,45,0,0" Width="72" Height="32"/>
                     <Label Content="Acc" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,81,0,0" Width="72" Height="32"/>
                     <Label Content="CompFilter(deg)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-10,121,0,0" Width="99" Height="32"/>
-                    <Label Content="X-DirCos / Degree" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="708,17,0,0" Width="106"/>
-                    <Label Content="Y-DirCos / Degree" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="846,17,0,0" Width="106"/>
-                    <Label Content="Z-DirCos / Degree" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="976,17,0,0" Width="106"/>
-                    <Label Content="Norm" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,17,0,0" Width="106"/>
+                    <Label Content="X-DirCos / Degree" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="619,17,0,0" Width="106"/>
+                    <Label Content="Y-DirCos / Degree" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="757,17,0,0" Width="106"/>
+                    <Label Content="Z-DirCos / Degree" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="887,17,0,0" Width="106"/>
+                    <Label Content="Norm" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="481,17,0,0" Width="106"/>
 
-                    <TextBox x:Name="txtGRawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="89,49,0,0"/>
-                    <TextBox x:Name="txtGRawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="227,49,0,0"/>
-                    <TextBox x:Name="txtGRawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="357,49,0,0"/>
-                    <TextBox x:Name="txtARawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="89,85,0,0"/>
-                    <TextBox x:Name="txtARawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="227,85,0,0"/>
-                    <TextBox x:Name="txtARawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="357,85,0,0"/>
+                    <TextBox x:Name="txtGRawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="89,49,0,0"/>
+                    <TextBox x:Name="txtGRawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="227,49,0,0"/>
+                    <TextBox x:Name="txtGRawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="357,49,0,0"/>
+                    <TextBox x:Name="txtARawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="89,85,0,0"/>
+                    <TextBox x:Name="txtARawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="227,85,0,0"/>
+                    <TextBox x:Name="txtARawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="357,85,0,0"/>
                     <TextBox x:Name="txtCRawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="106" Margin="89,121,0,0" TextChanged="txtCRawX_TextChanged"/>
                     <TextBox x:Name="txtCRawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="106" Margin="227,121,0,0" TextChanged="txtCRawY_TextChanged"/>
                     <TextBox x:Name="txtCRawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="106" Margin="357,121,0,0"/>
 
-                    <TextBox x:Name="txtGNorm" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="533,49,0,0"/>
-                    <TextBox x:Name="txtANorm" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="533,85,0,0"/>
-                    <TextBox x:Name="txtCNorm" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="533,121,0,0"/>
+                    <TextBox x:Name="txtGNorm" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="481,49,0,0"/>
+                    <TextBox x:Name="txtANorm" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="481,85,0,0"/>
+                    <TextBox x:Name="txtCNorm" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="481,121,0,0"/>
 
-                    <TextBox x:Name="txtGDirCosX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="708,49,0,0"/>
-                    <TextBox x:Name="txtGDegreeX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="761,49,0,0"/>
-                    <TextBox x:Name="txtADirCosX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="708,85,0,0"/>
-                    <TextBox x:Name="txtADegreeX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="761,85,0,0"/>
-                    <TextBox x:Name="txtCDirCosX"  HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="708,121,0,0"/>
-                    <TextBox x:Name="txtCDegreeX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="761,121,0,0" TextChanged="txtCDegreeX_TextChanged"/>
+                    <TextBox x:Name="txtGDirCosX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="619,49,0,0"/>
+                    <TextBox x:Name="txtGDegreeX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="672,49,0,0"/>
+                    <TextBox x:Name="txtADirCosX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="619,85,0,0"/>
+                    <TextBox x:Name="txtADegreeX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="672,85,0,0"/>
+                    <TextBox x:Name="txtCDirCosX"  HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="619,121,0,0"/>
+                    <TextBox x:Name="txtCDegreeX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="672,121,0,0" TextChanged="txtCDegreeX_TextChanged"/>
 
-                    <TextBox x:Name="txtGDirCosY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="846,49,0,0"/>
-                    <TextBox x:Name="txtGDegreeY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="899,49,0,0"/>
-                    <TextBox x:Name="txtADirCosY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="846,85,0,0"/>
-                    <TextBox x:Name="txtADegreeY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="899,85,0,0"/>
-                    <TextBox x:Name="txtCDirCosY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="846,121,0,0"/>
-                    <TextBox x:Name="txtCDegreeY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="899,121,0,0"/>
+                    <TextBox x:Name="txtGDirCosY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="757,49,0,0"/>
+                    <TextBox x:Name="txtGDegreeY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="810,49,0,0"/>
+                    <TextBox x:Name="txtADirCosY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="757,85,0,0"/>
+                    <TextBox x:Name="txtADegreeY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="810,85,0,0"/>
+                    <TextBox x:Name="txtCDirCosY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="757,121,0,0"/>
+                    <TextBox x:Name="txtCDegreeY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="810,121,0,0"/>
 
-                    <TextBox x:Name="txtGDirCosZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="976,49,0,0"/>
-                    <TextBox x:Name="txtGDegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1029,49,0,0"/>
-                    <TextBox x:Name="txtADirCosZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="976,85,0,0"/>
-                    <TextBox x:Name="txtADegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1029,85,0,0"/>
-                    <TextBox x:Name="txtCDirCosZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="976,121,0,0"/>
-                    <TextBox x:Name="txtCDegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53" Margin="1029,121,0,0"/>
+                    <TextBox x:Name="txtGDirCosZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="887,49,0,0"/>
+                    <TextBox x:Name="txtGDegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="940,49,0,0"/>
+                    <TextBox x:Name="txtADirCosZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="887,85,0,0"/>
+                    <TextBox x:Name="txtADegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="940,85,0,0"/>
+                    <TextBox x:Name="txtCDirCosZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="887,121,0,0"/>
+                    <TextBox x:Name="txtCDegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="940,121,0,0"/>
                     <Label Content="Heading(deg)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,159,0,0" Width="84" Height="32"/>
-                    <TextBox Name="txtHeadingX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="89,159,0,0"/>
-                    <TextBox Name="txtHeadingY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="227,159,0,0"/>
-                    <TextBox Name="txtHeadingZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="357,159,0,0"/>
-                    <Label Content="Control Ref" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="631,191,0,0" Width="72" Height="32"/>
-                    <TextBox x:Name="txtCtrlRoll" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="729,192,0,0"/>
-                    <TextBox x:Name="txtCtrlPitch" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="858,191,0,0"/>
-                    <TextBox x:Name="txtCtrlYaw" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="985,192,0,0"/>
-                    <Label Name="label" Content="Dist2Gnd (mm)" HorizontalAlignment="Left" Height="23" Margin="12,197,0,0" VerticalAlignment="Top" Width="106"/>
-                    <TextBox Name="txtDist2Gnd" HorizontalAlignment="Left" Height="28" Margin="123,197,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="115"/>
-                    <Label Content="Local Coord (mm)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="618,159,0,0" Width="106" Height="32"/>
-                    <TextBox x:Name="txtLocalCoordX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="729,159,0,0"/>
-                    <TextBox x:Name="txtLocalCoordY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="858,159,0,0"/>
-                    <TextBox x:Name="txtLocalCoordZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Margin="985,159,0,0"/>
+                    <TextBox Name="txtHeadingX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="89,159,0,0"/>
+                    <TextBox Name="txtHeadingY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="227,159,0,0"/>
+                    <TextBox Name="txtHeadingZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="357,159,0,0"/>
+                    <Label Content="Control Ref (deg)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="592,196,0,0" Width="106" Height="32"/>
+                    <TextBox x:Name="txtCtrlRoll" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="698,197,0,0"/>
+                    <TextBox x:Name="txtCtrlPitch" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="826,196,0,0"/>
+                    <TextBox x:Name="txtCtrlYaw" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="952,197,0,0"/>
+                    <Label Name="label" Content="Dist2Gnd (mm)" HorizontalAlignment="Left" Height="23" Margin="1008,17,0,0" VerticalAlignment="Top" Width="106"/>
+                    <TextBox Name="txtDist2Gnd" HorizontalAlignment="Left" Height="22" Margin="1008,49,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106"/>
+                    <Label Content="Local Coord (mm)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="586,159,0,0" Width="106" Height="32"/>
+                    <TextBox x:Name="txtLocalCoordX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="696,159,0,0"/>
+                    <TextBox x:Name="txtLocalCoordY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="826,159,0,0"/>
+                    <TextBox x:Name="txtLocalCoordZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="952,159,0,0"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="260" Margin="45,699,0,0" VerticalAlignment="Top" Width="1124">
@@ -237,7 +237,7 @@
                     <Label Content="XY-Plane" HorizontalAlignment="Left" Height="30" Margin="956,105,0,0" VerticalAlignment="Top" Width="66" Grid.Row="1"/>
                 </Grid>
             </Border>
-            <TextBox Name="txtHeading" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="84" Margin="544,260,0,0"/>
+            <TextBox Name="txtHeading" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="84" Margin="528,260,0,0"/>
 
 
 
