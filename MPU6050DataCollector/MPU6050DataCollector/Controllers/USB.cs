@@ -866,34 +866,30 @@ namespace SerialMonitorTest03.ControllerFolder
                 if (this._collectionMode)
                 {
                     Console.WriteLine("gathering...");
-                    
-                    if( !gyro[0].Equals("0") && !gyro[1].Equals("0") && !gyro[2].Equals("0") &&
-                        !acc[0].Equals("0") && !acc[1].Equals("0") && !acc[2].Equals("0") &&
-                        !cFilter[0].Equals("0") && !cFilter[1].Equals("0") && !cFilter[2].Equals("0") &&
-                        !mag[0].Equals("0") && !mag[1].Equals("0") && !mag[2].Equals("0")  )  
-                    {
-                        for (int i = 0; i < 10; i++)
-                        {
-                            this._data.gyro[i].Add(gyro[i]);
-                            this._data.acc[i].Add(acc[i]);
-                            this._data.cFilter[i].Add(cFilter[i]);
-                            if (i < 3)
+                   _numberOfDataGathered++;
+                    //if ( !gyro[0].Equals("0") && !gyro[1].Equals("0") && !gyro[2].Equals("0") &&
+                    //        !acc[0].Equals("0") && !acc[1].Equals("0") && !acc[2].Equals("0") &&
+                    //        !cFilter[0].Equals("0") && !cFilter[1].Equals("0") && !cFilter[2].Equals("0") &&
+                    //        !mag[0].Equals("0") && !mag[1].Equals("0") && !mag[2].Equals("0")  )  
+                    //    {
+                            for (int i = 0; i < 10; i++)
                             {
-                                this._data.mag[i].Add(mag[i]);
+                                this._data.gyro[i].Add(gyro[i]);
+                                this._data.acc[i].Add(acc[i]);
+                                this._data.cFilter[i].Add(cFilter[i]);
+                                if (i < 3)
+                                {
+                                    this._data.mag[i].Add(mag[i]);
+                                }
+                                //else
+                                //{
+                                //    this._data.gyro[i].Add("0");
+                                //    this._data.acc[i].Add("0");
+                                //    this._data.cFilter[i].Add("0");
+                                //    this._data.mag[i].Add("0");
+                                //}
                             }
-                            //else
-                            //{
-                            //    this._data.gyro[i].Add("0");
-                            //    this._data.acc[i].Add("0");
-                            //    this._data.cFilter[i].Add("0");
-                            //    this._data.mag[i].Add("0");
-                            //}
-                        }
-                        
-                            
-                        
-                        this._numberOfDataGathered++;
-                    }
+                        //}
                     
                     
                 }
