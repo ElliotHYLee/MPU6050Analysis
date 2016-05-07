@@ -164,10 +164,12 @@ namespace MPU6050DataCollector.Controllers
             for (int i = 0; i < outterIteration; i++)
             {
                 List<string> temp = this._data.gyro[i];
+               
                 for (int j = 0; j < innerIteration; j++)
                 {
                     sheet[0].Cells[j + 2, i + 1] = temp[j];
                 }
+                
             }
             // sheet two - acc
             sheet[1] = (Excel.Worksheet)xlBook.Worksheets.Add();
@@ -185,10 +187,12 @@ namespace MPU6050DataCollector.Controllers
             for (int i = 0; i < outterIteration; i++)
             {
                 List<string> temp = this._data.acc[i];
+          
                 for (int j = 0; j < innerIteration; j++)
                 {
                     sheet[1].Cells[j + 2, i + 1] = temp[j];
                 }
+                
             }
 
             // sheet three - cFilter
@@ -207,10 +211,12 @@ namespace MPU6050DataCollector.Controllers
             for (int i = 0; i < outterIteration; i++)
             {
                 List<string> temp = this._data.cFilter[i];
+                
                 for (int j = 0; j < innerIteration; j++)
                 {
                     sheet[2].Cells[j + 2, i + 1] = temp[j];
                 }
+                
             }
             // sheet three - magnetometer
             sheet[3] = (Excel.Worksheet)xlBook.Worksheets.Add();
@@ -221,11 +227,12 @@ namespace MPU6050DataCollector.Controllers
             for (int i = 0; i < 3; i++)
             {
                 List<string> temp = this._data.mag[i];
+                
                 for (int j = 0; j < innerIteration; j++)
                 {
                     sheet[3].Cells[j + 2, i + 1] = temp[j];
-                    //Console.WriteLine(temp[j] + " is added,");
                 }
+                
             }
 
 
