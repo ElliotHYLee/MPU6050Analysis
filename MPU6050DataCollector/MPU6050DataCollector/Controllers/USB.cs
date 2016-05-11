@@ -526,7 +526,7 @@ namespace SerialMonitorTest03.ControllerFolder
                         }
                         #endregion
                     }
-                    if (infoType.Equals("d")) // pid calculation
+                    if (infoType.Equals("d")) // distance 2 ground
                     {
                         #region distance info
                         if (listTokens[i].Substring(1, 1).Equals("g"))
@@ -912,10 +912,10 @@ namespace SerialMonitorTest03.ControllerFolder
 
 
                     //distance to ground
-                    if (!distanceToGround.Equals("0"))
-                    {
+                    //if (!distanceToGround.Equals("0"))
+                    //{
                         this._main.txtDist2Gnd.Text = distanceToGround;
-                    }
+                    //}
                     // localCord update
                     if (!localCoord[0].Equals("0")) this._main.txtLocalCoordX.Text = localCoord[0];
                     if (!localCoord[1].Equals("0")) this._main.txtLocalCoordY.Text = localCoord[1];
