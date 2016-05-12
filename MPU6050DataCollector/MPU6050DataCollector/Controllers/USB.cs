@@ -18,6 +18,8 @@ using MPU6050DataCollector.Controllers;
 
 namespace SerialMonitorTest03.ControllerFolder
 {
+
+
     // This class doesn't check convention
     class USB
     {
@@ -52,6 +54,13 @@ namespace SerialMonitorTest03.ControllerFolder
         private string[] throttle = new string[3];
         private bool updatePidConst = false;
         private bool updatePidOnOffStatus = false;
+
+        public string GetControlRefYaw
+        {
+            get { return ctrlReference[2]; }
+        }
+
+
 
         public USB(MainWindow x, AttitudeData y, MainController z)
         {
@@ -153,9 +162,9 @@ namespace SerialMonitorTest03.ControllerFolder
                 string inStream = (string)this._serial.ReadExisting();
                 this._serial.DiscardInBuffer();
                 this._serial.DiscardOutBuffer();
-                Console.WriteLine("---------------------");
-                Console.WriteLine(inStream);
-                Console.WriteLine("---------------------");
+                //Console.WriteLine("---------------------");
+                //Console.WriteLine(inStream);
+                //Console.WriteLine("---------------------");
 
                 //if (inStream.Contains("p"))
                 //{
@@ -195,7 +204,7 @@ namespace SerialMonitorTest03.ControllerFolder
                 }
                 catch (Exception err)
                 {
-                    Console.WriteLine(err);
+                   // Console.WriteLine(err);
                 }
             }
             #endregion
@@ -570,6 +579,7 @@ namespace SerialMonitorTest03.ControllerFolder
                             break;
                         case "z":
                             ctrlReference[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+
                             break;
                     }
                     #endregion

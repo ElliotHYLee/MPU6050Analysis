@@ -18,6 +18,9 @@ namespace MPU6050DataCollector
         SlimDX.DirectInput.Joystick stick;
         Joystick[] Sticks;
         Joystick stick1;
+
+        bool isOn;
+
         //Thumstick variables.
         int yValue = 0;
         int xValue = 0;
@@ -35,24 +38,57 @@ namespace MPU6050DataCollector
         double oldRoll = 0;
         double newRoll = 0;
 
-        double oldYaw = 0;
-        double newYaw = 0;
+        double oldYaw;
+        double newYaw;
         JoystickState state;
 
         internal MainController _mainCtrl;
 
-        internal JoyStickController(MainController controller)
+
+        static private JoyStickController _instance=null;
+
+        static public JoyStickController Instance
+        {
+            get
+            {
+                if (_instance==null) _instance = new JoyStickController();
+                return _instance;
+            }
+        }
+
+        private void close(object sender, FormClosingEventArgs e)
+        {
+            isOn = false;
+            _instance = null;
+            
+        }
+
+
+        internal JoyStickController()
         {
             InitializeComponent();
+            isOn = true;
+            this.FormClosing += close;
             GetSticks();
             Sticks = GetSticks();
             stick1 = Sticks[0];
             isFirst = true;
-            this._mainCtrl = controller;
+            
             //Console.WriteLine("here");
             state = new JoystickState();
 
+            
+            //MessageBox.Show(newYaw.ToString());
+
         }
+
+        internal void setUp(MainController controller, string defaultHeading)
+        {
+            this._mainCtrl = controller;
+            newYaw = double.Parse(defaultHeading) / 100;
+        }
+
+
 
         private void JoyStickController_Load(object sender, EventArgs e)
         {
@@ -107,13 +143,14 @@ namespace MPU6050DataCollector
 
             //Console.WriteLine(" x = " + xValue + " y = " + yValue + " z = " + zValue + " rot x = " + rotationXValue + " rot y = " + rotationYValue + " rot Z = " + rotationZValue);
 
-            double pitchMaxAngle = 20; //3 degree
-            double rollMaxAngle = 20;
-            double yawMaxAgnle = 90; //90 degree
+            double pitchMaxAngle = 4; //3 degree
+            double rollMaxAngle = 4;
+            double yawMaxAgnle = 2; //90 degree
 
             oldPitch = newPitch;
             oldRoll = newRoll;
             oldYaw = newYaw;
+
 
 
 
@@ -123,16 +160,16 @@ namespace MPU6050DataCollector
 
             newPitch = pitch;
             newRoll = roll;
-            newYaw = yaw;
+            newYaw = oldYaw + yaw;
             //send
             this._mainCtrl.updateRefAttPitch(pitch);
             this._mainCtrl.updateRefAttRoll(roll);
-            this._mainCtrl.updateRefAttYaw(yaw);
+            this._mainCtrl.updateRefAttYaw(newYaw);
 
             // update window
             this.txtPitch.Text = pitch.ToString();
             this.txtRoll.Text = roll.ToString();
-            this.txtYaw.Text = yaw.ToString();
+            this.txtYaw.Text = newYaw.ToString();
 
 
 
@@ -189,7 +226,8 @@ namespace MPU6050DataCollector
          //   {
          //       StickHandlingLogic(Sticks[i], i);
          //   }
-            StickHandlingLogic(stick1, 0);
+
+            if(isOn) StickHandlingLogic(stick1, 0);
             
             if (oldPwm != newPwm)
             {

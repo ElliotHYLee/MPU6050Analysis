@@ -90,11 +90,11 @@ namespace MPU6050DataCollector.Controllers
                 }
 
                 this._main.comboBaudRate.Items.Insert(0, 9600);
-                this._main.comboBaudRate.Items.Insert(0, 57600);
+                
                 this._main.comboBaudRate.Items.Insert(0, 115200);
-            
+                this._main.comboBaudRate.Items.Insert(0, 57600);
 
-                if (this._usb.numberOfPorts > 0)
+            if (this._usb.numberOfPorts > 0)
                 {
                 
                     this._main.comboPorts.SelectedIndex = 0;
@@ -665,14 +665,16 @@ namespace MPU6050DataCollector.Controllers
         public void openJoyStick()
         {
             if (!_joyStickIsOpen)
-            {  
-                this._joyStick = new JoyStickController(this);
+            {
+                this._joyStick = JoyStickController.Instance;//new JoyStickController(this, this._usb.GetControlRefYaw);
+
+                this._joyStick.setUp(this, this._usb.GetControlRefYaw);
                 this._joyStick.Closing += new CancelEventHandler(closeJoyStick);
                 this._joyStickIsOpen = true;
                 this._joyStick.Show();
 
 
-                this.requestPidOnOffStatus();
+                //this.requestPidOnOffStatus();
                 //this.requestPidConst();
 
 
@@ -682,6 +684,7 @@ namespace MPU6050DataCollector.Controllers
         public void closeJoyStick(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this._joyStickIsOpen = false;
+
         }
         public void updateThrottle(int val)
         {
@@ -702,15 +705,19 @@ namespace MPU6050DataCollector.Controllers
             if (pitch >= 0)
             {
                 msg1 = msg1 + "1";
-                if (pitch<10)
+                if (pitch==0)
+                {
+                    msg1 = msg1 + "0000";
+                }
+                else if (pitch<100)
                 {
                     msg1 = msg1 + "000";
                 }
-                else if(pitch <100)
+                else if(pitch <1000)
                 {
                     msg1 = msg1 + "00";
                 }
-                else if (pitch < 1000)
+                else if (pitch < 10000)
                 {
                     msg1 = msg1 + "0";
                 }
@@ -719,19 +726,24 @@ namespace MPU6050DataCollector.Controllers
             else if(pitch < 0)
             {
                 msg1 = msg1 + "2";
-                if (pitch > -10)
+                pitch = -pitch;
+                if (pitch == 0)
+                {
+                    msg1 = msg1 + "0000";
+                }
+                else if (pitch < 100)
                 {
                     msg1 = msg1 + "000";
                 }
-                else if (pitch > -100)
+                else if (pitch < 1000)
                 {
                     msg1 = msg1 + "00";
                 }
-                else if (pitch > -1000)
+                else if (pitch < 10000)
                 {
                     msg1 = msg1 + "0";
                 }
-                msg1 = msg1 + (-pitch).ToString();
+                msg1 = msg1 + (pitch).ToString();
             }
 
             
@@ -753,15 +765,19 @@ namespace MPU6050DataCollector.Controllers
             if (roll >= 0)
             {
                 msg2 = msg2 + "3";
-                if (roll < 10)
+                if (roll==0)
                 {
-                    msg2 = msg2 + "000";
+                    msg2 = msg2 + "0000";
                 }
                 else if (roll < 100)
                 {
-                    msg2 = msg2 + "00";
+                    msg2 = msg2 + "000";
                 }
                 else if (roll < 1000)
+                {
+                    msg2 = msg2 + "00";
+                }
+                else if (roll < 10000)
                 {
                     msg2 = msg2 + "0";
                 }
@@ -769,20 +785,25 @@ namespace MPU6050DataCollector.Controllers
             }
             else if (roll < 0)
             {
+                roll = -roll;
                 msg2 = msg2 + "4";
-                if (roll > -10)
+                if (roll == 0)
+                {
+                    msg2 = msg2 + "0000";
+                }
+                else if (roll < 100)
                 {
                     msg2 = msg2 + "000";
                 }
-                else if (roll > -100)
+                else if (roll < 1000)
                 {
                     msg2 = msg2 + "00";
                 }
-                else if (roll > -1000)
+                else if (roll < 10000)
                 {
                     msg2 = msg2 + "0";
                 }
-                msg2 = msg2 + (-roll).ToString();
+                msg2 = msg2 + (roll).ToString();
 
                 
             }
@@ -796,7 +817,7 @@ namespace MPU6050DataCollector.Controllers
 
         public void updateRefAttYaw(double y)
         {
-            int yaw = (int) (y * 100);
+            int yaw = (int) (y*100);
 
             String msg3 = "RA";
 
@@ -804,15 +825,19 @@ namespace MPU6050DataCollector.Controllers
             if (yaw >= 0)
             {
                 msg3 = msg3 + "5";
-                if (yaw < 10)
+                if (yaw == 0)
                 {
-                    msg3 = msg3 + "000";
+                    msg3 = msg3 + "0000";
                 }
                 else if (yaw < 100)
                 {
-                    msg3 = msg3 + "00";
+                    msg3 = msg3 + "000";
                 }
                 else if (yaw < 1000)
+                {
+                    msg3 = msg3 + "00";
+                }
+                else if (yaw < 10000)
                 {
                     msg3 = msg3 + "0";
                 }
@@ -821,19 +846,24 @@ namespace MPU6050DataCollector.Controllers
             else if (yaw < 0)
             {
                 msg3 = msg3 + "6";
-                if (yaw > -10)
+                yaw = -yaw;
+                if (yaw == 0)
+                {
+                    msg3 = msg3 + "0000";
+                }
+                else if (yaw < 100)
                 {
                     msg3 = msg3 + "000";
                 }
-                else if (yaw > -100)
+                else if (yaw < 1000)
                 {
                     msg3 = msg3 + "00";
                 }
-                else if (yaw > -1000)
+                else if (yaw < 10000)
                 {
                     msg3 = msg3 + "0";
                 }
-                msg3 = msg3 + (-yaw).ToString();
+                msg3 = msg3 + (yaw).ToString();
             }
 
             this._usb.sendData(msg3);
