@@ -917,10 +917,12 @@ namespace SerialMonitorTest03.ControllerFolder
                         this._main.txtDist2Gnd.Text = distanceToGround;
                     //}
                     // localCord update
-                    if (!localCoord[0].Equals("0")) this._main.txtLocalCoordX.Text = localCoord[0];
-                    if (!localCoord[1].Equals("0")) this._main.txtLocalCoordY.Text = localCoord[1];
-                    if (!localCoord[2].Equals("0")) this._main.txtLocalCoordZ.Text = localCoord[2];
-                    
+                    //if (!localCoord[0].Equals("0")) this._main.txtLocalCoordX.Text = localCoord[0];
+                    //if (!localCoord[1].Equals("0")) this._main.txtLocalCoordY.Text = localCoord[1];
+                    //if (!localCoord[2].Equals("0")) this._main.txtLocalCoordZ.Text = localCoord[2];
+                    this._main.txtLocalCoordX.Text = localCoord[0];
+                    this._main.txtLocalCoordY.Text = localCoord[1];
+                    this._main.txtLocalCoordZ.Text = localCoord[2];
 
 
                     // gyro update
@@ -963,8 +965,8 @@ namespace SerialMonitorTest03.ControllerFolder
                     //this._main.txtHeadingX.Text = x.ToString();
                     //this._main.txtHeadingY.Text = y.ToString();
                     //this._main.txtHeadingZ.Text = z.ToString();
-                    double head = Math.Atan2(double.Parse(mag[1]), double.Parse(mag[0]))*180/Math.PI;
-                    this._main.txtHeading.Text = head.ToString();
+                    //double head = Math.Atan2(double.Parse(mag[1]), double.Parse(mag[0]))*180/Math.PI;
+                    //this._main.txtHeading.Text = head.ToString();
 
 
                     // comp. filter update

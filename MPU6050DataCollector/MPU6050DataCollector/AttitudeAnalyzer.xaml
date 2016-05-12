@@ -223,11 +223,11 @@
                         <Canvas x:Name="canvasAttitudeX" HorizontalAlignment="Left" Height="200" Margin="-1" VerticalAlignment="Top" Width="200"/>
                     </Border>
 
-                    <Label Content="XZ-Plane" HorizontalAlignment="Left" Height="30" Margin="289,105,0,0" VerticalAlignment="Top" Width="66" Grid.Row="1"/>
+                    <Label Content="XZ-Plane (left view)" HorizontalAlignment="Left" Height="30" Margin="261,105,0,0" VerticalAlignment="Top" Width="110" Grid.Row="1"/>
                     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="570,21,0,0" VerticalAlignment="Top" Width="200" Grid.RowSpan="2">
                         <Canvas x:Name="canvasAttitudeY" HorizontalAlignment="Left" Height="200" Margin="-1,-1,0,-1" VerticalAlignment="Top" Width="200"/>
                     </Border>
-                    <Label Content="YZ-Plane" HorizontalAlignment="Left" Height="30" Margin="629,106,0,0" VerticalAlignment="Top" Width="66" Grid.Row="1"/>
+                    <Label Content="YZ-Plane (Rear View)" HorizontalAlignment="Left" Height="30" Margin="608,110,0,0" VerticalAlignment="Top" Width="121" Grid.Row="1"/>
                     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="880,21,0,0" VerticalAlignment="Top" Width="200" Grid.RowSpan="2">
                         <Canvas Name="canvasHeading" HorizontalAlignment="Left" Height="200" Margin="-1" VerticalAlignment="Top" Width="200">
                             <Canvas Name="canvasHeading_indicator" Height="94" Canvas.Left="54" Canvas.Top="54" Width="92" RenderTransformOrigin="0.489,0.537"/>
@@ -235,6 +235,10 @@
 
                     </Border>
                     <Label Content="XY-Plane" HorizontalAlignment="Left" Height="30" Margin="956,105,0,0" VerticalAlignment="Top" Width="66" Grid.Row="1"/>
+                    <Label x:Name="label1" Content="Front" HorizontalAlignment="Left" Height="26" Margin="171,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="44" RenderTransformOrigin="0.234,0.615"/>
+                    <Label x:Name="label1_Copy" Content="Back" HorizontalAlignment="Left" Height="26" Margin="420,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="44" RenderTransformOrigin="0.234,0.615"/>
+                    <Label x:Name="label1_Copy1" Content="Left" HorizontalAlignment="Left" Height="26" Margin="521,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="44" RenderTransformOrigin="0.234,0.615"/>
+                    <Label x:Name="label1_Copy2" Content="Right" HorizontalAlignment="Left" Height="26" Margin="775,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="44" RenderTransformOrigin="0.234,0.615"/>
                 </Grid>
             </Border>
             <TextBox Name="txtHeading" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="84" Margin="528,260,0,0"/>
