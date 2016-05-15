@@ -140,14 +140,14 @@ namespace MPU6050DataCollector.Controllers
             }
 
             Excel.Workbook xlBook;
-            Excel.Worksheet[] sheet = new Excel.Worksheet[4];
+            Excel.Worksheet[] sheet = new Excel.Worksheet[5];
             object misValue = System.Reflection.Missing.Value;
 
             xlBook = xlFile.Workbooks.Add(misValue);
 
             int outterIteration = this._data.gyro.Length;
             int innerIteration = this._data.gyro[0].Count;
-
+            
             // sheet one - gyro
             sheet[0] = (Excel.Worksheet)xlBook.Worksheets.get_Item(1);
             sheet[0].Name = (string)"Gyroscope";
@@ -161,16 +161,19 @@ namespace MPU6050DataCollector.Controllers
             sheet[0].Cells[1, 8] = "DegreeY";
             sheet[0].Cells[1, 9] = "DircosZ";
             sheet[0].Cells[1, 10] = "DegreeZ";
+           
             for (int i = 0; i < outterIteration; i++)
             {
                 List<string> temp = this._data.gyro[i];
-               
+                
                 for (int j = 0; j < innerIteration; j++)
                 {
+                    Console.WriteLine(i);
                     sheet[0].Cells[j + 2, i + 1] = temp[j];
                 }
                 
             }
+            Console.WriteLine("2");
             // sheet two - acc
             sheet[1] = (Excel.Worksheet)xlBook.Worksheets.Add();
             sheet[1].Name = (string)"Accelerometer";
@@ -218,7 +221,7 @@ namespace MPU6050DataCollector.Controllers
                 }
                 
             }
-            // sheet three - magnetometer
+            // sheet four - magnetometer
             sheet[3] = (Excel.Worksheet)xlBook.Worksheets.Add();
             sheet[3].Name = (string)"Magnetometer";
             sheet[3].Cells[1, 1] = "MagX";
@@ -234,6 +237,23 @@ namespace MPU6050DataCollector.Controllers
                 }
                 
             }
+            // sheet fives - control ref
+            sheet[4] = (Excel.Worksheet)xlBook.Worksheets.Add();
+            sheet[4].Name = (string)"Attitude Reference";
+            sheet[4].Cells[1, 1] = "pitch";
+            sheet[4].Cells[1, 2] = "roll";
+            sheet[4].Cells[1, 3] = "yaw";
+            for (int i = 0; i < 3; i++)
+            {
+                List<string> temp = this._data.ctrlRefAtt[i];
+
+                for (int j = 0; j < innerIteration; j++)
+                {
+                    
+                    sheet[4].Cells[j + 2, i + 1] = temp[j];
+                }
+
+            }
 
 
 
@@ -244,6 +264,8 @@ namespace MPU6050DataCollector.Controllers
             releaseObject(sheet[0]);
             releaseObject(sheet[1]);
             releaseObject(sheet[2]);
+            releaseObject(sheet[3]);
+            releaseObject(sheet[4]);
             releaseObject(xlBook);
             releaseObject(xlFile);
 

@@ -17,6 +17,7 @@ namespace MPU6050DataCollector.Model
         private List<string>[] _cFilter;
         private List<string>[] _motor;
         private List<string>[] _mag;
+        private List<string>[] _ctrlRefAtt;
         public AttitudeData()
         {
             this._gyro = new List<string>[10];
@@ -24,8 +25,11 @@ namespace MPU6050DataCollector.Model
             this._cFilter = new List<string>[10];
             this._motor = new List<string>[6];
             this._mag = new List<string>[3];
+            this._ctrlRefAtt = new List<string>[3];
+
             for (int i = 0; i < 10; i++)
             {
+                //if (i > 6) i = 10; // finish the loop early.
                 this._gyro[i] = new List<string>();
                 this._acc[i] = new List<string>();
                 this._cFilter[i] = new List<string>();
@@ -36,7 +40,9 @@ namespace MPU6050DataCollector.Model
                 if (i < 3)
                 {
                     this._mag[i] = new List<string>();
+                    this._ctrlRefAtt[i] = new List<string>();
                 }
+                
             }
 
             
@@ -70,6 +76,12 @@ namespace MPU6050DataCollector.Model
         {
             set { this._cFilter=value;}
             get { return this._cFilter; }
+        }
+
+        public List<string>[] ctrlRefAtt
+        {
+            set { this._ctrlRefAtt = value; }
+            get { return this._ctrlRefAtt; }
         }
 
 
