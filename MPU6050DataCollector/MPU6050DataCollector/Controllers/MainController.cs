@@ -168,12 +168,14 @@ namespace MPU6050DataCollector.Controllers
                 
                 for (int j = 0; j < innerIteration; j++)
                 {
-                    Console.WriteLine(i);
+                    //Console.WriteLine("asfasdf");
+                    //Console.WriteLine(i);
+
                     sheet[0].Cells[j + 2, i + 1] = temp[j];
                 }
                 
             }
-            Console.WriteLine("2");
+            //Console.WriteLine("2");
             // sheet two - acc
             sheet[1] = (Excel.Worksheet)xlBook.Worksheets.Add();
             sheet[1].Name = (string)"Accelerometer";
@@ -197,7 +199,7 @@ namespace MPU6050DataCollector.Controllers
                 }
                 
             }
-
+            
             // sheet three - cFilter
             sheet[2] = (Excel.Worksheet)xlBook.Worksheets.Add();
             sheet[2].Name = (string)"cFilter";
@@ -243,17 +245,23 @@ namespace MPU6050DataCollector.Controllers
             sheet[4].Cells[1, 1] = "pitch";
             sheet[4].Cells[1, 2] = "roll";
             sheet[4].Cells[1, 3] = "yaw";
+            sheet[4].Cells[1, 5] = "Throttle";
+            
             for (int i = 0; i < 3; i++)
             {
                 List<string> temp = this._data.ctrlRefAtt[i];
-
+                
                 for (int j = 0; j < innerIteration; j++)
                 {
-                    
                     sheet[4].Cells[j + 2, i + 1] = temp[j];
+                    if (i < 1)
+                    {
+                        List<string> throt = this._data.Throttle;
+                        sheet[4].Cells[j + 2, 5] = throt[j];
+                    }
                 }
-
             }
+
 
 
 
@@ -629,6 +637,7 @@ namespace MPU6050DataCollector.Controllers
             }
             
         }
+
 
         public void setSlider()
         {

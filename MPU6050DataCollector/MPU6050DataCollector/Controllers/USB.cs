@@ -791,7 +791,7 @@ namespace SerialMonitorTest03.ControllerFolder
         {
 
             #region for loop calculating attitudes
-                
+
             //double norm, xRaw, yRaw, zRaw;
             //// this for loop calculates variables.
             //for (int i = 0; i < 3; i++)
@@ -820,7 +820,7 @@ namespace SerialMonitorTest03.ControllerFolder
             //            yRaw = Double.Parse(acc[1]);
             //            zRaw = Double.Parse(acc[2]);
             //            norm = Math.Sqrt(xRaw * xRaw + yRaw * yRaw + zRaw * zRaw);
-                           
+
             //            //if (norm != 0)
             //            //{
             //            //    acc[3] = norm.ToString().Substring(0, 6);
@@ -876,27 +876,45 @@ namespace SerialMonitorTest03.ControllerFolder
             #endregion
 
             #region for collection mode
-                
+
+            double avgTimeElapse=0;   
+             
             if (this._collectionMode)
             {
                 sw.Stop();
                 //sw.Reset();
+                _numberOfDataGathered++;
                 double a = sw.ElapsedMilliseconds;
                 Console.WriteLine(a);
                 //sw.Reset();
                 sw.Start();
                 Console.WriteLine("gathering...");
-                    
-                _numberOfDataGathered++;
-         
-            if (!gyro[0].Equals("0") && !gyro[1].Equals("0") && !gyro[2].Equals("0") &&
-                    !acc[0].Equals("0") && !acc[1].Equals("0") && !acc[2].Equals("0") &&
-                    !cFilter[0].Equals("0") && !cFilter[1].Equals("0") && !cFilter[2].Equals("0") &&
-                    !mag[0].Equals("0") && !mag[1].Equals("0") && !mag[2].Equals("0"))
-            {
+                //Console.WriteLine("asdfasfsdfasdfsdfds" + this.throttle[0]);
+
+                if (_numberOfDataGathered > 0)
+                {
+                    avgTimeElapse = a / 1000 / _numberOfDataGathered;
+                }
+
+                this._main.Dispatcher.Invoke(() =>
+                {
+
+                    if (this._numberOfDataGathered > 0)
+                    {
+                        this._main.txtNumberOfData.Text = this._numberOfDataGathered.ToString() + " data gathered.";
+                        this._main.lblBoard.Content = "avgTimeElapse = " + avgTimeElapse.ToString().Substring(0, 5) + " sec";
+                    }
+
+                });
+
+
+
+                this._data.Throttle.Add(this.throttle[0]);
+                
+
                 for (int i = 0; i < 10; i++)
                 {
-                        
+
                     this._data.gyro[i].Add(gyro[i]);
                     this._data.acc[i].Add(acc[i]);
                     this._data.cFilter[i].Add(cFilter[i]);
@@ -905,20 +923,11 @@ namespace SerialMonitorTest03.ControllerFolder
                         this._data.mag[i].Add(mag[i]);
                         this._data.ctrlRefAtt[i].Add(ctrlReference[i]);
                     }
-                    //else
-                    //{
-                    //    this._data.gyro[i].Add("0");
-                    //    this._data.acc[i].Add("0");
-                    //    this._data.cFilter[i].Add("0");
-                    //    this._data.mag[i].Add("0");
-                    //}
                 }
+
+
             }
-                
-
-
-        }
-        else
+            else
             {
                 this._numberOfDataGathered = 0;
             }
@@ -1045,10 +1054,7 @@ namespace SerialMonitorTest03.ControllerFolder
 
 
 
-                if (this._numberOfDataGathered > 0)
-                {
-                    this._main.txtNumberOfData.Text = this._numberOfDataGathered.ToString() + " data gathered.";
-                }
+                
                     
             });
 

@@ -137,15 +137,15 @@ namespace MPU6050DataCollector
 
             //Console.Write("thrust = " + th);
             this.txtThrustPercent.Text = th.ToString();
-            this.txtThrustPWM.Text = (1101 + (2500 - 1101) * th / 100).ToString();
+            this.txtThrustPWM.Text = (1101 + (2000 - 1101) * th / 100).ToString();
             this.oldPwm = newPwm;
-            this.newPwm = (1101 + (2500 - 1101) * th / 100);
+            this.newPwm = (1101 + (2000 - 1101) * th / 100);
 
             //Console.WriteLine(" x = " + xValue + " y = " + yValue + " z = " + zValue + " rot x = " + rotationXValue + " rot y = " + rotationYValue + " rot Z = " + rotationZValue);
 
             double pitchMaxAngle = 10; //3 degree
             double rollMaxAngle = 10;
-            double yawMaxAgnle = 2; //90 degree
+            double yawMaxAgnle = 10; //90 degree
 
             oldPitch = newPitch;
             oldRoll = newRoll;
@@ -161,6 +161,8 @@ namespace MPU6050DataCollector
             newPitch = pitch;
             newRoll = roll;
             newYaw = oldYaw + yaw;
+            if (newYaw > 180) newYaw = -360 + newYaw;
+            if (newYaw < -180) newYaw = 360 + newYaw;
             //send
             this._mainCtrl.updateRefAttPitch(pitch);
             this._mainCtrl.updateRefAttRoll(roll);
