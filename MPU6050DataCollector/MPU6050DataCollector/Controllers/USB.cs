@@ -35,7 +35,7 @@ namespace SerialMonitorTest03.ControllerFolder
         private double _parsingRate;
         private double _parsingCounter;
 
-        private bool[] pidAxisOnOff = { false, false, false };
+        private bool[] pidAxisOnOff = { false, false, false, false, false, false };
         private string[] _portsList;
         private int _numberOfPorts;
         private bool _collectionMode;
@@ -166,9 +166,9 @@ namespace SerialMonitorTest03.ControllerFolder
             string inStream = (string)this._serial.ReadExisting();
             this._serial.DiscardInBuffer();
             this._serial.DiscardOutBuffer();
-            //Console.WriteLine("---------------------");
-            //Console.WriteLine(inStream);
-            //Console.WriteLine("---------------------");
+            Console.WriteLine("---------------------");
+            Console.WriteLine(inStream);
+            Console.WriteLine("---------------------");
 
             //if (inStream.Contains("p"))
             //{
@@ -570,7 +570,7 @@ namespace SerialMonitorTest03.ControllerFolder
 
             if (infoType.Equals("s"))
             {
-                #region parse localCoord
+                #region parse ctrl reference
                 // get direction of info (x,y,z)
                 infoDir = listTokens[i].Substring(1, 1);
                 switch (infoDir)
