@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="AttitudeAnalyzer" Height="1021.711" Width="1247.482"
         Loaded="MainWindow_Loaded">
-    <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+    <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Background="#FF8FABDC">
         <Grid Name="mainGrid" Width="1222" >
             <Button Name="btnSave" Content="Save Recorded" HorizontalAlignment="Left" Margin="1009,70,0,0" VerticalAlignment="Top" Width="106" Height="20" Click="btnSave_Click" Grid.RowSpan="2"/>
             <Button Name="btnCollect" Content="Collect Data" HorizontalAlignment="Left" Height="20" Margin="544,67,0,0" VerticalAlignment="Top" Width="106" Click="btnCollect_Click" Grid.RowSpan="2"/>
@@ -146,6 +146,7 @@
                     <Button Name="btnMpuControl" Content="MPU On/Off" HorizontalAlignment="Left" Height="20" Margin="80,78,0,0" VerticalAlignment="Top" Width="90"/>
                     <Button Name="btnOpenPID" Content="OpenPIDMonitor" HorizontalAlignment="Left" Height="30" Margin="10,128,0,0" VerticalAlignment="Top" Width="104" Click="btnOpenPID_Click"/>
                     <Button Name="btnJoyStick" Content="JoyStick" HorizontalAlignment="Left" Height="37" Margin="10,163,0,0" VerticalAlignment="Top" Width="102" Click="btnJoyStick_Click"/>
+                    <Button Name="btnOPenNavPID" Content="OpenNavPIDMonitor" HorizontalAlignment="Left" Height="32" Margin="10,205,0,0" VerticalAlignment="Top" Width="128" Click="btnOPenNavPID_Click"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="229" Margin="45,99,0,0" VerticalAlignment="Top" Width="1124">

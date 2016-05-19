@@ -1,0 +1,30 @@
+﻿<Window x:Class="MPU6050DataCollector.NavPIDMonitor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MPU6050DataCollector"
+        mc:Ignorable="d"
+        Title="NavPIDMonitor" Height="225" Width="345.164">
+    <Grid Margin="0,0,2,1">
+        <TextBox x:Name="txtKpPitch" HorizontalAlignment="Left" Height="23" Margin="73,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <Label x:Name="label" Content="Kp" HorizontalAlignment="Left" Height="26" Margin="31,44,0,0" VerticalAlignment="Top" Width="37" FontSize="10.667"/>
+        <TextBox x:Name="txtKdPitch" HorizontalAlignment="Left" Height="23" Margin="73,73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <Label x:Name="label_Copy" Content="Kd" HorizontalAlignment="Left" Height="26" Margin="31,70,0,0" VerticalAlignment="Top" Width="37" FontSize="10.667"/>
+        <TextBox x:Name="txtKiPitch" HorizontalAlignment="Left" Height="23" Margin="73,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <Label x:Name="label_Copy1" Content="Ki" HorizontalAlignment="Left" Height="26" Margin="31,96,0,0" VerticalAlignment="Top" Width="37" FontSize="10.667"/>
+        <Label x:Name="label1" Content="Pitch" HorizontalAlignment="Left" Height="24" Margin="73,18,0,0" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKpRoll" HorizontalAlignment="Left" Height="23" Margin="141,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKdRoll" HorizontalAlignment="Left" Height="23" Margin="141,73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKiRoll" HorizontalAlignment="Left" Height="23" Margin="141,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <Label x:Name="label1_Copy" Content="Roll" HorizontalAlignment="Left" Height="24" Margin="141,18,0,0" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKpHeight" HorizontalAlignment="Left" Height="23" Margin="211,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKdHeight" HorizontalAlignment="Left" Height="23" Margin="211,73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKiHeight" HorizontalAlignment="Left" Height="23" Margin="211,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <Label x:Name="label1_Copy1" Content="Thrust/Height" HorizontalAlignment="Left" Height="24" Margin="211,18,0,0" VerticalAlignment="Top" Width="89"/>
+        <Button x:Name="btnSetPitch" Content="Set Pitch" HorizontalAlignment="Left" Height="21" Margin="73,129,0,0" VerticalAlignment="Top" Width="65"/>
+        <Button x:Name="btnSetRoll" Content="Set Roll" HorizontalAlignment="Left" Height="21" Margin="141,129,0,0" VerticalAlignment="Top" Width="65"/>
+        <Button x:Name="btnSetHeight" Content="Set Height" HorizontalAlignment="Left" Height="21" Margin="211,129,0,0" VerticalAlignment="Top" Width="65"/>
+
+    </Grid>
+</Window>

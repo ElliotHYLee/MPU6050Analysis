@@ -418,6 +418,11 @@ namespace MPU6050DataCollector
             this._ctrl.takeOffMode();
         }
 
+        private void btnOPenNavPID_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.openNavPIDMonitor();
+        }
+
 
 
 

@@ -32,8 +32,10 @@ namespace MPU6050DataCollector.Controllers
         private bool[] _pidOnOff = {false, false, false};
         public bool _pidMonitorIsOpen = false;
         internal PIDMonitor _pidMonitor= null;
+        internal NavPIDMonitor _navPidMonitor = null;
         internal JoyStickController _joyStick = null;
         public bool _joyStickIsOpen = false;
+        public bool _navPidMonitorIsOpen = false;
 
         private ImageBrush bg3;
 
@@ -298,7 +300,6 @@ namespace MPU6050DataCollector.Controllers
                 GC.Collect();
             }
         }
-        
 
         public void startCollecting()
         {
@@ -670,20 +671,30 @@ namespace MPU6050DataCollector.Controllers
             this._usb.sendData("M" + motor.ToString() + newPwm.ToString());
         }
 
+
+        public void openNavPIDMonitor()
+        {
+            this._navPidMonitor = NavPIDMonitor.Instance();
+            this._navPidMonitor.Closing += closeNavPIDMonitor;
+            this._navPidMonitorIsOpen = true;
+            this._navPidMonitor.Show();
+        }
+        public void closeNavPIDMonitor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this._navPidMonitorIsOpen = false;
+        }
+
         public void openPIDMonitor()
         {
             if (!_pidMonitorIsOpen)
             {
                this._pidMonitor = new PIDMonitor(this);
-               this._pidMonitor.Closing += new CancelEventHandler(closePIDMonitor);
                this._pidMonitorIsOpen = true;
                this._pidMonitor.Show();
-
 
                this.requestPidOnOffStatus();
                //this.requestPidConst();
 
-                
             }
         }
 
@@ -691,7 +702,6 @@ namespace MPU6050DataCollector.Controllers
         {
             this._pidMonitorIsOpen = false;
         }
-
 
         public void openJoyStick()
         {

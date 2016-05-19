@@ -48,3 +48,6 @@ D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Release\
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Release\SlimDX.pdb
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Release\SlimDX.xml
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\MPU6050DataCollector.JoyStickController.resources
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\NavPIDMonitor.g.cs
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\MPU6050DataCollector_MarkupCompile.lref
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\NavPIDMonitor.baml

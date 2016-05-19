@@ -67,6 +67,9 @@
       <DependentUpon>JoyStickController.cs</DependentUpon>
     </Compile>
     <Compile Include="LineAttitude.cs" />
+    <Compile Include="NavPIDMonitor.xaml.cs">
+      <DependentUpon>NavPIDMonitor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PIDMonitor.xaml.cs">
       <DependentUpon>PIDMonitor.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,10 @@
       <DependentUpon>AttitudeAnalyzer.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NavPIDMonitor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PIDMonitor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
