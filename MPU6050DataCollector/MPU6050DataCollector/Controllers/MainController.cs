@@ -51,60 +51,60 @@ namespace MPU6050DataCollector.Controllers
 
         #region connection and disconnection
 
-            private void keepConnectionButtonConvention()
-            {
-                if (this._usb.numberOfPorts > 0)
-                {
-                    this._main.btnConnect.IsEnabled = true;
-                }
-                else
-                {
-                    this._main.btnConnect.IsEnabled = false;
-                }
-            }
-        
-            public void connect()
-            {
-                if (this._usbConnected)
-                {
-                    this._usbConnected = this._usb.disconnect();
-                    this.refreshComports();
-                }
-                else // not yet connected. So connect usb here
-                {
-                    string portName = this._main.comboPorts.SelectedItem.ToString();
-                    int baudRate = int.Parse(this._main.comboBaudRate.SelectedItem.ToString());
-                    this._usbConnected = this._usb.connect(portName, baudRate);
-                    Console.WriteLine(this._usb.portName + " online.");
-                }
-            
-            }
-        
-            public void refreshComports()
-            {
-                this._main.comboPorts.Items.Clear();
-                this._main.comboBaudRate.Items.Clear();
-                Console.WriteLine("Number of Ports Available: " + this._usb.numberOfPorts);
-                String[] ports = _usb.portsList;
-                for (int i = 0; i < _usb.numberOfPorts; i++)
-                {
-                    this._main.comboPorts.Items.Insert(i, ports[i]);
-                }
-
-                this._main.comboBaudRate.Items.Insert(0, 9600);
-                
-                this._main.comboBaudRate.Items.Insert(0, 115200);
-                this._main.comboBaudRate.Items.Insert(0, 57600);
-
+        private void keepConnectionButtonConvention()
+        {
             if (this._usb.numberOfPorts > 0)
-                {
-                
-                    this._main.comboPorts.SelectedIndex = 0;
-                    this._main.comboBaudRate.SelectedIndex = 0;
-                }
-
-                this.keepConnectionButtonConvention();
+            {
+                this._main.btnConnect.IsEnabled = true;
             }
+            else
+            {
+                this._main.btnConnect.IsEnabled = false;
+            }
+        }
+        
+        public void connect()
+        {
+            if (this._usbConnected)
+            {
+                this._usbConnected = this._usb.disconnect();
+                this.refreshComports();
+            }
+            else // not yet connected. So connect usb here
+            {
+                string portName = this._main.comboPorts.SelectedItem.ToString();
+                int baudRate = int.Parse(this._main.comboBaudRate.SelectedItem.ToString());
+                this._usbConnected = this._usb.connect(portName, baudRate);
+                Console.WriteLine(this._usb.portName + " online.");
+            }
+            
+        }
+        
+        public void refreshComports()
+        {
+            this._main.comboPorts.Items.Clear();
+            this._main.comboBaudRate.Items.Clear();
+            Console.WriteLine("Number of Ports Available: " + this._usb.numberOfPorts);
+            String[] ports = _usb.portsList;
+            for (int i = 0; i < _usb.numberOfPorts; i++)
+            {
+                this._main.comboPorts.Items.Insert(i, ports[i]);
+            }
+
+            this._main.comboBaudRate.Items.Insert(0, 9600);
+                
+            this._main.comboBaudRate.Items.Insert(0, 115200);
+            this._main.comboBaudRate.Items.Insert(0, 57600);
+
+        if (this._usb.numberOfPorts > 0)
+            {
+                
+                this._main.comboPorts.SelectedIndex = 0;
+                this._main.comboBaudRate.SelectedIndex = 0;
+            }
+
+            this.keepConnectionButtonConvention();
+        }
 
         #endregion
 
@@ -332,7 +332,6 @@ namespace MPU6050DataCollector.Controllers
             }
         }
 
-
         //public void preUpdatePidConst(int kType, int direction)
         //{
         //    if (direction < 0)
@@ -372,9 +371,13 @@ namespace MPU6050DataCollector.Controllers
         public void updatePidConstX()
         {
             string[] k = new string[9]; // in order of kp, ki, kd
-            k[0] = this._pidMonitor.txtXKp.Text;
-            k[1] = this._pidMonitor.txtXKi.Text;
-            k[2] = this._pidMonitor.txtXKd.Text;
+            //k[0] = this._pidMonitor.txtXKp.Text;
+            //k[1] = this._pidMonitor.txtXKi.Text;
+            //k[2] = this._pidMonitor.txtXKd.Text;
+            k[0] = this._navPidMonitor.txtKpPitchSet.Text;
+            k[1] = this._navPidMonitor.txtKdPitchSet.Text;
+            k[2] = this._navPidMonitor.txtKiPitchSet.Text;
+
 
             string result = "";
 
@@ -426,10 +429,13 @@ namespace MPU6050DataCollector.Controllers
         {
             string[] k = new string[9]; // in order of kp, ki, kd
 
-            k[3] = this._pidMonitor.txtYKp.Text;
-            k[4] = this._pidMonitor.txtYKi.Text;
-            k[5] = this._pidMonitor.txtYKd.Text;
-            
+            //k[3] = this._pidMonitor.txtYKp.Text;
+            //k[4] = this._pidMonitor.txtYKi.Text;
+            //k[5] = this._pidMonitor.txtYKd.Text;
+            k[3] = this._navPidMonitor.txtKpRollSet.Text;
+            k[4] = this._navPidMonitor.txtKdRollSet.Text;
+            k[5] = this._navPidMonitor.txtKiRollSet.Text;
+
             string result = "";
 
             if (k[3].Equals("") || k[4].Equals("") || k[5].Equals(""))
@@ -639,7 +645,6 @@ namespace MPU6050DataCollector.Controllers
             
         }
 
-
         public void setSlider()
         {
             this._main.moterSlide1.Minimum = 1100;
@@ -675,6 +680,7 @@ namespace MPU6050DataCollector.Controllers
         public void openNavPIDMonitor()
         {
             this._navPidMonitor = NavPIDMonitor.Instance();
+            this._navPidMonitor.MainCtrl = this;
             this._navPidMonitor.Closing += closeNavPIDMonitor;
             this._navPidMonitorIsOpen = true;
             this._navPidMonitor.Show();

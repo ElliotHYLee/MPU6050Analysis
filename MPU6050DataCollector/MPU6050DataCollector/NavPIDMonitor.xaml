@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MPU6050DataCollector"
         mc:Ignorable="d"
-        Title="NavPIDMonitor" Height="225" Width="345.164">
+        Title="NavPIDMonitor" Height="409.197" Width="445.967">
     <Grid Margin="0,0,2,1">
         <TextBox x:Name="txtKpPitch" HorizontalAlignment="Left" Height="23" Margin="73,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
         <Label x:Name="label" Content="Kp" HorizontalAlignment="Left" Height="26" Margin="31,44,0,0" VerticalAlignment="Top" Width="37" FontSize="10.667"/>
@@ -18,13 +18,32 @@
         <TextBox x:Name="txtKdRoll" HorizontalAlignment="Left" Height="23" Margin="141,73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
         <TextBox x:Name="txtKiRoll" HorizontalAlignment="Left" Height="23" Margin="141,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
         <Label x:Name="label1_Copy" Content="Roll" HorizontalAlignment="Left" Height="24" Margin="141,18,0,0" VerticalAlignment="Top" Width="65"/>
-        <TextBox x:Name="txtKpHeight" HorizontalAlignment="Left" Height="23" Margin="211,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
-        <TextBox x:Name="txtKdHeight" HorizontalAlignment="Left" Height="23" Margin="211,73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
-        <TextBox x:Name="txtKiHeight" HorizontalAlignment="Left" Height="23" Margin="211,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
-        <Label x:Name="label1_Copy1" Content="Thrust/Height" HorizontalAlignment="Left" Height="24" Margin="211,18,0,0" VerticalAlignment="Top" Width="89"/>
-        <Button x:Name="btnSetPitch" Content="Set Pitch" HorizontalAlignment="Left" Height="21" Margin="73,129,0,0" VerticalAlignment="Top" Width="65"/>
-        <Button x:Name="btnSetRoll" Content="Set Roll" HorizontalAlignment="Left" Height="21" Margin="141,129,0,0" VerticalAlignment="Top" Width="65"/>
-        <Button x:Name="btnSetHeight" Content="Set Height" HorizontalAlignment="Left" Height="21" Margin="211,129,0,0" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKpHeightAsc" HorizontalAlignment="Left" Height="23" Margin="211,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKdHeightAsc" HorizontalAlignment="Left" Height="23" Margin="211,73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKiHeight" HorizontalAlignment="Left" Height="23" Margin="251,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <Label x:Name="label1_Copy1" Content="Thrust/Height" HorizontalAlignment="Left" Height="29" Margin="238,0,0,0" VerticalAlignment="Top" Width="95"/>
+        <Button x:Name="btnSetPitch" Content="Set Pitch" HorizontalAlignment="Left" Height="21" Margin="73,236,0,0" VerticalAlignment="Top" Width="65" Click="btnSetPitch_Click"/>
+        <Button x:Name="btnSetRoll" Content="Set Roll" HorizontalAlignment="Left" Height="21" Margin="143,236,0,0" VerticalAlignment="Top" Width="65" Click="btnSetRoll_Click"/>
+        <Button x:Name="btnSetHeight" Content="Set Height" HorizontalAlignment="Left" Height="21" Margin="251,236,0,0" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKpHeightDesc" HorizontalAlignment="Left" Height="23" Margin="291,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKdHeightDesc" HorizontalAlignment="Left" Height="23" Margin="291,73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <Label x:Name="label2" Content="Ascent" HorizontalAlignment="Left" Height="24" Margin="219,18,0,0" VerticalAlignment="Top" Width="52"/>
+        <Label x:Name="label2_Copy" Content="Descent" HorizontalAlignment="Left" Height="24" Margin="298,18,0,0" VerticalAlignment="Top" Width="52"/>
+        <TextBox x:Name="txtKpPitchSet" HorizontalAlignment="Left" Height="23" Margin="73,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKdPitchSet" HorizontalAlignment="Left" Height="23" Margin="73,171,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKiPitchSet" HorizontalAlignment="Left" Height="23" Margin="73,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKpRollSet" HorizontalAlignment="Left" Height="23" Margin="141,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKdRollSet" HorizontalAlignment="Left" Height="23" Margin="141,171,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKiRollSet" HorizontalAlignment="Left" Height="23" Margin="141,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKpHeightAscSet" HorizontalAlignment="Left" Height="23" Margin="211,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKdHeightAscSet" HorizontalAlignment="Left" Height="23" Margin="211,171,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKiHeightSet" HorizontalAlignment="Left" Height="23" Margin="251,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKpHeightDescSet" HorizontalAlignment="Left" Height="23" Margin="291,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <TextBox x:Name="txtKdHeightDescSet" HorizontalAlignment="Left" Height="23" Margin="291,171,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+        <Label x:Name="label_Copy2" Content="Kp" HorizontalAlignment="Left" Height="26" Margin="31,147,0,0" VerticalAlignment="Top" Width="37" FontSize="10.667"/>
+        <Label x:Name="label_Copy3" Content="Kd" HorizontalAlignment="Left" Height="26" Margin="31,173,0,0" VerticalAlignment="Top" Width="37" FontSize="10.667"/>
+        <Label x:Name="label_Copy4" Content="Ki" HorizontalAlignment="Left" Height="26" Margin="31,199,0,0" VerticalAlignment="Top" Width="37" FontSize="10.667"/>
+        <Button x:Name="btnSync" Content="Sync" HorizontalAlignment="Left" Height="21" Margin="31,236,0,0" VerticalAlignment="Top" Width="37" Click="btnSync_Click"/>
 
     </Grid>
 </Window>

@@ -143,8 +143,8 @@ namespace MPU6050DataCollector
 
             //Console.WriteLine(" x = " + xValue + " y = " + yValue + " z = " + zValue + " rot x = " + rotationXValue + " rot y = " + rotationYValue + " rot Z = " + rotationZValue);
 
-            double pitchMaxAngle = 5; //3 degree
-            double rollMaxAngle = 5;
+            double pitchMaxAngle = 10; //3 degree
+            double rollMaxAngle = 10;
             double yawMaxAgnle = 5; //90 degree
 
             oldPitch = newPitch;
