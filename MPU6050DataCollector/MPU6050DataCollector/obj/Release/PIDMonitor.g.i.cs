@@ -37,7 +37,7 @@ namespace MPU6050DataCollector {
     /// <summary>
     /// PIDMonitor
     /// </summary>
-    public partial class PIDMonitor : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+    public partial class AttPIDMonitor : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
         #line 7 "..\..\PIDMonitor.xaml"

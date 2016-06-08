@@ -30,12 +30,16 @@ namespace MPU6050DataCollector.Controllers
         private bool _usbConnected;
         private LineAttitude lineX, lineY, lineZ;
         private bool[] _pidOnOff = {false, false, false};
-        public bool _pidMonitorIsOpen = false;
-        internal PIDMonitor _pidMonitor= null;
+
+        internal AttPIDMonitor _attPidMonitor= null;
         internal NavPIDMonitor _navPidMonitor = null;
         internal JoyStickController _joyStick = null;
+        internal InfoChoiceMonitor _infoChoiceMonitor = null;
+
+        public bool _attPidMonitorIsOpen = false;
         public bool _joyStickIsOpen = false;
         public bool _navPidMonitorIsOpen = false;
+        public bool _infoChoiceMonitorIsOpen = false;
 
         private ImageBrush bg3;
 
@@ -95,8 +99,9 @@ namespace MPU6050DataCollector.Controllers
                 
             this._main.comboBaudRate.Items.Insert(0, 115200);
             this._main.comboBaudRate.Items.Insert(0, 57600);
+            //this._main.comboBaudRate.Items.Insert(0, 38400);
 
-        if (this._usb.numberOfPorts > 0)
+            if (this._usb.numberOfPorts > 0)
             {
                 
                 this._main.comboPorts.SelectedIndex = 0;
@@ -107,6 +112,12 @@ namespace MPU6050DataCollector.Controllers
         }
 
         #endregion
+
+        public String InfoChoice
+        {
+            get { return _usb.InfoChoice; }
+        }
+
 
         public bool pidOnOffX
         {
@@ -315,22 +326,11 @@ namespace MPU6050DataCollector.Controllers
             }
         }
 
-        public void setPidStatusNew(string val)
+        public void requestInfo(string val)
         {
-            this._usb.sendData(val);
+            this._usb.sendDataRobust(val);
         }
 
-        public void setPidStatus()
-        {
-            if (this._main.lblPidIndicator.Content.Equals("PID ON"))
-            {
-                this._usb.sendData("P00000000");
-            }
-            else
-            {
-                this._usb.sendData("P00000001");
-            }
-        }
 
         //public void preUpdatePidConst(int kType, int direction)
         //{
@@ -368,75 +368,31 @@ namespace MPU6050DataCollector.Controllers
         //    updatePidConst();
         //}
 
-        public void updatePidConstX()
+
+        public async void updateAttPidAttConst(string[] k)
         {
-            string[] k = new string[9]; // in order of kp, ki, kd
-            //k[0] = this._pidMonitor.txtXKp.Text;
-            //k[1] = this._pidMonitor.txtXKi.Text;
-            //k[2] = this._pidMonitor.txtXKd.Text;
-            k[0] = this._navPidMonitor.txtKpPitchSet.Text;
-            k[1] = this._navPidMonitor.txtKdPitchSet.Text;
-            k[2] = this._navPidMonitor.txtKiPitchSet.Text;
-
-
-            string result = "";
-
+            
+            updateAttPidConstX(k);
+            await Task.Delay(500);
+            updateAttPidConstY(k);
+            await Task.Delay(500);
+            updateAttPidConstZ(k);
+        }
+        
+        public void updateAttPidConstX(string[] k)
+        {
             if (k[0].Equals("") || k[1].Equals("") || k[2].Equals(""))
             {
                 MessageBox.Show("Check the connection and request propeller's pid constant");
-                return; 
+                return;
             }
+            this._usb.sendDataRobust("pA" + k[0]);
+            this._usb.sendDataRobust("pB" + k[1]);
+            this._usb.sendDataRobust("pC" + k[2]);
 
-            for (int i = 0; i < 3; i++)
-            {
-                int temp =  (int) (Double.Parse(k[i]) + 0.5);
-                if ( temp < 10)
-                {
-                    result = "000000" + temp.ToString();
-                }
-                else if (temp <100)
-                {
-                    result = "00000" + temp.ToString();
-                }
-                else if (temp <1000)
-                {
-                    result = "0000" + temp.ToString();
-                }
-                else if (temp < 10000)
-                {
-                    result = "000" + temp.ToString();
-                }
-                else if (temp < 100000)
-                {
-                    result = "00" + temp.ToString();
-                }
-                else if (temp < 1000000)
-                {
-                    result = "0" + temp.ToString();
-                }
-                else
-                {
-                    result = temp.ToString();
-                }
-                this._usb.sendData("P" + (i+1).ToString() + result);
-                Console.WriteLine("P" + (i+1).ToString() + result);
-            }
-
-            
         }
-
-        public void updatePidConstY()
+        public void updateAttPidConstY(string[] k)
         {
-            string[] k = new string[9]; // in order of kp, ki, kd
-
-            //k[3] = this._pidMonitor.txtYKp.Text;
-            //k[4] = this._pidMonitor.txtYKi.Text;
-            //k[5] = this._pidMonitor.txtYKd.Text;
-            k[3] = this._navPidMonitor.txtKpRollSet.Text;
-            k[4] = this._navPidMonitor.txtKdRollSet.Text;
-            k[5] = this._navPidMonitor.txtKiRollSet.Text;
-
-            string result = "";
 
             if (k[3].Equals("") || k[4].Equals("") || k[5].Equals(""))
             {
@@ -444,52 +400,12 @@ namespace MPU6050DataCollector.Controllers
                 return;
             }
 
-            for (int i = 3; i < 6; i++)
-            {
-                int temp = (int)(Double.Parse(k[i]) + 0.5);
-                if (temp < 10)
-                {
-                    result = "000000" + temp.ToString();
-                }
-                else if (temp < 100)
-                {
-                    result = "00000" + temp.ToString();
-                }
-                else if (temp < 1000)
-                {
-                    result = "0000" + temp.ToString();
-                }
-                else if (temp < 10000)
-                {
-                    result = "000" + temp.ToString();
-                }
-                else if (temp < 100000)
-                {
-                    result = "00" + temp.ToString();
-                }
-                else if (temp < 1000000)
-                {
-                    result = "0" + temp.ToString();
-                }
-                else
-                {
-                    result = temp.ToString();
-                }
-                this._usb.sendData("P" + (i + 1).ToString() + result);
-                Console.WriteLine("P" + (i + 1).ToString() + result);
-            }
-
+            this._usb.sendDataRobust("pD" + k[3]);
+            this._usb.sendDataRobust("pE" + k[4]);
+            this._usb.sendDataRobust("pF" + k[5]);
         }
-
-        public void updatePidConstZ()
+        public void updateAttPidConstZ(string[] k)
         {
-            string[] k = new string[9]; // in order of kp, ki, kd
-
-            k[6] = this._pidMonitor.txtZKp.Text;
-            k[7] = this._pidMonitor.txtZKi.Text;
-            k[8] = this._pidMonitor.txtZKd.Text;
-
-            string result = "";
 
             if (k[6].Equals("") || k[7].Equals("") || k[8].Equals(""))
             {
@@ -497,81 +413,114 @@ namespace MPU6050DataCollector.Controllers
                 return;
             }
 
-            for (int i = 6; i < 9; i++)
-            {
-                int temp = (int)(Double.Parse(k[i]) + 0.5);
-                if (temp < 10)
-                {
-                    result = "000000" + temp.ToString();
-                }
-                else if (temp < 100)
-                {
-                    result = "00000" + temp.ToString();
-                }
-                else if (temp < 1000)
-                {
-                    result = "0000" + temp.ToString();
-                }
-                else if (temp < 10000)
-                {
-                    result = "000" + temp.ToString();
-                }
-                else if (temp < 100000)
-                {
-                    result = "00" + temp.ToString();
-                }
-                else if (temp < 1000000)
-                {
-                    result = "0" + temp.ToString();
-                }
-                else
-                {
-                    result = temp.ToString();
-                }
-                this._usb.sendData("P" + (i + 1).ToString() + result);
-                Console.WriteLine("P" + (i + 1).ToString() + result);
-            }
+            this._usb.sendDataRobust("pG" + k[6]);
+            this._usb.sendDataRobust("pH" + k[7]);
+            this._usb.sendDataRobust("pI" + k[8]);
+
+        }
 
 
+        public async void updateNavPidAttConst(string[] k)
+        {
+
+            updateNavPidConstX(k);
+            await Task.Delay(500);
+            updateNavPidConstY(k);
+            await Task.Delay(500);
+            updateNavPidConstZ(k);
+        }
+
+
+        public void updateNavPidConstX(string[] k)
+        {
+            this._usb.sendDataRobust("PA" + k[0]);
+            this._usb.sendDataRobust("PB" + k[1]);
+            this._usb.sendDataRobust("PC" + k[2]);
+        }
+
+        public void updateNavPidConstY(string[] k)
+        {
+            this._usb.sendDataRobust("PD" + k[3]);
+            this._usb.sendDataRobust("PE" + k[4]);
+            this._usb.sendDataRobust("PF" + k[5]);
+        }
+
+        public void updateNavPidConstZ(string[] k)
+        {
+
+            this._usb.sendDataRobust("PG" + k[6]);
+            this._usb.sendDataRobust("PH" + k[7]);
+            this._usb.sendDataRobust("PI" + k[8]);
+            this._usb.sendDataRobust("PJ" + k[9]);
+            this._usb.sendDataRobust("PK" + k[10]);
         }
 
         public void prepareMode()
         {
-            this._usb.sendData("D10002");
-            Console.WriteLine("System Mode = prepare. Message sent: D10002");
+            this._usb.sendDataRobust("D1");
+            Console.WriteLine("System Mode = prepare. Message sent: D1");
         }
         public void preTakeOffMode()
         {
-            this._usb.sendData("D10003");
-            Console.WriteLine("System Mode = pre Take-off. Message sent: D10003");
+            this._usb.sendDataRobust("D2");
+            Console.WriteLine("System Mode = pre Take-off. Message sent: D2");
         }
 
         public void takeOffMode()
         {
-            this._usb.sendData("D10004");
-            Console.WriteLine("System Mode = take off. Message sent: D10004");
+            this._usb.sendDataRobust("D3");
+            Console.WriteLine("System Mode = take off. Message sent: D3");
         }
 
         public void idleMode()
         {
-            this._usb.sendData("D10001");
-            Console.WriteLine("System Mode = prepare. Message sent: D10001");
+            this._usb.sendDataRobust("D0");
+            Console.WriteLine("System Mode = prepare. Message sent: D0");
         }
 
-        public void requestPidOnOffStatus()
+        
+        public void requestAttPidOnOffStatus()
         {
             string command = "R12";
-            this._usb.sendData(command);
-            Console.WriteLine("PID on off status requested: " + command);
+            this._usb.sendDataRobust(command);
         }
-        
-        public void requestPidConst()
+
+        public  void requestAttPidConst()
         {
             // R11 = request PID contants like Kp, Ki, Kd
             string command = "R11";
-            this._usb.sendData(command);
+            this._usb.sendDataRobust(command);
             Console.WriteLine("PID Constant requested: " + command);
         }
+
+
+        public void requestNavPidOnOffStatus()
+        {
+            string command = "R3";
+            this._usb.sendDataRobust(command);
+        }
+
+        public void requestNavPidConst()
+        {
+            string command = "R2";
+            this._usb.sendDataRobust(command);
+            //Console.WriteLine("NavPID on off status requested: " + command);
+        }
+
+
+
+        public void requestInfoChoice()
+        {
+            string command = "R1";
+            this._usb.sendDataRobust(command);
+        }
+
+        public void sendInfoChoice(string val)
+        {
+            string command = "I" + val;
+            this._usb.sendDataRobust(command);
+        }
+
 
         internal void Loaded()
         {
@@ -664,49 +613,100 @@ namespace MPU6050DataCollector.Controllers
             this._main.sldrMainThrottle.Maximum = 2500;
         }
         
-        public void decrease(int motor, string currentPwm, int delta)
+        public async void decrease(int motor, string currentPwm, int delta)
         {
+            // motor : from 1 to 6
             int newPwm = int.Parse(currentPwm) - delta;
-            this._usb.sendData("M" + motor.ToString() + newPwm.ToString());
+            String motorNumber="x";
+            if (motor == 1) motorNumber = "a";
+            else if(motor==2) motorNumber = "b";
+            else if (motor == 3) motorNumber = "c";
+            else if (motor == 4) motorNumber = "d";
+            else if (motor == 5) motorNumber = "e";
+            else if (motor == 6) motorNumber = "f";
+
+            for (int i=0; i< 5; i++)
+            {
+                this._usb.sendDataRobust("M" + motorNumber + newPwm.ToString());
+                await Task.Delay(100);
+            }
+
+            
+            //Console.WriteLine("M" + motorNumber + newPwm.ToString() + ";");
         }
 
-        public void increase(int motor, string currentPwm, int delta)
+        public async void increase(int motor, string currentPwm, int delta)
         {
             int newPwm = int.Parse(currentPwm) + delta;
-            this._usb.sendData("M" + motor.ToString() + newPwm.ToString());
+            String motorNumber = "x";
+            if (motor == 1) motorNumber = "a";
+            else if (motor == 2) motorNumber = "b";
+            else if (motor == 3) motorNumber = "c";
+            else if (motor == 4) motorNumber = "d";
+            else if (motor == 5) motorNumber = "e";
+            else if (motor == 6) motorNumber = "f";
+
+            for (int i = 0; i < 5; i++)
+            {
+                this._usb.sendDataRobust("M" + motorNumber + newPwm.ToString());
+                await Task.Delay(100);
+            }
+            //Console.WriteLine("M" + motorNumber + newPwm.ToString() + ";");
+        }
+
+        public void testSend()
+        {
+            _usb.sendDataRobust("asdfasd");
         }
 
 
         public void openNavPIDMonitor()
         {
-            this._navPidMonitor = NavPIDMonitor.Instance();
-            this._navPidMonitor.MainCtrl = this;
-            this._navPidMonitor.Closing += closeNavPIDMonitor;
-            this._navPidMonitorIsOpen = true;
-            this._navPidMonitor.Show();
+            if(!_navPidMonitorIsOpen)
+            {
+                openInfoChoiceMonitor();
+                _infoChoiceMonitor.autoSetPidNavDebugMode();
+                this._navPidMonitor = NavPIDMonitor.Instance();
+                this._navPidMonitor.MainCtrl = this;
+                this._navPidMonitor.Closing += closeNavPIDMonitor;
+                this._navPidMonitorIsOpen = true;
+                this._navPidMonitor.Show();
+
+                this.requestNavPidOnOffStatus();
+                this.requestNavPidConst();
+            }
+            
         }
         public void closeNavPIDMonitor(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this._navPidMonitorIsOpen = false;
+            openInfoChoiceMonitor();
+            _infoChoiceMonitor.autoClosePidNavDebugMode();
         }
 
-        public void openPIDMonitor()
+        public void openAttPIDMonitor()
         {
-            if (!_pidMonitorIsOpen)
+            if (!_attPidMonitorIsOpen)
             {
-               this._pidMonitor = new PIDMonitor(this);
-               this._pidMonitorIsOpen = true;
-               this._pidMonitor.Show();
+                openInfoChoiceMonitor();
+                _infoChoiceMonitor.autoSetPidAttDebugMode();
+                this._attPidMonitor = AttPIDMonitor.Instance();
+                this._attPidMonitor.MainCtrl = this;
+                this._attPidMonitor.Closing += closeAttPIDMonitor;
+                this._attPidMonitorIsOpen = true;
+                this._attPidMonitor.Show();
 
-               this.requestPidOnOffStatus();
-               //this.requestPidConst();
-
+                this.requestAttPidOnOffStatus();
+                this.requestAttPidConst();
             }
         }
 
-        public void closePIDMonitor(object sender, System.ComponentModel.CancelEventArgs e)
+        public void closeAttPIDMonitor(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            this._pidMonitorIsOpen = false;
+            openInfoChoiceMonitor();
+            _infoChoiceMonitor.autoClosePidAttDebugMode();
+            this._attPidMonitorIsOpen = false;
+            
         }
 
         public void openJoyStick()
@@ -733,10 +733,30 @@ namespace MPU6050DataCollector.Controllers
             this._joyStickIsOpen = false;
 
         }
+
+        public void openInfoChoiceMonitor()
+        {
+            if (!_infoChoiceMonitorIsOpen)
+            {
+                this._infoChoiceMonitor = InfoChoiceMonitor.Instance();
+                this._infoChoiceMonitor.MainCtrl = this;
+                this._infoChoiceMonitor.Closing += closeInfoChoiceMonitor;
+                this._infoChoiceMonitorIsOpen = true;
+                this._infoChoiceMonitor.Show();
+            }
+        }
+
+        public void closeInfoChoiceMonitor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this._infoChoiceMonitorIsOpen = false;
+
+        }
+
+
         public void updateThrottle(int val)
         {
             string msg = "TH" + val.ToString();
-            this._usb.sendData(msg);
+            this._usb.sendDataRobust(msg);
             Console.WriteLine(val);
 
         }
@@ -746,54 +766,8 @@ namespace MPU6050DataCollector.Controllers
             int pitch = (int)( p * 100);
             
 
-            String msg1 = "RA";
-            
-
-            if (pitch >= 0)
-            {
-                msg1 = msg1 + "1";
-                if (pitch==0)
-                {
-                    msg1 = msg1 + "0000";
-                }
-                else if (pitch<100)
-                {
-                    msg1 = msg1 + "000";
-                }
-                else if(pitch <1000)
-                {
-                    msg1 = msg1 + "00";
-                }
-                else if (pitch < 10000)
-                {
-                    msg1 = msg1 + "0";
-                }
-                msg1 = msg1 + pitch.ToString();
-            }
-            else if(pitch < 0)
-            {
-                msg1 = msg1 + "2";
-                pitch = -pitch;
-                if (pitch == 0)
-                {
-                    msg1 = msg1 + "0000";
-                }
-                else if (pitch < 100)
-                {
-                    msg1 = msg1 + "000";
-                }
-                else if (pitch < 1000)
-                {
-                    msg1 = msg1 + "00";
-                }
-                else if (pitch < 10000)
-                {
-                    msg1 = msg1 + "0";
-                }
-                msg1 = msg1 + (pitch).ToString();
-            }
-
-            
+            String msg1 = "CA" + pitch.ToString();
+                             
             this._usb.sendData(msg1);
             
             Console.WriteLine(msg1);
@@ -804,58 +778,7 @@ namespace MPU6050DataCollector.Controllers
         {
             
             int roll = (int) (r * 100);
-            
-
-            
-            String msg2 = "RA";
-
-            if (roll >= 0)
-            {
-                msg2 = msg2 + "3";
-                if (roll==0)
-                {
-                    msg2 = msg2 + "0000";
-                }
-                else if (roll < 100)
-                {
-                    msg2 = msg2 + "000";
-                }
-                else if (roll < 1000)
-                {
-                    msg2 = msg2 + "00";
-                }
-                else if (roll < 10000)
-                {
-                    msg2 = msg2 + "0";
-                }
-                msg2 = msg2 + roll.ToString();
-            }
-            else if (roll < 0)
-            {
-                roll = -roll;
-                msg2 = msg2 + "4";
-                if (roll == 0)
-                {
-                    msg2 = msg2 + "0000";
-                }
-                else if (roll < 100)
-                {
-                    msg2 = msg2 + "000";
-                }
-                else if (roll < 1000)
-                {
-                    msg2 = msg2 + "00";
-                }
-                else if (roll < 10000)
-                {
-                    msg2 = msg2 + "0";
-                }
-                msg2 = msg2 + (roll).ToString();
-
-                
-            }
-
-
+            String msg2 = "CB" + roll.ToString();
             this._usb.sendData(msg2);
             Console.WriteLine(msg2);
 
@@ -866,53 +789,8 @@ namespace MPU6050DataCollector.Controllers
         {
             int yaw = (int) (y*100);
 
-            String msg3 = "RA";
-
-
-            if (yaw >= 0)
-            {
-                msg3 = msg3 + "5";
-                if (yaw == 0)
-                {
-                    msg3 = msg3 + "0000";
-                }
-                else if (yaw < 100)
-                {
-                    msg3 = msg3 + "000";
-                }
-                else if (yaw < 1000)
-                {
-                    msg3 = msg3 + "00";
-                }
-                else if (yaw < 10000)
-                {
-                    msg3 = msg3 + "0";
-                }
-                msg3 = msg3 + yaw.ToString();
-            }
-            else if (yaw < 0)
-            {
-                msg3 = msg3 + "6";
-                yaw = -yaw;
-                if (yaw == 0)
-                {
-                    msg3 = msg3 + "0000";
-                }
-                else if (yaw < 100)
-                {
-                    msg3 = msg3 + "000";
-                }
-                else if (yaw < 1000)
-                {
-                    msg3 = msg3 + "00";
-                }
-                else if (yaw < 10000)
-                {
-                    msg3 = msg3 + "0";
-                }
-                msg3 = msg3 + (yaw).ToString();
-            }
-
+            String msg3 = "CC" + yaw.ToString();
+            
             this._usb.sendData(msg3);
             Console.WriteLine(msg3);
 

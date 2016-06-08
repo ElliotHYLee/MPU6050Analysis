@@ -241,7 +241,7 @@ namespace MPU6050DataCollector
 
         private void btnGetPidConst_Click(object sender, RoutedEventArgs e)
         {
-            this._ctrl.requestPidConst();
+            this._ctrl.requestAttPidConst();
         }
 
         //private void btnSetPidConst_Click(object sender, RoutedEventArgs e)
@@ -254,10 +254,7 @@ namespace MPU6050DataCollector
 
         }
 
-        private void btnPidControl_Click(object sender, RoutedEventArgs e)
-        {
-            this._ctrl.setPidStatus();
-        }
+
 
         private void btnDecreaseMotor1By_Click(object sender, RoutedEventArgs e)
         {
@@ -324,7 +321,7 @@ namespace MPU6050DataCollector
 
         private void btnOpenPID_Click(object sender, RoutedEventArgs e)
         {
-            this._ctrl.openPIDMonitor();
+            this._ctrl.openAttPIDMonitor();
         }
 
         
@@ -421,6 +418,16 @@ namespace MPU6050DataCollector
         private void btnOPenNavPID_Click(object sender, RoutedEventArgs e)
         {
             this._ctrl.openNavPIDMonitor();
+        }
+
+        private void btnTest_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.testSend();
+        }
+
+        private void btnInfoChoice_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.openInfoChoiceMonitor();
         }
 
 

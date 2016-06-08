@@ -1,0 +1,254 @@
+﻿<Window x:Class="MPU6050DataCollector.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AttitudeAnalyzer" Height="1021.711" Width="1247.482"
+        Loaded="MainWindow_Loaded">
+    <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Background="#FF8FABDC">
+        <Grid Name="mainGrid" Width="1222" >
+            <Button Name="btnSave" Content="Save Recorded" HorizontalAlignment="Left" Margin="1009,70,0,0" VerticalAlignment="Top" Width="106" Height="20" Click="btnSave_Click" Grid.RowSpan="2"/>
+            <Button Name="btnCollect" Content="Collect Data" HorizontalAlignment="Left" Height="20" Margin="544,67,0,0" VerticalAlignment="Top" Width="106" Click="btnCollect_Click" Grid.RowSpan="2"/>
+            <TextBox Name="txtNumberOfData" HorizontalAlignment="Left" Height="23" Margin="390,67,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Grid.RowSpan="2"/>
+            <Button Name ="btnConnect" Content="Connect" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="260,66,0,0" Click="btnConnect_Clicked" Grid.RowSpan="2"/>
+            <Label Content="Com Port" HorizontalAlignment="Left" Margin="49,30,0,0" VerticalAlignment="Top" Height="26" Width="71" Grid.RowSpan="2"/>
+            <Label Content="BaudRate" HorizontalAlignment="Left" Margin="49,60,0,0" VerticalAlignment="Top" Height="26" Width="71" Grid.RowSpan="2"/>
+            <ComboBox Name="comboPorts" HorizontalAlignment="Left" Margin="125,30,0,0" VerticalAlignment="Top" Width="120" Grid.RowSpan="2" />
+            <Button Name="btnRefresh" Content="Refresh" HorizontalAlignment="Left" Margin="260,30,0,0" VerticalAlignment="Top" Width="76" RenderTransformOrigin="-0.291,1.639" Click="btnRefresh_Click" Grid.RowSpan="2"/>
+            <ComboBox Name="comboBaudRate" HorizontalAlignment="Left" Margin="125,64,0,0" VerticalAlignment="Top" Width="120" Grid.RowSpan="2"/>
+            <TextBox Name="txtFileName" HorizontalAlignment="Left" Height="26" Margin="1009,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="106" Grid.RowSpan="2"/>
+            <Label Name="lblAddress" Content="Label" HorizontalAlignment="Left" Height="24" Margin="390,30,0,0" VerticalAlignment="Top" Width="614" Grid.RowSpan="2"/>
+            <Label Name="lblBoard" Content="Label" HorizontalAlignment="Left" Height="32" Margin="674,67,0,0" VerticalAlignment="Top" Width="330" Grid.RowSpan="2"/>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="366" Margin="45,333,0,0" VerticalAlignment="Top" Width="930">
+                <Grid Height="366" Margin="-1" VerticalAlignment="Top">
+                    <TextBox Name="txtMotor1" HorizontalAlignment="Left" Height="23" Margin="74,66,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="86"  />
+                    <Button Name="btnDecreaseMotor1" Content="Dec1" HorizontalAlignment="Left" Margin="168,64,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor1_Click"/>
+                    <Button Name="btnIncreaseMotor1" Content="Up1" HorizontalAlignment="Left" Margin="502,64,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor1_Click"/>
+                    <TextBox Name="txtMotor2" HorizontalAlignment="Left" Height="22" Margin="74,105,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="86"  />
+                    <Button Name="btnDecreaseMotor2" Content="Dec1" HorizontalAlignment="Left" Margin="168,103,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor2_Click"/>
+                    <Button Name="btnIncreaseMotor2" Content="Up1" HorizontalAlignment="Left" Margin="502,106,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor2_Click"/>
+                    <TextBox Name="txtMotor3"  HorizontalAlignment="Left" Height="23" Margin="74,144,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="86"  />
+                    <Button Name="btnDecreaseMotor3" Content="Dec1" HorizontalAlignment="Left" Margin="168,146,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor3_Click"/>
+                    <Button Name="btnIncreaseMotor3" Content="Up1" HorizontalAlignment="Left" Margin="502,146,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor3_Click"/>
+                    <TextBox Name="txtMotor4" HorizontalAlignment="Left" Height="23" Margin="74,184,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="86" TextChanged="txtMotor4_TextChanged" />
+                    <Button Name="btnDecreaseMotor4" Content="Dec1" HorizontalAlignment="Left" Margin="168,186,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor4_Click"/>
+                    <Button Name="btnIncreaseMotor4" Content="Up1" HorizontalAlignment="Left" Margin="502,186,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor4_Click"/>
+                    <Button Name="btnStartPWM" Content="PrepareMode" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top" Width="78" Click="btnStartPWM_Click" Height="27" Background="YellowGreen"/>
+                    <Label Content="Motor1" HorizontalAlignment="Left" Margin="16,63,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.407,0.125" Width="52"/>
+                    <Label Content="Motor2" HorizontalAlignment="Left" Margin="16,102,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.407,0.125" Width="52"/>
+                    <Label Content="Motor3" HorizontalAlignment="Left" Margin="16,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.407,0.125" Width="52"/>
+                    <Label Content="Motor4" HorizontalAlignment="Left" Margin="16,181,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.407,0.125" Width="52"/>
+                    <Slider Name="moterSlide1" HorizontalAlignment="Left" Margin="264,62,0,0" VerticalAlignment="Top" Height="23" Width="216" RenderTransformOrigin="0.5,0.5" ValueChanged="moterSlide1_ValueChanged" >
+                        <Slider.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0.198"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Slider.RenderTransform>
+                    </Slider>
+                    <Slider Name="motorSlide2" HorizontalAlignment="Left" Margin="264,107,0,0" VerticalAlignment="Top" Height="23" Width="216" RenderTransformOrigin="0.5,0.5" >
+                        <Slider.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0.198"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Slider.RenderTransform>
+                    </Slider>
+                    <Slider Name="motorSlide3" HorizontalAlignment="Left" Margin="264,148,0,0" VerticalAlignment="Top" Height="23" Width="216" RenderTransformOrigin="0.5,0.5" >
+                        <Slider.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0.198"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Slider.RenderTransform>
+                    </Slider>
+                    <Slider Name="motorSlide4" HorizontalAlignment="Left" Margin="264,185,0,0" VerticalAlignment="Top" Height="23" Width="216" RenderTransformOrigin="0.574,5.89" ValueChanged="motorSlide4_ValueChanged" >
+                        <Slider.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0.198"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Slider.RenderTransform>
+                    </Slider>
+                    <Button Name="btnIncreaseAll" Content="Increase All" HorizontalAlignment="Left" Margin="502,14,0,0" VerticalAlignment="Top" Width="70" Click="btnIncreaseAll_Click"/>
+                    <Button Name="btnDecreaseAll" Content="Decrease All" HorizontalAlignment="Left" Margin="168,14,0,0" VerticalAlignment="Top" Width="70" Click="btnDecreaseAll_Click"/>
+                    <TextBox Name ="txtDecraseCalInterval" HorizontalAlignment="Left" Height="20" Margin="168,39,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="70"/>
+                    <TextBox Name ="txtIncraseCalInterval" HorizontalAlignment="Left" Height="20" Margin="502,39,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="70" RenderTransformOrigin="1.057,-1.6"/>
+                    <Button Name="btnStop" Content="Idle Mode" HorizontalAlignment="Left" Margin="380,10,0,0" VerticalAlignment="Top" Width="80" Height="27" Click="btnStop_Click" Background="Red"/>
+                    <Button Name="btnIncreaseMotor1By" Content="UpAs" HorizontalAlignment="Left" Margin="539,64,0,0" VerticalAlignment="Top" Width="33" Height="20" Click="btnIncreaseMotor1By_Click" />
+                    <Button Name="btnIncreaseMotor2By" Content="UpAs" HorizontalAlignment="Left" Margin="539,106,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor2By_Click" />
+                    <Button Name="btnIncreaseMotor3By" Content="UpAs" HorizontalAlignment="Left" Margin="539,146,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor3By_Click"/>
+                    <Button Name="btnIncreaseMotor4By" Content="UpAs" HorizontalAlignment="Left" Margin="539,186,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor4By_Click"/>
+                    <Button Name="btnDecreaseMotor1By" Content="DecBy" HorizontalAlignment="Left" Margin="202,64,0,0" VerticalAlignment="Top" Width="36" Height="20" Click="btnDecreaseMotor1By_Click" />
+                    <Button Name="btnDecreaseMotor2By" Content="DecBy" HorizontalAlignment="Left" Margin="202,103,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor2By_Click" />
+                    <Button Name="btnDecreaseMotor3By" Content="DecBy" HorizontalAlignment="Left" Margin="202,146,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor3By_Click"/>
+                    <Button Name="btnDecreaseMotor4By" Content="DecBy" HorizontalAlignment="Left" Margin="202,186,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor4By_Click"/>
+                    <TextBox Name="txtMainThrottle" HorizontalAlignment="Left" Height="23" Margin="606,53,0,0" TextWrapping="Wrap" Text="Throttle" VerticalAlignment="Top" Width="86"  />
+                    <Label Content="Main Throttle" HorizontalAlignment="Left" Margin="606,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.407,0.125" Width="86"/>
+                    <TextBox Name="txtMotor5"  HorizontalAlignment="Left" Height="23" Margin="74,221,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="86"  />
+                    <Button Name="btnDecreaseMotor5" Content="Dec1" HorizontalAlignment="Left" Margin="168,223,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor5_Click"/>
+                    <Button Name="btnIncreaseMotor5" Content="Up1" HorizontalAlignment="Left" Margin="502,223,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor5_Click"/>
+                    <TextBox Name="txtMotor6" HorizontalAlignment="Left" Height="23" Margin="74,261,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="86" TextChanged="txtMotor6_TextChanged" />
+                    <Button Name="btnDecreaseMotor6" Content="Dec1" HorizontalAlignment="Left" Margin="168,263,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor6_Click"/>
+                    <Button Name="btnIncreaseMotor6" Content="Up1" HorizontalAlignment="Left" Margin="502,263,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor6_Click"/>
+                    <Label Content="Motor5" HorizontalAlignment="Left" Margin="16,221,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.407,0.125" Width="52"/>
+                    <Label Content="Motor6" HorizontalAlignment="Left" Margin="16,258,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.407,0.125" Width="52"/>
+                    <Slider Name="motorSlide5" HorizontalAlignment="Left" Margin="264,225,0,0" VerticalAlignment="Top" Height="23" Width="216" RenderTransformOrigin="0.5,0.5" >
+                        <Slider.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0.198"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Slider.RenderTransform>
+                    </Slider>
+                    <Slider Name="motorSlide6" HorizontalAlignment="Left" Margin="264,262,0,0" VerticalAlignment="Top" Height="23" Width="216" RenderTransformOrigin="0.574,5.89" >
+                        <Slider.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0.198"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Slider.RenderTransform>
+                    </Slider>
+                    <Button Name="btnIncreaseMotor5By" Content="UpAs" HorizontalAlignment="Left" Margin="539,223,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor5By_Click"/>
+                    <Button Name="btnIncreaseMotor6By" Content="UpAs" HorizontalAlignment="Left" Margin="539,263,0,0" VerticalAlignment="Top" Width="37" Height="20" Click="btnIncreaseMotor6By_Click"/>
+                    <Button Name="btnDecreaseMotor5By" Content="DecBy" HorizontalAlignment="Left" Margin="202,223,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor5By_Click"/>
+                    <Button Name="btnDecreaseMotor6By" Content="DecBy" HorizontalAlignment="Left" Margin="202,263,0,0" VerticalAlignment="Top" Width="34" Height="20" Click="btnDecreaseMotor6By_Click"/>
+                    <Slider Name="sldrMainThrottle" Orientation="Vertical" HorizontalAlignment="Left" Height="245" Margin="606,81,0,0" VerticalAlignment="Top" Width="22" ValueChanged="sldrMainThrottle_ValueChanged"/>
+                    <Button Name="btnThrottleUp100" Content="+100" HorizontalAlignment="Left" Height="29" Margin="633,175,0,0" VerticalAlignment="Top" Width="63" Click="btnThrottleUp100_Click" />
+                    <Button Name="btnThrottleDown100" Content="-100" HorizontalAlignment="Left" Height="29" Margin="633,298,0,0" VerticalAlignment="Top" Width="63" Click="btnThrottleDown100_Click"/>
+                    <Button Name="btnThrottleUp50" Content="+50" HorizontalAlignment="Left" Height="31" Margin="633,216,0,0" VerticalAlignment="Top" Width="63" Click="btnThrottleUp50_Click"/>
+                    <Button Name="btnThrottleDown50" Content="-50" HorizontalAlignment="Left" Height="31" Margin="633,255,0,0" VerticalAlignment="Top" Width="63" Click="btnThrottleDown50_Click"/>
+                    <Label Content="Set As:" HorizontalAlignment="Left" Height="28" Margin="633,76,0,0" VerticalAlignment="Top" Width="59"/>
+                    <TextBox Name="txtSetThrottle" HorizontalAlignment="Left" Height="31" Margin="633,106,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="59"/>
+                    <Button Name="btnSetThrottle" Content="Set" HorizontalAlignment="Left" Height="29" Margin="633,137,0,0" VerticalAlignment="Top" Width="59" Click="btnSetThrottle_Click"/>
+                    <Button x:Name="btnPreTakeOff" Content="preTakeOff" HorizontalAlignment="Left" Height="27" Margin="750,32,0,0" VerticalAlignment="Top" Width="88" Click="btnPreTakeOff_Click"/>
+                    <Button x:Name="btnTakeOff" Content="TakeOff" HorizontalAlignment="Left" Height="28" Margin="750,76,0,0" VerticalAlignment="Top" Width="88" Click="btnTakeOff_Click"/>
+                </Grid>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="366" Margin="975,333,0,0" VerticalAlignment="Top" Width="194">
+                <Grid HorizontalAlignment="Right" Height="366" Margin="-1" VerticalAlignment="Top" Width="194">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Name="lblPidIndicator" Content="PID ON" HorizontalAlignment="Left" Height="28" Margin="10,36,0,0" VerticalAlignment="Top" Width="66"/>
+                    <Label Name="lblMpuIndicator" Content="MPU ON" HorizontalAlignment="Left" Height="28" Margin="10,74,0,0" VerticalAlignment="Top" Width="66"/>
+                    <Button Name="btnPidControl" Content="PID On/Off" HorizontalAlignment="Left" Height="20" Margin="80,38,0,0" VerticalAlignment="Top" Width="90" Click="btnPidControl_Click"/>
+                    <Button Name="btnMpuControl" Content="MPU On/Off" HorizontalAlignment="Left" Height="20" Margin="80,78,0,0" VerticalAlignment="Top" Width="90"/>
+                    <Button Name="btnOpenPID" Content="OpenPIDMonitor" HorizontalAlignment="Left" Height="30" Margin="10,128,0,0" VerticalAlignment="Top" Width="104" Click="btnOpenPID_Click"/>
+                    <Button Name="btnJoyStick" Content="JoyStick" HorizontalAlignment="Left" Height="37" Margin="10,163,0,0" VerticalAlignment="Top" Width="102" Click="btnJoyStick_Click"/>
+                    <Button Name="btnOPenNavPID" Content="OpenNavPIDMonitor" HorizontalAlignment="Left" Height="32" Margin="10,205,0,0" VerticalAlignment="Top" Width="128" Click="btnOPenNavPID_Click"/>
+                </Grid>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="229" Margin="45,99,0,0" VerticalAlignment="Top" Width="1124">
+                <Grid HorizontalAlignment="Left" Height="229" Margin="-1" VerticalAlignment="Top" Width="1124">
+                    <Label Content="X-Raw" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,17,0,0" Width="106"/>
+                    <Label Content="Y-Raw" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="227,17,0,0" Width="106"/>
+                    <Label Content="Z-Raw" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="357,17,0,0" Width="106"/>
+                    <Label Content="Gyro" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,45,0,0" Width="72" Height="32"/>
+                    <Label Content="Acc" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,81,0,0" Width="72" Height="32"/>
+                    <Label Content="CompFilter(deg)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-10,121,0,0" Width="99" Height="32"/>
+                    <Label Content="X-DirCos / Degree" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="619,17,0,0" Width="106"/>
+                    <Label Content="Y-DirCos / Degree" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="757,17,0,0" Width="106"/>
+                    <Label Content="Z-DirCos / Degree" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="887,17,0,0" Width="106"/>
+                    <Label Content="Norm" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="481,17,0,0" Width="106"/>
+
+                    <TextBox x:Name="txtGRawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="89,49,0,0"/>
+                    <TextBox x:Name="txtGRawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="227,49,0,0"/>
+                    <TextBox x:Name="txtGRawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="357,49,0,0"/>
+                    <TextBox x:Name="txtARawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="89,85,0,0"/>
+                    <TextBox x:Name="txtARawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="227,85,0,0"/>
+                    <TextBox x:Name="txtARawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="357,85,0,0"/>
+                    <TextBox x:Name="txtCRawX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="106" Margin="89,121,0,0" TextChanged="txtCRawX_TextChanged"/>
+                    <TextBox x:Name="txtCRawY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="106" Margin="227,121,0,0" TextChanged="txtCRawY_TextChanged"/>
+                    <TextBox x:Name="txtCRawZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="106" Margin="357,121,0,0"/>
+
+                    <TextBox x:Name="txtGNorm" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="481,49,0,0"/>
+                    <TextBox x:Name="txtANorm" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="481,85,0,0"/>
+                    <TextBox x:Name="txtCNorm" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="481,121,0,0"/>
+
+                    <TextBox x:Name="txtGDirCosX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="619,49,0,0"/>
+                    <TextBox x:Name="txtGDegreeX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="672,49,0,0"/>
+                    <TextBox x:Name="txtADirCosX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="619,85,0,0"/>
+                    <TextBox x:Name="txtADegreeX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="672,85,0,0"/>
+                    <TextBox x:Name="txtCDirCosX"  HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="619,121,0,0"/>
+                    <TextBox x:Name="txtCDegreeX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="672,121,0,0" TextChanged="txtCDegreeX_TextChanged"/>
+
+                    <TextBox x:Name="txtGDirCosY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="757,49,0,0"/>
+                    <TextBox x:Name="txtGDegreeY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="810,49,0,0"/>
+                    <TextBox x:Name="txtADirCosY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="757,85,0,0"/>
+                    <TextBox x:Name="txtADegreeY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="810,85,0,0"/>
+                    <TextBox x:Name="txtCDirCosY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="757,121,0,0"/>
+                    <TextBox x:Name="txtCDegreeY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="810,121,0,0"/>
+
+                    <TextBox x:Name="txtGDirCosZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="887,49,0,0"/>
+                    <TextBox x:Name="txtGDegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="940,49,0,0"/>
+                    <TextBox x:Name="txtADirCosZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="887,85,0,0"/>
+                    <TextBox x:Name="txtADegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="940,85,0,0"/>
+                    <TextBox x:Name="txtCDirCosZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="887,121,0,0"/>
+                    <TextBox x:Name="txtCDegreeZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53" Margin="940,121,0,0"/>
+                    <Label Content="Heading(deg)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,159,0,0" Width="84" Height="32"/>
+                    <TextBox Name="txtHeadingX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="89,159,0,0"/>
+                    <TextBox Name="txtHeadingY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="227,159,0,0"/>
+                    <TextBox Name="txtHeadingZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="357,159,0,0"/>
+                    <Label Content="Control Ref (deg)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="592,196,0,0" Width="106" Height="32"/>
+                    <TextBox x:Name="txtCtrlRoll" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="698,197,0,0"/>
+                    <TextBox x:Name="txtCtrlPitch" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="826,196,0,0"/>
+                    <TextBox x:Name="txtCtrlYaw" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="952,197,0,0"/>
+                    <Label Name="label" Content="Dist2Gnd (mm)" HorizontalAlignment="Left" Height="23" Margin="1008,17,0,0" VerticalAlignment="Top" Width="106"/>
+                    <TextBox Name="txtDist2Gnd" HorizontalAlignment="Left" Height="22" Margin="1008,49,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106"/>
+                    <Label Content="Local Coord (mm)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="586,159,0,0" Width="106" Height="32"/>
+                    <TextBox x:Name="txtLocalCoordX" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="696,159,0,0"/>
+                    <TextBox x:Name="txtLocalCoordY" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="826,159,0,0"/>
+                    <TextBox x:Name="txtLocalCoordZ" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106" Margin="952,159,0,0"/>
+                </Grid>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="260" Margin="45,699,0,0" VerticalAlignment="Top" Width="1124">
+                <Grid HorizontalAlignment="Left" Height="262" Margin="-1,-1,-1,-3" VerticalAlignment="Top" Width="1124">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="58*"/>
+                        <RowDefinition Height="73*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="listInfoType" HorizontalAlignment="Left" Height="174" Margin="16,47,0,0" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+                    <Label Content="Incoming Data" HorizontalAlignment="Left" Height="26" Margin="16,21,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="220,21,0,0" VerticalAlignment="Top" Width="200" Grid.RowSpan="2">
+                        <Canvas x:Name="canvasAttitudeX" HorizontalAlignment="Left" Height="200" Margin="-1" VerticalAlignment="Top" Width="200"/>
+                    </Border>
+
+                    <Label Content="XZ-Plane (left view)" HorizontalAlignment="Left" Height="30" Margin="261,105,0,0" VerticalAlignment="Top" Width="110" Grid.Row="1"/>
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="570,21,0,0" VerticalAlignment="Top" Width="200" Grid.RowSpan="2">
+                        <Canvas x:Name="canvasAttitudeY" HorizontalAlignment="Left" Height="200" Margin="-1,-1,0,-1" VerticalAlignment="Top" Width="200"/>
+                    </Border>
+                    <Label Content="YZ-Plane (Rear View)" HorizontalAlignment="Left" Height="30" Margin="608,110,0,0" VerticalAlignment="Top" Width="121" Grid.Row="1"/>
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="880,21,0,0" VerticalAlignment="Top" Width="200" Grid.RowSpan="2">
+                        <Canvas Name="canvasHeading" HorizontalAlignment="Left" Height="200" Margin="-1" VerticalAlignment="Top" Width="200">
+                            <Canvas Name="canvasHeading_indicator" Height="94" Canvas.Left="54" Canvas.Top="54" Width="92" RenderTransformOrigin="0.489,0.537"/>
+                        </Canvas>
+
+                    </Border>
+                    <Label Content="XY-Plane" HorizontalAlignment="Left" Height="30" Margin="956,105,0,0" VerticalAlignment="Top" Width="66" Grid.Row="1"/>
+                    <Label x:Name="label1" Content="Front" HorizontalAlignment="Left" Height="26" Margin="171,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="44" RenderTransformOrigin="0.234,0.615"/>
+                    <Label x:Name="label1_Copy" Content="Back" HorizontalAlignment="Left" Height="26" Margin="420,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="44" RenderTransformOrigin="0.234,0.615"/>
+                    <Label x:Name="label1_Copy1" Content="Left" HorizontalAlignment="Left" Height="26" Margin="521,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="44" RenderTransformOrigin="0.234,0.615"/>
+                    <Label x:Name="label1_Copy2" Content="Right" HorizontalAlignment="Left" Height="26" Margin="775,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="44" RenderTransformOrigin="0.234,0.615"/>
+                </Grid>
+            </Border>
+            <TextBox Name="txtHeading" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="84" Margin="528,260,0,0"/>
+            <Button x:Name ="btnTest" Content="Test Msg" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="824,501,0,0" Click="btnTest_Click"/>
+
+
+
+
+
+        </Grid>
+    </ScrollViewer>
+</Window>

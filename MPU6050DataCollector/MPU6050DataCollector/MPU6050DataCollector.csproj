@@ -59,21 +59,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AbsAddress.cs" />
-    <Compile Include="JoyStickController.cs">
+    <Compile Include="Auxiliary\AbsAddress.cs" />
+    <Compile Include="Monitors\InfoChoiceMonitor.xaml.cs">
+      <DependentUpon>InfoChoiceMonitor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Monitors\JoyStickController.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="JoyStickController.Designer.cs">
+    <Compile Include="Monitors\JoyStickController.Designer.cs">
       <DependentUpon>JoyStickController.cs</DependentUpon>
     </Compile>
-    <Compile Include="LineAttitude.cs" />
-    <Compile Include="NavPIDMonitor.xaml.cs">
+    <Compile Include="Auxiliary\LineAttitude.cs" />
+    <Compile Include="Monitors\PID\NavPIDMonitor.xaml.cs">
       <DependentUpon>NavPIDMonitor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PIDMonitor.xaml.cs">
-      <DependentUpon>PIDMonitor.xaml</DependentUpon>
+    <Compile Include="Monitors\PID\AttPidMonitor.xaml.cs">
+      <DependentUpon>AttPidMonitor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tokenizer.cs" />
+    <Compile Include="Auxiliary\Tokenizer.cs" />
     <Page Include="AttitudeAnalyzer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,11 +89,15 @@
       <DependentUpon>AttitudeAnalyzer.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NavPIDMonitor.xaml">
+    <Page Include="Monitors\InfoChoiceMonitor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PIDMonitor.xaml">
+    <Page Include="Monitors\PID\NavPIDMonitor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Monitors\PID\AttPidMonitor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,7 +119,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="JoyStickController.resx">
+    <EmbeddedResource Include="Monitors\JoyStickController.resx">
       <DependentUpon>JoyStickController.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
