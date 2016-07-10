@@ -255,7 +255,9 @@ namespace MPU6050DataCollector
             tempList.Add(0);
             tempList.Add(4);
             tempList.Add(5);
+            tempList.Add(6);
             tempList.Add(9);
+            tempList.Add(10);
             for (int i = 0; i < numberOfCheckBox; i++)
             {
                 if (tempList.Contains(i)) chkBoxArr[i].IsChecked = true;

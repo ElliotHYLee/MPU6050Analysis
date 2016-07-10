@@ -613,10 +613,11 @@ namespace MPU6050DataCollector.Controllers
             this._main.sldrMainThrottle.Maximum = 2500;
         }
         
-        public async void decrease(int motor, string currentPwm, int delta)
+        public void decrease(int motor, string currentPwm, int delta)
         {
             // motor : from 1 to 6
-            int newPwm = int.Parse(currentPwm) - delta;
+            //int newPwm = int.Parse(currentPwm) - delta;
+            int newPwm =  -delta;
             String motorNumber="x";
             if (motor == 1) motorNumber = "a";
             else if(motor==2) motorNumber = "b";
@@ -625,19 +626,34 @@ namespace MPU6050DataCollector.Controllers
             else if (motor == 5) motorNumber = "e";
             else if (motor == 6) motorNumber = "f";
 
-            for (int i=0; i< 5; i++)
-            {
-                this._usb.sendDataRobust("M" + motorNumber + newPwm.ToString());
-                await Task.Delay(100);
-            }
+          
+            this._usb.sendData("M" + motorNumber + newPwm.ToString());
+           
 
             
             //Console.WriteLine("M" + motorNumber + newPwm.ToString() + ";");
         }
 
-        public async void increase(int motor, string currentPwm, int delta)
+        public void increaseAll(int delta)
         {
-            int newPwm = int.Parse(currentPwm) + delta;
+            String motorNumber = "g";
+            
+            this._usb.sendData("M" + motorNumber + delta.ToString());
+               
+            
+        }
+        public  void decreaseAll(int delta)
+        {
+            String motorNumber = "g";
+
+            this._usb.sendData("M" + motorNumber +"-"+ delta.ToString());
+                
+            
+        }
+        public  void increase(int motor, string currentPwm, int delta)
+        {
+            //int newPwm = int.Parse(currentPwm) + delta;
+            int newPwm = delta;
             String motorNumber = "x";
             if (motor == 1) motorNumber = "a";
             else if (motor == 2) motorNumber = "b";
@@ -646,11 +662,9 @@ namespace MPU6050DataCollector.Controllers
             else if (motor == 5) motorNumber = "e";
             else if (motor == 6) motorNumber = "f";
 
-            for (int i = 0; i < 5; i++)
-            {
-                this._usb.sendDataRobust("M" + motorNumber + newPwm.ToString());
-                await Task.Delay(100);
-            }
+           
+           this._usb.sendData("M" + motorNumber + newPwm.ToString());
+            
             //Console.WriteLine("M" + motorNumber + newPwm.ToString() + ";");
         }
 

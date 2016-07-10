@@ -1,8 +1,7 @@
 ﻿<Window x:Class="MPU6050DataCollector.AttPIDMonitor"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="PIDMonitor" Height="449" Width="606"
-        >
+        Title="PIDMonitor" Height="449" Width="606" >
     <Grid>
         <TextBox Name="txtXKp" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="76" Margin="90,41,0,0"/>
         <Label Content="xKp" HorizontalAlignment="Left" Height="27" Margin="55,37,0,0" VerticalAlignment="Top" Width="30"/>
@@ -10,14 +9,14 @@
         <Label Content="xKd" HorizontalAlignment="Left" Height="27" Margin="55,95,0,0" VerticalAlignment="Top" Width="30"/>
         <TextBox Name="txtXKi" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="76" Margin="90,73,0,0"/>
         <Label Content="xKi" HorizontalAlignment="Left" Height="27" Margin="55,69,0,0" VerticalAlignment="Top" Width="30"/>
-        <Label Content="X-Axis" HorizontalAlignment="Left" Height="27" Margin="55,10,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label Content="Pitch" HorizontalAlignment="Left" Height="27" Margin="55,10,0,0" VerticalAlignment="Top" Width="101"/>
         <TextBox Name="txtYKp" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="81" Margin="253,41,0,0"/>
         <Label Content="yKp" HorizontalAlignment="Left" Height="27" Margin="218,37,0,0" VerticalAlignment="Top" Width="30"/>
         <TextBox Name="txtYKd" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="81" Margin="253,99,0,0"/>
         <Label Content="yKd" HorizontalAlignment="Left" Height="27" Margin="218,95,0,0" VerticalAlignment="Top" Width="30"/>
         <TextBox Name="txtYKi" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="81" Margin="253,72,0,0"/>
         <Label Content="yKi" HorizontalAlignment="Left" Height="27" Margin="218,68,0,0" VerticalAlignment="Top" Width="30"/>
-        <Label Content="pitch-Axis (Y)&#xD;&#xA;" HorizontalAlignment="Left" Height="27" Margin="218,10,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label Content="roll" HorizontalAlignment="Left" Height="27" Margin="218,10,0,0" VerticalAlignment="Top" Width="101"/>
         <TextBox Name="txtZKp" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="81" Margin="419,41,0,0"/>
         <Label Content="zKp" HorizontalAlignment="Left" Height="27" Margin="384,37,0,0" VerticalAlignment="Top" Width="30"/>
         <TextBox Name="txtZKd" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="81" Margin="420,99,0,0"/>
@@ -38,9 +37,8 @@
         <TextBox Name="txtZPro" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="75" Margin="385,258,0,0"/>
         <TextBox Name="txtZDer" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="75" Margin="385,289,0,0"/>
         <TextBox Name ="txtZInt" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="75" Margin="384,320,0,0"/>
-        <Label Content="Roll(X) axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="178,187,0,0"/>
-        <Label Content="Pitch(Y) axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="291,186,0,0"/>
-        <Label Content="Z axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="395,186,0,0" RenderTransformOrigin="2.45,0.846"/>
+        <Label Content="Roll(X) axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="285,186,0,0"/>
+      
         <Button Name="btnXonoff" Content="Off" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="165,218,0,0" Click="btnXonoff_Click"/>
         <Button Name="btnYonoff" Content="Off" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="276,218,0,0" Click="btnYonoff_Click"/>
         <Button Name="btnZonoff" Content="Off" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="384,218,0,0" Click="btnZonoff_Click"/>
