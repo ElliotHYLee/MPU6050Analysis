@@ -4,17 +4,17 @@
 exe
 C#
 .cs
-D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\
+D:\Github\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\
 MPU6050DataCollector
 none
 false
 TRACE
-D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\App.xaml
+D:\Github\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\App.xaml
 4324335588
 
 20-2083984799
-18749389186
+18-2060752750
 AttitudeAnalyzer.xaml;Monitors\InfoChoiceMonitor.xaml;Monitors\PID\NavPIDMonitor.xaml;Monitors\PID\AttPidMonitor.xaml;
 
-False
+True
 
