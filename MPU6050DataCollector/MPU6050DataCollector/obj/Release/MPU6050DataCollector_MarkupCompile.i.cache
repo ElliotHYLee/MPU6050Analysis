@@ -16,5 +16,5 @@ D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\App.xaml
 18749389186
 AttitudeAnalyzer.xaml;Monitors\InfoChoiceMonitor.xaml;Monitors\PID\NavPIDMonitor.xaml;Monitors\PID\AttPidMonitor.xaml;
 
-False
+True
 

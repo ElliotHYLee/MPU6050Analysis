@@ -670,7 +670,9 @@ namespace MPU6050DataCollector.Controllers
 
         public void testSend()
         {
-            _usb.sendDataRobust("asdfasd");
+            _usb.sendTestSD();
+            
+            
         }
 
 

@@ -1344,39 +1344,57 @@ namespace SerialMonitorTest03.ControllerFolder
 
         #region Data Sending
 
-            public async void sendDataRobust(String value)
+        public async void sendDataRobust(String value)
+        {
+            try
             {
-                try
+                for (int i = 0; i < 5; i++)
                 {
-                    for (int i = 0; i < 5; i++)
-                    {
-                        this._serial.Write(value + ";");
-                        await Task.Delay(30);
-                    }
-                Console.WriteLine(value);
+                    this._serial.Write(value + ";");
+                    await Task.Delay(30);
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Check usb connection");
-                    ex.GetType();
-                }
+            Console.WriteLine(value);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Check usb connection");
+                ex.GetType();
+            }
                 
-            }
+        }
 
-            public void sendData(String value)
+        public async void sendTestSD()
+        {
+            for (int i = 0; i < 5; i++)
             {
-                try
-                {
-                    this._serial.Write(";"+ value + ";");
-                    Console.WriteLine(value);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Check usb connection");
-                    ex.GetType();
-                }
-
+                this._serial.Write("B1;");
+                await Task.Delay(30);
             }
+            MessageBox.Show("B1 sent");
+            await Task.Delay(10000);
+            for(int i = 0; i < 5; i++)
+            {
+                this._serial.Write("B0;");
+                await Task.Delay(30);
+            }
+            MessageBox.Show("B0 sent");
+
+        }
+
+        public void sendData(String value)
+        {
+            try
+            {
+                this._serial.Write(";"+ value + ";");
+                Console.WriteLine(value);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Check usb connection");
+                ex.GetType();
+            }
+
+        }
 
         #endregion
 
