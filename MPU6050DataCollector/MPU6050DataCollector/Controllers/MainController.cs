@@ -43,6 +43,8 @@ namespace MPU6050DataCollector.Controllers
 
         private ImageBrush bg3;
 
+        private bool SDStatus;
+
         public MainController(MainWindow x, AttitudeData y)
         {
             this._main = x;
@@ -51,6 +53,7 @@ namespace MPU6050DataCollector.Controllers
             this._usbConnected = false;
             this.setDataAddress();
             this.refreshComports();
+            this.SDStatus = false;
         }
 
         #region connection and disconnection
@@ -438,6 +441,7 @@ namespace MPU6050DataCollector.Controllers
             this._usb.sendDataRobust("PC" + k[2]);
         }
 
+
         public void updateNavPidConstY(string[] k)
         {
             this._usb.sendDataRobust("PD" + k[3]);
@@ -670,10 +674,30 @@ namespace MPU6050DataCollector.Controllers
 
         public void testSend()
         {
-            _usb.sendTestSD();
+            //_usb.sendTestSD();
             
             
         }
+
+        public void SDRecording()
+        {
+            if (!SDStatus)
+            {
+                SDStatus = true;
+                //send B1;
+                _usb.sendDataRobust("B1");
+                this._main.btnSD.Content = "Stop SD Recording";
+                MessageBox.Show("SD on sent");
+            }
+            else
+            {
+                SDStatus = false;
+                _usb.sendDataRobust("B0");
+                this._main.btnSD.Content = "Start SD Recording";
+                MessageBox.Show("SD off sent");
+            }
+        }
+
 
 
         public void openNavPIDMonitor()

@@ -434,6 +434,11 @@ namespace MPU6050DataCollector
             this._ctrl.openInfoChoiceMonitor();
         }
 
+        private void btnSD_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.SDRecording();
+        }
+
 
 
 

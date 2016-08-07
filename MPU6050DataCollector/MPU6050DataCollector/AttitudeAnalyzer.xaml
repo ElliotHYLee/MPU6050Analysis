@@ -142,7 +142,7 @@
                     </Grid.RowDefinitions>
                     <Button Name="btnOpenPID" Content="OpenAttPIDMonitor" HorizontalAlignment="Left" Height="33" Margin="10,21,0,0" VerticalAlignment="Top" Width="127" Click="btnOpenPID_Click"/>
                     <Button Name="btnJoyStick" Content="JoyStick" HorizontalAlignment="Left" Height="33" Margin="149,21,0,0" VerticalAlignment="Top" Width="123" Click="btnJoyStick_Click"/>
-                    <Button Name="btnOPenNavPID" Content="OpenNavPIDMonitor" HorizontalAlignment="Left" Height="32" Margin="9,59,0,0" VerticalAlignment="Top" Width="128" Click="btnOPenNavPID_Click"/>
+                    <Button Name="btnOPenNavPID" Content="OpenNavPIDMonitor" HorizontalAlignment="Left" Height="32" Margin="10,59,0,0" VerticalAlignment="Top" Width="127" Click="btnOPenNavPID_Click"/>
                     <Button Name="btnInfoChoice" Content="Select Msg Types" HorizontalAlignment="Left" Height="32" Margin="149,59,0,0" VerticalAlignment="Top" Width="123" Click="btnInfoChoice_Click"/>
                 </Grid>
             </Border>
@@ -240,7 +240,8 @@
                 </Grid>
             </Border>
             <TextBox Name="txtHeading" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="84" Margin="528,260,0,0"/>
-            <Button x:Name ="btnTest" Content="Test Msg" HorizontalAlignment="Left" VerticalAlignment="Top" Width="66" Margin="1086,356,0,0" Click="btnTest_Click" Height="27"/>
+            <Button x:Name ="btnTest" Content="Test Msg" HorizontalAlignment="Left" VerticalAlignment="Top" Width="66" Margin="1103,667,0,0" Click="btnTest_Click" Height="27"/>
+            <Button x:Name="btnSD" Content="Start SD Recording" HorizontalAlignment="Left" VerticalAlignment="Top" Width="126" Margin="806,430,0,0" Height="32" Click="btnSD_Click"/>
 
 
 
