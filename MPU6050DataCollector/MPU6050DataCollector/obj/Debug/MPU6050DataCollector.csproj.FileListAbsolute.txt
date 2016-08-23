@@ -47,3 +47,14 @@ D:\Github\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\PI
 D:\Github\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\PIDMonitor.g.cs
 =======
 >>>>>>> origin/master
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Debug\SlimDX.dll
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Debug\SlimDX.pdb
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Debug\SlimDX.xml
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\Monitors\PID\AttPidMonitor.baml
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\Monitors\InfoChoiceMonitor.g.cs
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\Monitors\PID\NavPIDMonitor.g.cs
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\Monitors\PID\AttPidMonitor.g.cs
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector_MarkupCompile.lref
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\Monitors\InfoChoiceMonitor.baml
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\Monitors\PID\NavPIDMonitor.baml
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Debug\MPU6050DataCollector.JoyStickController.resources

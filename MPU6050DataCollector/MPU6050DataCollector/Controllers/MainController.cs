@@ -43,6 +43,8 @@ namespace MPU6050DataCollector.Controllers
 
         private ImageBrush bg3;
 
+        private bool SDStatus;
+
         public MainController(MainWindow x, AttitudeData y)
         {
             this._main = x;
@@ -51,6 +53,7 @@ namespace MPU6050DataCollector.Controllers
             this._usbConnected = false;
             this.setDataAddress();
             this.refreshComports();
+            this.SDStatus = false;
         }
 
         #region connection and disconnection
@@ -438,6 +441,7 @@ namespace MPU6050DataCollector.Controllers
             this._usb.sendDataRobust("PC" + k[2]);
         }
 
+
         public void updateNavPidConstY(string[] k)
         {
             this._usb.sendDataRobust("PD" + k[3]);
@@ -670,7 +674,61 @@ namespace MPU6050DataCollector.Controllers
 
         public void testSend()
         {
-            _usb.sendDataRobust("asdfasd");
+            //_usb.sendTestSD();
+            
+            
+        }
+
+        public void SDRecording()
+        {
+            if (!SDStatus)
+            {
+                SDStatus = true;
+                //send B1;
+                _usb.sendDataRobust("B1");
+                this._main.btnSD.Content = "Stop SD Recording";
+                MessageBox.Show("SD on sent");
+            }
+            else
+            {
+                SDStatus = false;
+                _usb.sendDataRobust("B0");
+                this._main.btnSD.Content = "Start SD Recording";
+                MessageBox.Show("SD off sent");
+            }
+        }
+
+        public void setBatteryBar(string[] voltage)
+        {
+            double[] cell = new double[6];
+            this._main.Dispatcher.Invoke(() =>
+            {
+                
+                for (int i=0; i< 6; i++)
+                {
+                    cell[i] = double.Parse(voltage[i]);
+                    if (cell[i] > 88)
+                    {
+                        this._main.CellBar[i].Foreground = new SolidColorBrush(Colors.Green);
+                    }else if(cell[i] > 82)
+                    {
+                        this._main.CellBar[i].Foreground = new SolidColorBrush(Colors.Yellow);
+                    }
+                    else
+                    {
+                        this._main.CellBar[i].Foreground = new SolidColorBrush(Colors.Red);
+                        Console.WriteLine("=================");
+                        Console.WriteLine(cell[i]);
+                    }
+
+                    this._main.CellBar[i].Value = cell[i];
+                    this._main.CellInfo[i].Text = voltage[i];
+                        
+                }
+            });
+
+
+
         }
 
 
