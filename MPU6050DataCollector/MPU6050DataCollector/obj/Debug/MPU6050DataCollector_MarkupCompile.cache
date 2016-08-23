@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\App.xaml
-21584415316
+4324335588
 
-12991758023
-152055168145
-AttitudeAnalyzer.xaml;PIDMonitor.xaml;
+16-1862286955
+18749389186
+AttitudeAnalyzer.xaml;Monitors\InfoChoiceMonitor.xaml;Monitors\PID\NavPIDMonitor.xaml;Monitors\PID\AttPidMonitor.xaml;
 
 False
 

@@ -50,6 +50,8 @@
         <Button Name="btnSetY" Content="Set" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Margin="267,136,0,0" Height="27" Click="btnSetY_Click" />
         <Button Name="btnSetZ" Content="Set" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Margin="433,136,0,0" Height="27" Click="btnSetZ_Click" />
         <Button Name ="btnUpDateConst" Content="Update pidConst" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="54,181,0,0"  Height="27" Click="btnUpDateConst_Click"/>
+        <Label Content="Pitch(Y) axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="167,187,0,0"/>
+        <Label Content="Yaw(Z) axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="384,186,0,0"/>
 
 
     </Grid>

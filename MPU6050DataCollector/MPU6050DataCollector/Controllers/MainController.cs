@@ -698,6 +698,38 @@ namespace MPU6050DataCollector.Controllers
             }
         }
 
+        public void setBatteryBar(string[] voltage)
+        {
+            double[] cell = new double[6];
+            this._main.Dispatcher.Invoke(() =>
+            {
+                
+                for (int i=0; i< 6; i++)
+                {
+                    cell[i] = double.Parse(voltage[i]);
+                    if (cell[i] > 88)
+                    {
+                        this._main.CellBar[i].Foreground = new SolidColorBrush(Colors.Green);
+                    }else if(cell[i] > 82)
+                    {
+                        this._main.CellBar[i].Foreground = new SolidColorBrush(Colors.Yellow);
+                    }
+                    else
+                    {
+                        this._main.CellBar[i].Foreground = new SolidColorBrush(Colors.Red);
+                        Console.WriteLine("=================");
+                        Console.WriteLine(cell[i]);
+                    }
+
+                    this._main.CellBar[i].Value = cell[i];
+                    this._main.CellInfo[i].Text = voltage[i];
+                        
+                }
+            });
+
+
+
+        }
 
 
         public void openNavPIDMonitor()

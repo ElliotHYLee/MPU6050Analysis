@@ -52,3 +52,4 @@ D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\Monitors\PID\AttPidMonitor.g.cs
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\Monitors\InfoChoiceMonitor.baml
 D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\obj\Release\Monitors\PID\NavPIDMonitor.baml
+D:\GitHub\MPU6050Analysis\MPU6050DataCollector\MPU6050DataCollector\bin\Release\SlimDX.dll

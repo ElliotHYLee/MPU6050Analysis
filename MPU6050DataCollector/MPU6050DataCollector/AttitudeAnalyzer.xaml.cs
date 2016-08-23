@@ -34,11 +34,34 @@ namespace MPU6050DataCollector
         private TextBox[] _gyro;
         private TextBox[] _acc;
         private TextBox[] _cFilter;
+
+        private ProgressBar[] _cellBar;
+        private TextBox[] _cellInfo;
         
 
         public MainWindow()
         {
             InitializeComponent();
+
+            _cellBar = new ProgressBar[6];
+            _cellInfo = new TextBox[6];
+
+            _cellBar[0] = prgLipoC0;
+            _cellBar[1] = prgLipoC1;
+            _cellBar[2] = prgLipoC2;
+            _cellBar[3] = prgLipoC3;
+            _cellBar[4] = prgLipoC4;
+            _cellBar[5] = prgLipoC5;
+
+            _cellInfo[0] = txtLipoC0;
+            _cellInfo[1] = txtLipoC1;
+            _cellInfo[2] = txtLipoC2;
+            _cellInfo[3] = txtLipoC3;
+            _cellInfo[4] = txtLipoC4;
+            _cellInfo[5] = txtLipoC5;
+
+            //prgLipoC0.Value = 10;
+            //prgLipoC0.Foreground = new SolidColorBrush(Colors.Red);
 
             Color color = new Color();
             color = Colors.Azure;
@@ -82,6 +105,18 @@ namespace MPU6050DataCollector
             this._cFilter[8] = this.txtCDirCosZ;
             this._cFilter[9] = this.txtCDegreeZ;
         }
+
+
+        public TextBox[] CellInfo
+        {
+            get { return _cellInfo; }
+        }
+
+        public ProgressBar[] CellBar
+        {
+            get { return _cellBar; }
+        }
+
 
         public TextBox[] gyro
         {

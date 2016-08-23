@@ -53,11 +53,13 @@ namespace SerialMonitorTest03.ControllerFolder
         string[] acc = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
         string[] cFilter = { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };
         string[] motor = { "0", "0", "0", "0", "0", "0" };
+        string[] voltage = { "0", "0", "0", "0", "0", "0" };
         string[] mag = { "0", "0", "0" };
         string distanceToGround = "0";
         string[] localCoord = { "0", "0", "0" };
         string[] ctrlReference = { "0", "0", "0" };
         string infoChoice="-1";
+        bool voltageInFlag = false;
 
         Stopwatch sw;
 
@@ -360,6 +362,42 @@ namespace SerialMonitorTest03.ControllerFolder
                             break;
                     }
                     #endregion
+                }
+
+                if (infoType.Equals("v"))
+                {
+                    #region parse voltage
+                    infoDir = listTokens[i].Substring(1, 1);
+                    switch (infoDir)
+                    {
+                        case "1":
+                            voltage[0] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                            break;
+                        case "2":
+                            voltage[1] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                            break;
+                        case "3":
+                            voltage[2] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                            break;
+                        case "4":
+                            voltage[3] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                            break;
+                        case "5":
+                            voltage[4] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                            break;
+                        case "6":
+                            voltage[5] = listTokens[i].Substring(2, listTokens[i].Length - 2);
+                            voltageInFlag = true;
+                            break;
+                    }
+                    #endregion
+                    
+                    //Console.WriteLine("cell" + infoDir + "= " + voltage[0]);
+                    //Console.WriteLine("cell" + infoDir + "= " + voltage[1]);
+                    //Console.WriteLine("cell" + infoDir + "= " + voltage[2]);
+                    //Console.WriteLine("cell" + infoDir + "= " + voltage[3]);
+                    //Console.WriteLine("cell" + infoDir + "= " + voltage[4]);
+                    //Console.WriteLine("cell" + infoDir + "= " + voltage[5]);
                 }
                 if (infoType.Equals("q"))
                 {
@@ -1337,6 +1375,11 @@ namespace SerialMonitorTest03.ControllerFolder
 
             #endregion
 
+            if (voltageInFlag)
+            {
+                this._mainCtrl.setBatteryBar(voltage);
+                voltageInFlag = false;
+            }
 
         }
 
