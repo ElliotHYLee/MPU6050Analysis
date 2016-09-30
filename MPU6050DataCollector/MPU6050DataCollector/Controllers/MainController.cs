@@ -707,14 +707,14 @@ namespace MPU6050DataCollector.Controllers
                 for (int i=0; i< 6; i++)
                 {
                     cell[i] = double.Parse(voltage[i]);
-                    if (cell[i] > 88)
+                    if (cell[i] > 85)  // green over 3.67
                     {
                         this._main.CellBar[i].Foreground = new SolidColorBrush(Colors.Green);
-                    }else if(cell[i] > 82)
+                    }else if(cell[i] > 80) // yellow for 3.45 ~ 3.66
                     {
                         this._main.CellBar[i].Foreground = new SolidColorBrush(Colors.Yellow);
                     }
-                    else
+                    else // red below 3.44v
                     {
                         this._main.CellBar[i].Foreground = new SolidColorBrush(Colors.Red);
                         Console.WriteLine("=================");

@@ -1391,7 +1391,7 @@ namespace SerialMonitorTest03.ControllerFolder
         {
             try
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     this._serial.Write(value + ";");
                     await Task.Delay(30);
