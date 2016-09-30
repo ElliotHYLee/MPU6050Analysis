@@ -62,6 +62,7 @@ namespace MPU6050DataCollector.Monitors.PID
             pitchPlotterThread = new Thread(new ThreadStart(this.plotPitch));
             pitchPlotterThread.IsBackground = true;
             pitchPlotterThread.Start();
+            //MessageBox.Show("asfdasdf");
         }
 
         private void plotPitch()
@@ -87,7 +88,7 @@ namespace MPU6050DataCollector.Monitors.PID
             {
                 //Console.WriteLine(pitchArr[i]);
                 chPitch.Series["Series1"].Points.AddY(pitchArr[i]);
-                chPitch.Series["Series2"].Points.AddY(0);
+                chPitch.Series["Series2"].Points.AddY(1400);
             }
         }
     }

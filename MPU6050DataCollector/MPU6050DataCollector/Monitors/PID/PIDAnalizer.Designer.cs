@@ -42,8 +42,8 @@
             // 
             // chPitch
             // 
-            chartArea1.AxisY.Maximum = 30D;
-            chartArea1.AxisY.Minimum = -30D;
+            chartArea1.AxisY.Maximum = 2000D;
+            chartArea1.AxisY.Minimum = 1000D;
             chartArea1.Name = "ChartArea1";
             this.chPitch.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";

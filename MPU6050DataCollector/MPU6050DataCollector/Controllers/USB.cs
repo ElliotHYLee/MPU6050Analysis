@@ -811,7 +811,7 @@ namespace SerialMonitorTest03.ControllerFolder
                 #region update Euler and others for PID Analysis
                 if (pidAnalyzerIsDemanding)
                 {
-                    accumEuler(cFilter[0]);
+                    accumEuler(localCoord[0]);
                     //Console.WriteLine("accum running");
                 }
                 #endregion
@@ -1135,7 +1135,7 @@ namespace SerialMonitorTest03.ControllerFolder
         public void accumEuler(string pitch)
         {
             double temp = Double.Parse(pitch);
-            temp /= 100;
+            //temp /= 100;
             int size = pitchForPIDAnalysis.Count;
             if (size <= 1000)
             {
