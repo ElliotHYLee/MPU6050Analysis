@@ -61,6 +61,12 @@ namespace SerialMonitorTest03.ControllerFolder
         string infoChoice="-1";
         bool voltageInFlag = false;
 
+
+        Queue<double> pitchForPIDAnalysis;
+        //double[] pitchForPIDAnalysis = new double[100];
+        int[] arrIndexForPIDAnalysis = new int[3];
+        bool pidAnalyzerIsDemanding = false;
+
         Stopwatch sw;
 
         private string[] throttle = new string[3];
@@ -76,6 +82,24 @@ namespace SerialMonitorTest03.ControllerFolder
             get { return ctrlReference[2]; }
         }
         
+        public Queue<double> RecentPitch
+        {
+            get { return pitchForPIDAnalysis; }
+        }
+
+        public bool TurnPIDAnalyzerNeedy
+        {
+            set {
+                pidAnalyzerIsDemanding = value;
+                if (pidAnalyzerIsDemanding == true)
+                {
+                    pitchForPIDAnalysis = new Queue<double>();
+                }   
+            }
+        }
+
+
+
 
         public USB(MainWindow x, AttitudeData y, MainController z)
         {
@@ -784,9 +808,18 @@ namespace SerialMonitorTest03.ControllerFolder
                 this.updateMain();
                 #endregion
 
+                #region update Euler and others for PID Analysis
+                if (pidAnalyzerIsDemanding)
+                {
+                    accumEuler(cFilter[0]);
+                    //Console.WriteLine("accum running");
+                }
+                #endregion
+
+
                 #region update monitors for information type
 
-               
+
 
                 if (this._mainCtrl._attPidMonitorIsOpen)
                 {
@@ -1097,6 +1130,24 @@ namespace SerialMonitorTest03.ControllerFolder
                 }
                 #endregion
             }
+        }
+
+        public void accumEuler(string pitch)
+        {
+            double temp = Double.Parse(pitch);
+            temp /= 100;
+            int size = pitchForPIDAnalysis.Count;
+            if (size <= 1000)
+            {
+                pitchForPIDAnalysis.Enqueue(temp);
+            }
+            else
+            {
+                pitchForPIDAnalysis.Dequeue();
+                pitchForPIDAnalysis.Enqueue(temp);
+               // Console.WriteLine("enqued: " + temp);
+            }
+
         }
 
         //private void updateMain(string[] gyro, string[] acc, string[] cFilter, string[] motor, string[] mag, string distanceToGround, string[] localCoord, string[] ctrlReference)

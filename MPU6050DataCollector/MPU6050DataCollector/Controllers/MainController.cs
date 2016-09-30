@@ -18,7 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 using System.ComponentModel;
-
+using MPU6050DataCollector.Monitors.PID;
 
 namespace MPU6050DataCollector.Controllers
 {
@@ -35,11 +35,13 @@ namespace MPU6050DataCollector.Controllers
         internal NavPIDMonitor _navPidMonitor = null;
         internal JoyStickController _joyStick = null;
         internal InfoChoiceMonitor _infoChoiceMonitor = null;
+        internal PIDAnalyzer _pidAnalizer = null;
 
         public bool _attPidMonitorIsOpen = false;
         public bool _joyStickIsOpen = false;
         public bool _navPidMonitorIsOpen = false;
         public bool _infoChoiceMonitorIsOpen = false;
+        public bool _pidAnalyzerMonitorIsOpen = false;
 
         private ImageBrush bg3;
 
@@ -804,6 +806,24 @@ namespace MPU6050DataCollector.Controllers
         {
             this._joyStickIsOpen = false;
 
+        }
+
+        public void openPIDAnalizer()
+        {
+            if(!_pidAnalyzerMonitorIsOpen)
+            {
+                this._pidAnalizer = PIDAnalyzer.Instance;
+                this._pidAnalizer.Closing += closPIDAnalyzerMonitor;
+                this._pidAnalyzerMonitorIsOpen = true;
+                this._usb.TurnPIDAnalyzerNeedy = true;
+                this._pidAnalizer.setUSBObject = this._usb;
+                this._pidAnalizer.Show();
+            }
+        }
+        public void closPIDAnalyzerMonitor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this._pidAnalyzerMonitorIsOpen = false;
+            this._usb.TurnPIDAnalyzerNeedy = false;
         }
 
         public void openInfoChoiceMonitor()
