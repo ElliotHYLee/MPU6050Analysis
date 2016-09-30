@@ -61,7 +61,6 @@ namespace MPU6050DataCollector
         {
             isOn = false;
             _instance = null;
-            
         }
 
 

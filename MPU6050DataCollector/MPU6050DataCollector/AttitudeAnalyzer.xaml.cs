@@ -474,6 +474,11 @@ namespace MPU6050DataCollector
             this._ctrl.SDRecording();
         }
 
+        private void btnPIDAnalyze_Click(object sender, RoutedEventArgs e)
+        {
+            this._ctrl.openPIDAnalizer();
+        }
+
 
 
 
