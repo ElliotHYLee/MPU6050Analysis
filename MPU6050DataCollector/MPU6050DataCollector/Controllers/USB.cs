@@ -63,6 +63,9 @@ namespace SerialMonitorTest03.ControllerFolder
 
 
         Queue<double> pitchForPIDAnalysis;
+        Queue<double> rollForPIDAnalysis;
+
+
         //double[] pitchForPIDAnalysis = new double[100];
         int[] arrIndexForPIDAnalysis = new int[3];
         bool pidAnalyzerIsDemanding = false;
@@ -87,6 +90,11 @@ namespace SerialMonitorTest03.ControllerFolder
             get { return pitchForPIDAnalysis; }
         }
 
+        public Queue<double> RecentRoll
+        {
+            get { return rollForPIDAnalysis; }
+        }
+
         public bool TurnPIDAnalyzerNeedy
         {
             set {
@@ -94,12 +102,10 @@ namespace SerialMonitorTest03.ControllerFolder
                 if (pidAnalyzerIsDemanding == true)
                 {
                     pitchForPIDAnalysis = new Queue<double>();
+                    rollForPIDAnalysis = new Queue<double>();
                 }   
             }
         }
-
-
-
 
         public USB(MainWindow x, AttitudeData y, MainController z)
         {
@@ -253,7 +259,6 @@ namespace SerialMonitorTest03.ControllerFolder
         {
             get { return this.infoChoice; }
         }
-
 
         private void parse(string x)
         {
@@ -811,11 +816,11 @@ namespace SerialMonitorTest03.ControllerFolder
                 #region update Euler and others for PID Analysis
                 if (pidAnalyzerIsDemanding)
                 {
-                    accumEuler(localCoord[0]);
+                    accumPitch(localCoord[0]);
+                    accumRoll(localCoord[1]);
                     //Console.WriteLine("accum running");
                 }
                 #endregion
-
 
                 #region update monitors for information type
 
@@ -1132,7 +1137,25 @@ namespace SerialMonitorTest03.ControllerFolder
             }
         }
 
-        public void accumEuler(string pitch)
+
+        public void accumRoll(string roll)
+        {
+            double temp = Double.Parse(roll);
+            //temp /= 100;
+            int size = rollForPIDAnalysis.Count;
+            if (size <= 1000)
+            {
+                rollForPIDAnalysis.Enqueue(temp);
+            }
+            else
+            {
+                rollForPIDAnalysis.Dequeue();
+                rollForPIDAnalysis.Enqueue(temp);
+                // Console.WriteLine("enqued: " + temp);
+            }
+        }
+
+        public void accumPitch(string pitch)
         {
             double temp = Double.Parse(pitch);
             //temp /= 100;
@@ -1147,7 +1170,6 @@ namespace SerialMonitorTest03.ControllerFolder
                 pitchForPIDAnalysis.Enqueue(temp);
                // Console.WriteLine("enqued: " + temp);
             }
-
         }
 
         //private void updateMain(string[] gyro, string[] acc, string[] cFilter, string[] motor, string[] mag, string distanceToGround, string[] localCoord, string[] ctrlReference)

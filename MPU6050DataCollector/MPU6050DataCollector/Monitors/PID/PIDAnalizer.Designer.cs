@@ -32,12 +32,19 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chPitch = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnPitchSP = new System.Windows.Forms.Button();
             this.txtPitchSP = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnPitchStart = new System.Windows.Forms.Button();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chPitch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // chPitch
@@ -99,11 +106,46 @@
             this.btnPitchStart.UseVisualStyleBackColor = true;
             this.btnPitchStart.Click += new System.EventHandler(this.btnPitchStart_Click);
             // 
+            // chart1
+            // 
+            chartArea2.AxisY.Maximum = 750D;
+            chartArea2.AxisY.Minimum = -750D;
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
+            this.chart1.Location = new System.Drawing.Point(12, 275);
+            this.chart1.Name = "chart1";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series4.Legend = "Legend1";
+            series4.Name = "Series2";
+            this.chart1.Series.Add(series3);
+            this.chart1.Series.Add(series4);
+            this.chart1.Size = new System.Drawing.Size(999, 239);
+            this.chart1.TabIndex = 5;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1028, 275);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(92, 32);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "StartRoll";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnRollStart_Click);
+            // 
             // PIDAnalyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1510, 620);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.btnPitchStart);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtPitchSP);
@@ -113,6 +155,7 @@
             this.Text = "PIDAnalizer";
             this.Load += new System.EventHandler(this.PIDAnalizer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chPitch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,5 +168,7 @@
         private System.Windows.Forms.TextBox txtPitchSP;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnPitchStart;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Button button1;
     }
 }

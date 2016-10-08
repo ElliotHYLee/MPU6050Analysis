@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MPU6050DataCollector.Monitors.PID
 {
@@ -73,23 +74,43 @@ namespace MPU6050DataCollector.Monitors.PID
                 pitchArr = _usbObject.RecentPitch.ToArray();
                 if (chPitch.IsHandleCreated)
                 {
-                    this.Invoke((MethodInvoker)delegate { UpdatePitchChart(pitchArr); });
+                    this.Invoke((MethodInvoker)delegate { updateChart(chPitch, pitchArr, 1400); });
                 }
                 Thread.Sleep(1000 / 5);
             }
         }
 
-        private void UpdatePitchChart(double[] pitchArr)
+        private void plotRoll()
         {
-            chPitch.Series["Series1"].Points.Clear();
-            chPitch.Series["Series2"].Points.Clear();
+            double[] rollArr;
+            while (true)
+            {
+                rollArr = _usbObject.RecentRoll.ToArray();
+                if (chPitch.IsHandleCreated)
+                {
+                    this.Invoke((MethodInvoker)delegate { updateChart(chPitch, rollArr, 0); });
+                }
+                Thread.Sleep(1000 / 5);
+            }
+        }
 
-            for (int i= 0; i< pitchArr.Length-1; i++)
+
+        private void updateChart(Chart ch, double[] arr, double input)
+        {
+            ch.Series["Series1"].Points.Clear();
+            ch.Series["Series2"].Points.Clear();
+
+            for (int i= 0; i< arr.Length-1; i++)
             {
                 //Console.WriteLine(pitchArr[i]);
-                chPitch.Series["Series1"].Points.AddY(pitchArr[i]);
-                chPitch.Series["Series2"].Points.AddY(1400);
+                ch.Series["Series1"].Points.AddY(arr[i]);
+                ch.Series["Series2"].Points.AddY(input);
             }
+        }
+
+        private void btnRollStart_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
